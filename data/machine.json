@@ -1,0 +1,13 @@
+{
+  "opers": [
+    { "cycle": "import", "title": "Import", "node": "ChinRada", "opers": ["запрос", "каталог", "платёж", "отправка"] },
+    { "cycle": "logistic", "title": "Logistic", "node": "CDEK", "opers": ["сообщение", "платёж", "отправка"] },
+    { "cycle": "logistic", "title": "Logistic", "node": "Self", "opers": ["приёмка", "маркировка", "упаковка", "отгрузка"] },
+    { "cycle": "sales", "title": "Sales", "node": "Ozon", "opers": ["анализ", "маркетинг", "выручка"] }
+  ],
+  "oneOffCycles": [
+    { "id": "P / 01", "title": "Декларация 3Д", "description": "Разовый регуляторный цикл проекта." },
+    { "id": "P / 02", "title": "Маркировка", "description": "Подбор и настройка ПО, создающие условия для регулярного oper «маркировка»." },
+    { "id": "P / 03", "title": "Брендирование", "description": "Отдельный цикл развития бренда, не равный регулярному oper «маркетинг»." }
+  ]
+}

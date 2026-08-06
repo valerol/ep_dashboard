@@ -1,0 +1,7 @@
+[
+  { "id": "machine", "label": "Философская машина" },
+  { "id": "roadmap", "label": "Дорожная карта" },
+  { "id": "current", "label": "Текущий шаг" },
+  { "id": "news", "label": "Новости" },
+  { "id": "history", "label": "История сайта" }
+]
