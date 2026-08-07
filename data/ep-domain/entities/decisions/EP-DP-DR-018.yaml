@@ -1,0 +1,28 @@
+decision_id: EP-DP-DR-018
+date: 2026-08-07
+authority: EP-ACTOR-OWNER-LPR
+type: OWNER_CONFIRMED_PROCESS_CORRECTION
+subject: SUPPLIER_TO_INTERNATIONAL_CARRIER_HANDOFF
+evidence:
+  type: OWNER_LPR_CONFIRMATION_RECORD
+  facts:
+    - supplier_delivers_parcel_to_international_carrier
+    - supplier_provides_tracking_number_and_parcel_photo
+    - after_arrival_owner_and_carrier_agree_receipt_point
+    - carrier_issues_invoice
+    - owner_pays_invoice
+    - carrier_provides_international_tracking_number
+  alternate_workflow_observed: false
+significance:
+  result: SIGNIFICANT
+  basis:
+    - CURRENT_RULE_PROVEN_INCOMPLETE
+    - CURRENT_ROUTE_REQUIRED_CORRECTION
+affected_rules:
+  - I5
+  - L(I)1
+  - L(I)2
+owner_decision: CHANGE_PROTOCOL
+qa_use:
+  authorized_at: 2026-08-07T14:50:00+10:00
+  mode: RETROSPECTIVE_REAL_EVENT_VALIDATION
