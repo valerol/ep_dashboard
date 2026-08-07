@@ -1,0 +1,26 @@
+cycle_instance_id: EP-GROWTH_PROJECT-20260807-001
+cycle_class: GROWTH_PROJECT
+scope: EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2
+membership:
+  primary_cycle_class: GROWTH_PROJECT
+  related_cycle_classes: []
+goal: Создать EP-DP v0.2 и довести её до авторизованного входа в INTERNAL_QA
+cycle_record_state: CLOSED
+transition_decision: READY
+remediation_state: NONE
+current_step: PROJECT_CLOSED
+plan:
+  - normalize_openitems
+  - complete_oper_objects
+  - complete_physiology_object
+  - authorize_internal_qa
+expected_result: EP-DP v0.2 enters INTERNAL_QA
+actual_result: EP-DP v0.2 entered INTERNAL_QA
+outcome: ACHIEVED
+evidence_refs:
+  - data/ep-domain/entities/projects/EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2.yaml
+opened_at: 2026-08-07T00:00:00+10:00
+updated_at: 2026-08-07T14:45:00+10:00
+closed_at: 2026-08-07T14:44:00+10:00
+instruction_version: EP-DP-v0.2-INTERNAL_QA
+observer: EP-ACTOR-OWNER-LPR
