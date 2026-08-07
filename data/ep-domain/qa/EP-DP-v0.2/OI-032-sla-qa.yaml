@@ -1,0 +1,53 @@
+qa_id: EP-DP-QA-OI-032-SLA-20260807
+scope: OBSERVATION_RECORDING_SLA
+rule_ref: EP-DP-DR-008
+result: PASS
+actual_cases:
+  ordinary_state_change:
+    source_event: INTERNAL_QA_ENTRY_AUTHORIZATION
+    available_for_recording_at: 2026-08-07T12:49:00+10:00
+    actual_recorded_at: 2026-08-07T14:45:00+10:00
+    elapsed_minutes: 116
+    limit_minutes: 1440
+    expected: ON_TIME
+    actual: ON_TIME
+    result: PASS
+  closure_decision:
+    source_event: EP-GROWTH_PROJECT-20260807-001_CLOSURE
+    decided_at: 2026-08-07T14:44:00+10:00
+    actual_recorded_at: 2026-08-07T14:45:00+10:00
+    elapsed_minutes: 1
+    limit_minutes: 1440
+    expected: ON_TIME
+    actual: ON_TIME
+    result: PASS
+boundary_fixtures:
+  critical_exact_deadline:
+    elapsed_minutes: 240
+    expected: ON_TIME
+    actual: ON_TIME
+    result: PASS
+  critical_after_deadline:
+    elapsed_minutes: 241
+    expected:
+      recording_status: LATE
+      dependent_transition: HOLD
+      late_flag_persists_after_resume: true
+    actual:
+      recording_status: LATE
+      dependent_transition: HOLD
+      late_flag_persists_after_resume: true
+    result: PASS
+  ordinary_exact_deadline:
+    elapsed_minutes: 1440
+    expected: ON_TIME
+    actual: ON_TIME
+    result: PASS
+  ordinary_after_deadline:
+    elapsed_minutes: 1441
+    expected: LATE
+    actual: LATE
+    result: PASS
+notes:
+  - boundary fixtures test deterministic rule semantics; they are not fabricated business events
+  - actual cases test real QA events recorded in this branch
