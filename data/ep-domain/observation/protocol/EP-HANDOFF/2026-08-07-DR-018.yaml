@@ -1,0 +1,43 @@
+protocol_id: EP-HANDOFF
+version_id: 2026-08-07-DR-018
+status: ACTIVE_IN_EP_DP_V0_2
+change_type: VERSIONED_RULE_CHANGE
+authority: EP-ACTOR-OWNER-LPR
+evidence_ref: data/ep-domain/entities/decisions/EP-DP-DR-018.yaml
+change_reason: Observed supplier-carrier workflow contradicted/incompleted the previously assumed pickup workflow.
+affected_rules:
+  - I5
+  - L(I)1
+  - L(I)2
+impact_map:
+  route:
+    changed: true
+    note: Supplier performs physical delivery to international carrier; owner does not request carrier pickup.
+  I5:
+    before: OWNER_TO_CARRIER_PICKUP_HANDOFF_ASSUMED
+    after:
+      - SUPPLIER_DISPATCH_CONFIRMED
+      - SUPPLIER_TRACKING_NUMBER_RECORDED
+      - PARCEL_PHOTO_RECORDED
+  LI1:
+    before: CARRIER_PICKUP_COORDINATION_ASSUMED
+    after:
+      - TRACKING_SHOWS_ARRIVAL_AT_CARRIER_OR_CARRIER_INFORMS_OWNER
+      - OWNER_AND_CARRIER_AGREE_RECEIPT_POINT
+  LI2:
+    before: GENERIC_CARRIER_TRANSFER_EVIDENCE
+    after:
+      - CARRIER_ISSUES_INVOICE
+      - OWNER_PAYS_INVOICE
+      - CARRIER_PROVIDES_INTERNATIONAL_TRACKING_NUMBER
+  interfaces:
+    changed: true
+  evidence_requirements:
+    changed: true
+  economics:
+    changed: false
+  compliance:
+    changed: false
+previous_version_ref: PRE_DR_018_ASSUMED_HANDOFF
+history_preserved: true
+silent_overwrite: false
