@@ -1,0 +1,97 @@
+record_id: EP-EVENT-20260807-001
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-07T20:16:40+10:00"
+updated_at: "2026-08-07T20:16:40+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OZON_ACCEPTANCE_REPORT:SUPPLY-2000059753725
+  - OZON_STOCK_SNAPSHOT:2026-08-07T19:44:00+10:00
+  - OWNER_LPR_REPORT:2026-08-07:SECOND_OZON_TRANSFER
+
+observation_event_id: EP-EVENT-20260807-001
+event_type: STATE_OBSERVED
+action_or_event_ref: SECOND_OZON_TRANSFER_RECONCILIATION
+occurred_at: null
+observed_or_received_at: "2026-08-07T19:44:00+10:00"
+
+membership:
+  primary:
+    cycle_class: LOGISTIC_RUSSIA
+    cycle_instance_id: EP-LR-20260807-003
+    classification_basis_ref: ACCEPTANCE_RESULT_DIRECTLY_CONFIRMED
+  related:
+    - cycle_class: LOGISTIC_RUSSIA
+      cycle_instance_id: EP-LR-20260807-002
+      relation_basis_ref: ACCEPTED_QUANTITY_CONFIRMS_SHIPPED_QUANTITY
+    - cycle_class: LOGISTIC_RUSSIA
+      cycle_instance_id: EP-LR-20260807-001
+      relation_basis_ref: CHILD_ACCEPTANCE_COMPLETES_PARENT_TRANSFER
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-07T20:15:21+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: OPEN
+  current_step_after: READY_FOR_CLOSURE_DECISION
+  result: Evidence confirms complete shipment and acceptance of the second Ozon transfer
+
+facts:
+  source_document_storage: NOT_COPIED_TO_REPOSITORY
+  shipment:
+    total_units: 75
+    moscow_units: 43
+    saint_petersburg_units: 32
+    fact_authority: OWNER_LPR
+  moscow_acceptance:
+    declared_units: 43
+    accepted_units: 43
+    difference_units: 0
+    source_system_or_location: OZON_ACCEPTANCE_REPORT
+    evidence_ref: OZON_ACCEPTANCE_REPORT:SUPPLY-2000059753725
+  stock_snapshot:
+    snapshot_at: "2026-08-07T19:44:00+10:00"
+    source_system_or_location: OZON_FBO_STOCK_EXPORT
+    evidence_ref: OZON_STOCK_SNAPSHOT:2026-08-07T19:44:00+10:00
+    available_units_total: 74
+    available_units_by_cluster:
+      moscow: 41
+      saint_petersburg: 32
+      krasnodar: 1
+    unavailable_units: 0
+    units_in_transit: 0
+  reconciliation:
+    sold_from_new_batch_units: 2
+    prior_batch_units_in_stock: 1
+    remaining_new_batch_units: 73
+    formula: 74 - 1 + 2 = 75
+    reconciled_new_batch_units: 75
+    unresolved_difference_units: 0
+    fact_authority: OWNER_LPR_ACCEPTED_RECONCILIATION
+
+closure:
+  outcome: null
+  expected_result_ref: null
+  actual_result_or_NO_FINAL_RESULT: null
+  actual_vs_expected_comparison: null
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
+
+recording_sla:
+  oper_id: O3
+  sla_class: ORDINARY_OBSERVATION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_CONFIRMED_NONCRITICAL_RECONCILIATION
+  sla_started_at: "2026-08-07T19:44:00+10:00"
+  sla_deadline_at: "2026-08-08T19:44:00+10:00"
+  evaluated_at: "2026-08-07T20:16:40+10:00"
+  actual_recorded_at: "2026-08-07T20:16:40+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
