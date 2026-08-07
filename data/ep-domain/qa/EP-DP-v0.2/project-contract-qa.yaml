@@ -1,0 +1,46 @@
+qa_id: EP-DP-PROJECT-CONTRACT-QA-20260807
+project_id: EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2
+executed_at: 2026-08-07T14:45:00+10:00
+result: PASS
+checks:
+  result:
+    status: PASS
+    value: EP-DP v0.2 entered INTERNAL_QA
+  owner:
+    status: PASS
+    value: EP-ACTOR-OWNER-LPR
+  deadline:
+    status: PASS
+    value: BEFORE_INTERNAL_QA_ENTRY
+    type: MILESTONE
+  budget:
+    status: PASS
+    value: N/A_NO_SEPARATE_DIRECT_BUDGET
+  resource:
+    status: PASS
+    value: OWNER_LPR_HOUR
+  quality:
+    status: PASS
+    criteria:
+      - ALL_INTERNAL_QA_ENTRY_BLOCKERS_RESOLVED
+      - ALL_OPER_OBJECTS_DEFINITION_COMPLETE
+      - PHYSIOLOGY_OBJECT_COMPLETE
+      - TRANSITION_AUTHORIZED_BY_OWNER_LPR
+  displaced_tasks:
+    status: PASS_WITH_RESIDUE
+    value: NOT_TRACKED_RETROSPECTIVELY
+    blocking: false
+  closure:
+    status: PASS
+    state: CLOSED
+    outcome: ACHIEVED
+  handoff:
+    status: PASS
+    target: EP-DP-001_INTERNAL_QA_STAGE
+    transferred_to_regular_process: false
+  residue:
+    status: PASS
+    refs:
+      - EPDP-OI-032
+    blocking_project_closure: false
+conclusion: Project contract is complete enough for legitimate CLOSED state; continuing INTERNAL_QA is residue of the artifact lifecycle, not unfinished project creation work.
