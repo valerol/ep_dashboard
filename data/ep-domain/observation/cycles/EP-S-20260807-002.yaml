@@ -2,12 +2,14 @@ record_id: EP-S-20260807-002
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-07T21:37:53+10:00"
-updated_at: "2026-08-07T21:37:53+10:00"
+updated_at: "2026-08-07T21:52:51+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260807-008
+  - EP-EVENT-20260807-009
   - OZON_SALES_ANALYTICS_SCREENSHOT:WEEK_ENDING_2026-08-07
   - OZON_SALES_ANALYTICS_CSV:ozon_sales_week_2026-08-07.csv
+  - OWNER_LPR_DECISION:2026-08-07:NO_ACTION
 
 cycle_instance_id: EP-S-20260807-002
 cycle_type_id: OZON_WEEKLY_SALES_REVIEW
@@ -28,10 +30,10 @@ domain_membership:
 contour_membership: ECONOMICS.SYSTEM
 
 goal: Проверить недельную статистику Ozon и принять решение о следующем шаге или его отсутствии
-cycle_record_state: OPEN
-transition_decision: HOLD
-remediation_state: REPAIR
-current_step: RESTORE_SKU_OR_EXPLICITLY_ACCEPT_AGGREGATE_ONLY_DECISION
+cycle_record_state: CLOSED
+transition_decision: NO_ACTION
+remediation_state: NONE
+current_step: CYCLE_CLOSED_AFTER_NO_ACTION_DECISION
 plan:
   - Получить скриншот недельной аналитики Ozon
   - Преобразовать его в CSV с пятью каноническими колонками
@@ -39,15 +41,17 @@ plan:
   - Принять решение NEXT_STEP_SELECTED, NO_ACTION или HOLD_FOR_DATA_REPAIR
   - Закрыть обзор отдельным closure-событием
 expected_result: Недельная статистика преобразована в валидный CSV; принято решение о следующем шаге или его отсутствии
-actual_result: CSV создан; 33 строки, 2 заказа на 5800 RUB и 10249 показов; SKU отсутствуют во всех 33 строках; решение не зафиксировано
+actual_result: CSV создан; 33 строки, 2 заказа на 5800 RUB и 10249 показов; SKU отсутствуют во всех 33 строках; OWNER_LPR приняла агрегированное ограничение и выбрала NO_ACTION
 evidence_refs:
   - EP-EVENT-20260807-008
+  - EP-EVENT-20260807-009
 
 opened_at: "2026-08-07T21:37:53+10:00"
-current_closed_at: null
-current_closure_outcome: NONE
-current_closure_event_ref: null
-closure_event_refs: []
+current_closed_at: "2026-08-07T21:52:51+10:00"
+current_closure_outcome: ACHIEVED
+current_closure_event_ref: EP-EVENT-20260807-009
+closure_event_refs:
+  - EP-EVENT-20260807-009
 reopen_event_refs: []
 post_close_evidence_refs: []
 
