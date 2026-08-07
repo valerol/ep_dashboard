@@ -1,0 +1,12 @@
+observation_event_id: EP-OEV-20260807-005
+oper: O2
+cycle_instance_id: EP-GROWTH_PROJECT-20260807-001
+cycle_class: GROWTH_PROJECT
+scope: EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2
+goal: Создать EP-DP v0.2 и довести её до авторизованного входа в INTERNAL_QA
+current_step: PROJECT_CREATED_RETROSPECTIVELY_FOR_QA
+plan_ref: data/ep-domain/entities/projects/EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2.yaml
+expected_result: EP-DP v0.2 enters INTERNAL_QA
+result: PASS
+recorded_at: 2026-08-07T14:45:00+10:00
+observer: EP-ACTOR-OWNER-LPR
