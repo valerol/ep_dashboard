@@ -1,0 +1,131 @@
+record_id: EP-DOMAIN-REPOSITORY-MAP
+record_type: REPOSITORY_TOPOLOGY_MANIFEST
+schema_version: "1.0"
+snapshot_at: "2026-08-07"
+data_owner: OWNER_LPR
+authority_ref: EP-DP-DR-061
+
+repository:
+  provider: GitHub
+  repository_full_name: valerol/ep_dashboard
+  canonical_branch: main
+  domain_root: data/ep-domain
+
+canonical_physiology:
+  current_version: "0.2.1"
+  path: data/ep-domain/domain-physiology/EP-DP-v0.2.1.md
+  current_pointer: data/ep-domain/domain-physiology/CURRENT.md
+  embedded_topology_ref: EP-DP_v0.2.1_§14.1
+
+top_level_logical_structure:
+  - path: .openai/hosting.json
+    role: SITES_BINDING
+    recovery_scope: ORIENTATION_ONLY
+  - path: app/
+    role: SITE_INTERFACE
+    recovery_scope: OUTSIDE_DOMAIN_PHYSIOLOGY
+  - path: build/
+    role: SITE_BUILD
+    recovery_scope: OUTSIDE_DOMAIN_PHYSIOLOGY
+  - path: worker/
+    role: SITE_PUBLICATION_RUNTIME
+    recovery_scope: OUTSIDE_DOMAIN_PHYSIOLOGY
+  - path: scripts/
+    role: REPOSITORY_AUTOMATION
+    recovery_scope: OUTSIDE_DOMAIN_PHYSIOLOGY
+  - path: prompts/
+    role: SITE_UPDATE_PROCEDURES
+    recovery_scope: ORIENTATION_ONLY
+  - path: sources/
+    role: PRIVATE_SOURCE_HANDLING_RULES
+    recovery_scope: ORIENTATION_ONLY
+  - path: tests/
+    role: VALIDATION
+    recovery_scope: OUTSIDE_DOMAIN_PHYSIOLOGY
+  - path: data/
+    role: PROJECT_DATA
+    recovery_scope: PARTIAL
+
+required_singletons:
+  - path: data/ep-domain/README.md
+    role: DOMAIN_REGISTRY_ENTRYPOINT
+    authority: INFORMATIVE
+  - path: data/ep-domain/repository-map.yaml
+    role: MACHINE_READABLE_TOPOLOGY_MIRROR
+    authority: DERIVED_FROM_EP_DP_§14.1
+  - path: data/ep-domain/domain-physiology/CURRENT.md
+    role: ACTIVE_PHYSIOLOGY_POINTER
+    authority: CANONICAL_POINTER
+  - path: data/ep-domain/domain-physiology/EP-DP-v0.2.1.md
+    role: CURRENT_DOMAIN_PHYSIOLOGY
+    authority: NORMATIVE
+  - path: data/ep-domain/observation/cycle-types/registry.yaml
+    role: REPEATABLE_CYCLE_TYPE_REGISTRY
+    authority: CANONICAL
+  - path: data/ep-domain/observation/templates/cycle.yaml
+    role: CYCLE_RECORD_TEMPLATE
+    authority: CANONICAL_SCHEMA_TEMPLATE
+  - path: data/ep-domain/observation/templates/event.yaml
+    role: OBSERVATION_EVENT_TEMPLATE
+    authority: CANONICAL_SCHEMA_TEMPLATE
+  - path: data/ep-domain/observation/protocol/EP-DP-LOGISTICS-CYCLE-PROTOCOL/1.0.yaml
+    role: ACTIVE_LOGISTICS_CYCLE_PROTOCOL
+    authority: NORMATIVE_VERSION
+  - path: data/ep-domain/observation/indexes/cycles.yaml
+    role: CYCLE_NAVIGATION_INDEX
+    authority: DERIVED_NON_CANONICAL_PROJECTION
+
+repeatable_patterns:
+  - pattern: data/ep-domain/domain-physiology/EP-DP-v<version>.md
+    record_type: DOMAIN_PHYSIOLOGY_VERSION
+    rule: IMMUTABLE_VERSIONED_ARTIFACT
+  - pattern: data/ep-domain/observation/protocol/<protocol_or_instruction_id>/<version_id>.yaml
+    record_type: PROTOCOL_VERSION
+    rule: IMMUTABLE_VERSIONED_ARTIFACT
+  - pattern: data/ep-domain/observation/cycles/<cycle_instance_id>.yaml
+    record_type: CYCLE_RECORD
+    rule: ONE_INSTANCE_PER_FILE
+  - pattern: data/ep-domain/observation/events/<YYYY>/<MM>/<observation_event_id>.yaml
+    record_type: OBSERVATION_EVENT
+    rule: APPEND_ONLY_ONE_EVENT_PER_FILE
+
+current_inventory:
+  cycle_records:
+    - EP-LI-20260807-001
+    - EP-LI-20260807-002
+    - EP-LR-20260807-001
+    - EP-LR-20260807-002
+    - EP-LR-20260807-003
+  observation_events:
+    - EP-EVENT-20260807-001
+    - EP-EVENT-20260807-002
+    - EP-EVENT-20260807-003
+    - EP-EVENT-20260807-004
+    - EP-EVENT-20260807-005
+    - EP-EVENT-20260807-006
+    - EP-EVENT-20260807-007
+  active_protocol_versions:
+    - EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
+  derived_indexes:
+    - data/ep-domain/observation/indexes/cycles.yaml
+
+reconstruction:
+  physiology_to_repository:
+    minimum_result: DOMAIN_ROOT_WITH_REQUIRED_SINGLETONS_PATTERNS_ROLES_AND_ACTIVE_PROTOCOLS
+    source_refs:
+      - EP-DP_v0.2.1_§6.9
+      - EP-DP_v0.2.1_§14.1
+      - EP-DP-DR-061
+  repository_to_physiology:
+    exact_text_path: data/ep-domain/domain-physiology/EP-DP-v0.2.1.md
+    active_version_path: data/ep-domain/domain-physiology/CURRENT.md
+  excluded:
+    - EXTERNAL_PRIMARY_EVIDENCE_CONTENT
+    - GIT_HISTORY
+    - POST_SNAPSHOT_EVENTS
+
+synchronization:
+  topology_change: UPDATE_PHYSIOLOGY_AND_THIS_MANIFEST_IN_SAME_CHANGE_SET
+  physiology_version_change: UPDATE_CURRENT_POINTER_AND_THIS_MANIFEST
+  inventory_change_only: UPDATE_CURRENT_INVENTORY_WITHOUT_NEW_PHYSIOLOGY_VERSION
+  drift_state: HOLD-REPOSITORY-PHYSIOLOGY-DRIFT
