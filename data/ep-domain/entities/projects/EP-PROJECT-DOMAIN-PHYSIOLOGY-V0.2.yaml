@@ -1,0 +1,34 @@
+project_id: EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2
+title: Создание доменной физиологии EP-DP v0.2
+type: GROWTH
+owner: EP-ACTOR-OWNER-LPR
+scope: Сборка и нормализация доменной физиологии Elephant Pants до разрешённого входа в INTERNAL_QA
+result: EP-DP v0.2 структурно завершена и авторизован переход CANDIDATE -> INTERNAL_QA
+deadline:
+  type: MILESTONE
+  value: BEFORE_INTERNAL_QA_ENTRY
+budget: N/A_NO_SEPARATE_DIRECT_BUDGET
+resource:
+  primary: OWNER_LPR
+  unit: OWNER_LPR_HOUR
+quality:
+  - ALL_INTERNAL_QA_ENTRY_BLOCKERS_RESOLVED
+  - ALL_OPER_OBJECTS_DEFINITION_COMPLETE
+  - PHYSIOLOGY_OBJECT_COMPLETE
+  - TRANSITION_AUTHORIZED_BY_OWNER_LPR
+displaced_tasks: NOT_TRACKED_RETROSPECTIVELY
+closure:
+  state: CLOSED
+  outcome: ACHIEVED
+  actual_result: EP-DP v0.2 entered INTERNAL_QA
+  closed_at: 2026-08-07T14:44:00+10:00
+  authority: EP-ACTOR-OWNER-LPR
+handoff:
+  target: EP-DP-001_INTERNAL_QA_STAGE
+  transferred_to_regular_process: false
+residue:
+  - ref: EPDP-OI-032
+    blocking_project_closure: false
+    meaning: runtime Observation QA continues after creation project closure
+source_refs:
+  - sandbox:elephant_pants_domain_physiology_v0.2_internal_qa.md
