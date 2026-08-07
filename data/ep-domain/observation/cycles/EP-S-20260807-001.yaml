@@ -2,11 +2,12 @@ record_id: EP-S-20260807-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-07T21:37:53+10:00"
-updated_at: "2026-08-07T21:37:53+10:00"
+updated_at: "2026-08-07T21:52:51+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260807-001
   - EP-EVENT-20260807-008
+  - EP-EVENT-20260807-009
 
 cycle_instance_id: EP-S-20260807-001
 cycle_type_id: SALES_BATCH
@@ -30,16 +31,17 @@ goal: Реализовать 75 единиц второй партии чере�
 cycle_record_state: OPEN
 transition_decision: READY
 remediation_state: NONE
-current_step: WEEKLY_SALES_REVIEW_AND_DECISION
+current_step: CONTINUE_SALES_WITH_NO_ACTION_UNTIL_NEXT_WEEKLY_REVIEW
 plan:
   - Не реже одного раза в 7 дней выполнять OZON_WEEKLY_SALES_REVIEW
   - По каждому обзору фиксировать следующий шаг или отсутствие действия
   - Продолжать продажи до достижения условия закрытия партии
   - После завершения продаж свести экономику партии
 expected_result: Продажи второй партии завершены; выплаты и остаток подтверждены
-actual_result: На 2026-08-07 зафиксированы 2 заказа; цикл продаж продолжается
+actual_result: На 2026-08-07 зафиксированы 2 заказа; по первому недельному обзору принято NO_ACTION; цикл продаж продолжается
 evidence_refs:
   - EP-EVENT-20260807-008
+  - EP-EVENT-20260807-009
 
 opened_at: null
 current_closed_at: null
