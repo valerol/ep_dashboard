@@ -1,0 +1,83 @@
+record_id: EP-CYCLE-TYPE-REGISTRY
+record_type: CYCLE_TYPE_REGISTRY
+schema_version: "1.0"
+created_at: "2026-08-07T20:00:27+10:00"
+updated_at: "2026-08-07T20:00:27+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-DP-DR-006
+  - EP-DP-DR-007
+  - EP-DP-DR-009
+  - OWNER_LPR_AUTHORIZATION:2026-08-07:CYCLE_REGISTRY_IMPLEMENTATION
+
+type_contract:
+  type_identity_field: cycle_type_id
+  cycle_class_rule: MUST_MATCH_EP_DP_CYCLE_CLASS_DICTIONARY
+  hierarchy_rule: INSTANCE_PARENT_LINK_ONLY
+  repeat_rule: NEW_INSTANCE_ID_PER_OCCURRENCE
+  unknown_type_rule: PROPOSE_AND_HOLD_FOR_OWNER_LPR
+
+cycle_types:
+  - cycle_type_id: IMPORT_BATCH
+    title: Закупка и импорт партии
+    cycle_class: IMPORT
+    class_boundary_ref: EP-DP_v0.2_I1-I5
+    allowed_parent_type_ids: []
+    required_child_type_ids: [LOGISTICS_BATCH]
+    expected_result_template: Партия закуплена и передана в логистический контур
+
+  - cycle_type_id: LOGISTICS_BATCH
+    title: Логистика партии
+    cycle_class: LOGISTIC_IMPORT
+    class_boundary_ref: EP-DP_v0.2_L(I)1-L(I)4
+    allowed_parent_type_ids: [IMPORT_BATCH]
+    required_child_type_ids: [INTERNATIONAL_DELIVERY, OZON_TRANSFER]
+    expected_result_template: Партия доставлена до контура реализации
+
+  - cycle_type_id: INTERNATIONAL_DELIVERY
+    title: Доставка от производителя в Россию
+    cycle_class: LOGISTIC_IMPORT
+    class_boundary_ref: EP-DP_v0.2_L(I)1-L(I)4
+    allowed_parent_type_ids: [LOGISTICS_BATCH]
+    required_child_type_ids: []
+    expected_result_template: Партия получена в России и доступна для подготовки к Ozon
+
+  - cycle_type_id: OZON_TRANSFER
+    title: Передача партии на Ozon
+    cycle_class: LOGISTIC_RUSSIA
+    class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
+    allowed_parent_type_ids: [LOGISTICS_BATCH]
+    required_child_type_ids: [OZON_SHIPMENT, OZON_ACCEPTANCE]
+    expected_result_template: Партия принята складом Ozon без неурегулированных расхождений
+
+  - cycle_type_id: OZON_SHIPMENT
+    title: Отгрузка партии на Ozon
+    cycle_class: LOGISTIC_RUSSIA
+    class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
+    allowed_parent_type_ids: [OZON_TRANSFER]
+    required_child_type_ids: []
+    expected_result_template: Груз передан в маршрут Ozon с подтверждением отгрузки
+
+  - cycle_type_id: OZON_ACCEPTANCE
+    title: Приёмка партии складом Ozon
+    cycle_class: LOGISTIC_RUSSIA
+    class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
+    allowed_parent_type_ids: [OZON_TRANSFER]
+    required_child_type_ids: []
+    expected_result_template: Получен акт приёмки; остатки сверены; расхождения отсутствуют или урегулированы
+
+  - cycle_type_id: SALES_BATCH
+    title: Продажа партии
+    cycle_class: SALES
+    class_boundary_ref: EP-DP_v0.2_S1-S2
+    allowed_parent_type_ids: []
+    required_child_type_ids: [BATCH_ECONOMICS]
+    expected_result_template: Продажи партии завершены; выплаты и остаток подтверждены
+
+  - cycle_type_id: BATCH_ECONOMICS
+    title: Сведение экономики партии
+    cycle_class: ECONOMICS
+    class_boundary_ref: EP-DP_v0.2_§1.1_ECONOMICS.SYSTEM_AND_E1-E4
+    allowed_parent_type_ids: [SALES_BATCH]
+    required_child_type_ids: []
+    expected_result_template: Фактический cashflow рассчитан и распределение ресурса зафиксировано
