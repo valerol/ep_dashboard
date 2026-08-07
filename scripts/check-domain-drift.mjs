@@ -145,7 +145,27 @@ export async function checkDomainDrift(repositoryRoot = process.cwd()) {
   const physiology = await readFile(path.join(repositoryRoot, map.canonicalPath), "utf8");
   const topologyFiles = extractTopology(physiology);
 
-  compareSets("§14.1 ↔ repository-map", topologyFiles, map.declaredDomainFiles, errors);
+  const repeatablePatterns = map.repeatable.map(patternRegex);
+  const structuralTopologyFiles = new Set(
+    [...topologyFiles].filter(
+      (entry) => !repeatablePatterns.some((pattern) => pattern.test(entry)),
+    ),
+  );
+  const structuralMapFiles = new Set(
+    [...map.declaredDomainFiles].filter(
+      (entry) => !repeatablePatterns.some((pattern) => pattern.test(entry)),
+    ),
+  );
+
+  // §14.1 is a structural snapshot. Repeatable cycle, event, protocol and
+  // physiology-version instances are governed by patterns and current_inventory;
+  // adding a conforming instance must not require a new physiology version.
+  compareSets(
+    "§14.1 ↔ repository-map structural paths",
+    structuralTopologyFiles,
+    structuralMapFiles,
+    errors,
+  );
 
   const actualFiles = new Set(await walkFiles(repositoryRoot));
   const archivalPatterns = map.repeatable
