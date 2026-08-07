@@ -1,0 +1,18 @@
+observation_event_id: EP-OEV-20260807-002
+oper_id: O2
+event_type: CYCLE_REGISTERED
+event_at: 2026-08-07T14:35:00+10:00
+recorded_at: 2026-08-07T14:35:00+10:00
+primary_cycle_instance_id: EP-REPAIR_PROJECT-20260807-001
+cycle_class: REPAIR_PROJECT
+scope: MARKING_PROJECT
+required_fields:
+  membership: PRESENT
+  goal: PRESENT
+  current_step: PRESENT
+  plan: PRESENT
+  expected_result: PRESENT
+cycle_record_path: data/ep-domain/observation/cycles/EP-REPAIR_PROJECT-20260807-001.yaml
+decision: CONFIRM
+authority: EP-ACTOR-OWNER-LPR
+qa_record: true
