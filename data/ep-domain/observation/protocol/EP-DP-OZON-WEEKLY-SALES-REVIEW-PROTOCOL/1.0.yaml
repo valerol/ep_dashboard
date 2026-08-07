@@ -1,0 +1,126 @@
+record_id: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
+record_type: PROTOCOL_VERSION
+schema_version: "1.0"
+created_at: "2026-08-07T21:37:53+10:00"
+updated_at: "2026-08-07T21:37:53+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-DP-DR-006
+  - EP-DP-DR-007
+  - EP-DP-DR-008
+  - EP-DP-DR-009
+  - EP-DP-DR-061
+  - OWNER_LPR_DIRECTIVE:2026-08-07:WEEKLY_OZON_SALES_REVIEW
+
+protocol_or_instruction_id: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL
+version_id: "1.0"
+title: Еженедельная проверка аналитики продаж Ozon
+status: ACTIVE
+canonical_effect:
+  branch: main
+  effective_from: "2026-08-07T21:37:53+10:00"
+  relation_to_ep_dp: NORMATIVE_DOMAIN_EXTENSION_REGISTERED_BY_EP_DP_DR_009_AND_EP_DP_DR_061
+  governing_rules: [EP-DP-DR-006, EP-DP-DR-007, EP-DP-DR-008, EP-DP-DR-009, EP-DP-DR-061]
+
+scope:
+  parent_cycle_type_id: SALES_BATCH
+  child_cycle_type_id: OZON_WEEKLY_SALES_REVIEW
+  cycle_class: SALES
+  applies_while_parent_state: OPEN
+  minimum_repeating_subcycle: true
+
+cadence:
+  minimum_frequency: ONCE_PER_WEEK
+  maximum_interval_between_completed_reviews: P7D
+  additional_reviews_allowed: true
+  first_review_due: NO_LATER_THAN_P7D_AFTER_PARENT_OPENED_AT
+  next_review_due: NO_LATER_THAN_P7D_AFTER_PREVIOUS_REVIEW_CLOSED_AT
+  obligation_ends_when: PARENT_SALES_BATCH_IS_CLOSED
+  overdue_state: HOLD-WEEKLY-SALES-REVIEW-OVERDUE
+
+source_capture:
+  system: OZON_SELLER
+  navigation_path: Цены и акции → Цены → Аналитика по продажам
+  reporting_period: ONE_WEEK
+  capture_form: SCREENSHOT
+  repository_storage: FACTS_AND_STABLE_REFS_ONLY
+  screenshot_in_github: NOT_REQUIRED
+
+codex_processing:
+  required: true
+  prompt_language: ru
+  canonical_prompt: |-
+    Это статистика по продажам за неделю. Сделай из нее .csv с 5 колонками:
+    sku, заказано на сумму, заказано товаров, показы всего, конверсия
+    Результирующий файл во вложении.
+  output_format: CSV_UTF8
+  required_columns_in_order:
+    - sku
+    - заказано на сумму
+    - заказано товаров
+    - показы всего
+    - конверсия
+  field_rules:
+    sku: REQUIRED_TEXT_IDENTIFIER_PER_ROW
+    заказано на сумму: NONNEGATIVE_NUMERIC_RUB
+    заказано товаров: NONNEGATIVE_INTEGER
+    показы всего: NONNEGATIVE_INTEGER
+    конверсия: NONNEGATIVE_PERCENTAGE
+  output_file_in_github: NOT_REQUIRED
+
+decision_rule:
+  decision_required_for_subcycle_closure: true
+  allowed_decisions:
+    - NEXT_STEP_SELECTED
+    - NO_ACTION
+    - HOLD_FOR_DATA_REPAIR
+  closure_eligible_decisions: [NEXT_STEP_SELECTED, NO_ACTION]
+  nonclosure_decision: HOLD_FOR_DATA_REPAIR
+  next_step_payload_required_if: NEXT_STEP_SELECTED
+  decision_basis:
+    - WEEKLY_CSV_FACTS
+    - ACTIVE_SALES_GOAL_AND_CURRENT_STEP
+    - RELEVANT_PRIOR_WEEK_OR_BATCH_BASELINE_IF_AVAILABLE
+  no_silent_inference_of_owner_choice: true
+
+cycle_procedure:
+  - step: OPEN_REVIEW
+    requirement: CREATE_NEW_OZON_WEEKLY_SALES_REVIEW_INSTANCE_UNDER_OPEN_SALES_BATCH
+  - step: CAPTURE_SCREENSHOT
+    requirement: CAPTURE_ONE_WEEK_FROM_CANONICAL_OZON_ANALYTICS_LOCATION
+  - step: PROCESS_WITH_CODEX
+    requirement: APPLY_CANONICAL_PROMPT_AND_CREATE_FIVE_COLUMN_CSV
+  - step: VALIDATE_OUTPUT
+    requirement: VERIFY_HEADERS_TYPES_ROW_COUNT_AND_SKU_PRESENCE
+  - step: RECORD_FACTS
+    requirement: STORE_AGGREGATES_DATA_QUALITY_AND_EXTERNAL_EVIDENCE_REFS_WITHOUT_COPYING_FILES_TO_GITHUB
+  - step: DECIDE
+    requirement: RECORD_NEXT_STEP_OR_EXPLICIT_NO_ACTION; USE_HOLD_IF_DATA_REPAIR_IS_REQUIRED
+  - step: CLOSE_REVIEW
+    requirement: CREATE_SEPARATE_APPEND_ONLY_CLOSURE_EVENT_AFTER_DECISION
+
+closure_rule:
+  achieved_if:
+    - SCREENSHOT_CAPTURED
+    - CSV_CREATED_WITH_REQUIRED_COLUMNS
+    - OUTPUT_VALIDATED_OR_LIMITATION_EXPLICITLY_ACCEPTED
+    - NEXT_STEP_OR_NO_ACTION_RECORDED
+  closure_outcome: ACHIEVED
+  residue_disposition: NEXT_REVIEW_REMAINS_A_FUTURE_OCCURRENCE_NOT_RESIDUE_OF_CLOSED_REVIEW
+  parent_effect: CHILD_CLOSURE_DOES_NOT_CLOSE_SALES_BATCH
+
+data_quality_rule:
+  missing_sku:
+    severity: MATERIAL_FOR_ITEM_LEVEL_ANALYSIS
+    required_record: STORE_COUNT_OF_ROWS_WITH_MISSING_SKU
+    default_decision: HOLD_FOR_DATA_REPAIR
+    owner_override: MAY_ACCEPT_AGGREGATE_ONLY_DECISION_EXPLICITLY
+  forbidden_claim: DO_NOT_ATTRIBUTE_ROW_LEVEL_FACTS_TO_A_SKU_WHEN_SKU_IS_MISSING
+
+invariants:
+  - ONE_REVIEW_INSTANCE_PER_RECORDED_WEEKLY_OBSERVATION
+  - EACH_NEW_REVIEW_USES_A_NEW_CYCLE_INSTANCE_ID
+  - REVIEW_REMAINS_OPEN_UNTIL_A_DECISION_IS_RECORDED
+  - SCREENSHOTS_AND_CSV_FILES_ARE_NOT_REQUIRED_IN_THE_PUBLIC_REPOSITORY
+  - REPOSITORY_STORES_EXTRACTED_FACTS_SOURCE_REFS_AND_DECISIONS
+  - OPEN_SALES_BATCH_MUST_NOT_EXCEED_P7D_WITHOUT_A_COMPLETED_REVIEW

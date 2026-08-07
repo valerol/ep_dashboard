@@ -1,6 +1,6 @@
 record_id: EP-DOMAIN-REPOSITORY-MAP
 record_type: REPOSITORY_TOPOLOGY_MANIFEST
-schema_version: "1.1"
+schema_version: "1.2"
 snapshot_at: "2026-08-07"
 data_owner: OWNER_LPR
 authority_ref: EP-DP-DR-061
@@ -102,6 +102,8 @@ current_inventory:
     - EP-LR-20260807-001
     - EP-LR-20260807-002
     - EP-LR-20260807-003
+    - EP-S-20260807-001
+    - EP-S-20260807-002
   observation_events:
     - EP-EVENT-20260807-001
     - EP-EVENT-20260807-002
@@ -110,8 +112,10 @@ current_inventory:
     - EP-EVENT-20260807-005
     - EP-EVENT-20260807-006
     - EP-EVENT-20260807-007
+    - EP-EVENT-20260807-008
   active_protocol_versions:
     - EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
+    - EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
   derived_indexes:
     - data/ep-domain/observation/indexes/cycles.yaml
 
@@ -122,6 +126,7 @@ reconstruction:
       - EP-DP_v0.2.1_§6.9
       - EP-DP_v0.2.1_§14.1
       - EP-DP-DR-061
+      - EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
   repository_to_physiology:
     exact_text_path: data/ep-domain/domain-physiology/EP-DP-v0.2.1.md
     active_version_path: data/ep-domain/domain-physiology/CURRENT.md
@@ -134,6 +139,7 @@ synchronization:
   topology_change: UPDATE_PHYSIOLOGY_AND_THIS_MANIFEST_IN_SAME_CHANGE_SET
   physiology_version_change: UPDATE_CURRENT_POINTER_AND_THIS_MANIFEST
   inventory_change_only: UPDATE_CURRENT_INVENTORY_WITHOUT_NEW_PHYSIOLOGY_VERSION
+  active_protocol_change: UPDATE_ACTIVE_PROTOCOL_INVENTORY_AND_PROTOCOL_FILE_IN_SAME_CHANGE_SET
   automatic_check: node scripts/check-domain-drift.mjs
   ci_workflow: .github/workflows/domain-drift.yml
   drift_state: HOLD-REPOSITORY-PHYSIOLOGY-DRIFT

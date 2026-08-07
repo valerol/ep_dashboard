@@ -1,0 +1,87 @@
+record_id: EP-EVENT-20260807-008
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-07T21:37:53+10:00"
+updated_at: "2026-08-07T21:37:53+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_DIRECTIVE:2026-08-07:WEEKLY_OZON_SALES_REVIEW
+  - OZON_SALES_ANALYTICS_SCREENSHOT:WEEK_ENDING_2026-08-07
+  - OZON_SALES_ANALYTICS_CSV:ozon_sales_week_2026-08-07.csv
+
+observation_event_id: EP-EVENT-20260807-008
+event_type: STATE_OBSERVED
+action_or_event_ref: OZON_WEEKLY_SALES_REVIEW_OCCURRENCE_1
+occurred_at: "2026-08-07T21:37:53+10:00"
+observed_or_received_at: "2026-08-07T21:37:53+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260807-002
+    classification_basis_ref: WEEKLY_SALES_REVIEW_OUTPUT_DIRECTLY_OBSERVED
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: REPEATING_CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-07T21:37:53+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: OPEN
+  current_step_after: RESTORE_SKU_OR_EXPLICITLY_ACCEPT_AGGREGATE_ONLY_DECISION
+  result: Недельная статистика преобразована в CSV; решение ожидается
+
+facts:
+  source_period: WEEK_ENDING_2026-08-07
+  source_location: OZON_SELLER/Цены и акции/Цены/Аналитика по продажам
+  source_document_storage: NOT_COPIED_TO_REPOSITORY
+  csv_filename_ref: ozon_sales_week_2026-08-07.csv
+  csv_schema:
+    - sku
+    - заказано на сумму
+    - заказано товаров
+    - показы всего
+    - конверсия
+  row_count: 33
+  rows_with_blank_sku: 33
+  aggregate:
+    ordered_amount_rub: 5800
+    ordered_items: 2
+    total_impressions: 10249
+    rows_with_orders: 2
+  data_quality:
+    status: PARTIAL
+    limitation: ITEM_LEVEL_IDENTIFICATION_UNAVAILABLE_BECAUSE_ALL_SKU_VALUES_ARE_BLANK
+    forbidden_inference: DO_NOT_ASSIGN_THE_TWO_ORDERS_TO_SPECIFIC_SKUS
+  decision:
+    status: PENDING
+    allowed_next_values: [NEXT_STEP_SELECTED, NO_ACTION, HOLD_FOR_DATA_REPAIR]
+
+closure:
+  outcome: null
+  expected_result_ref: null
+  actual_result_or_NO_FINAL_RESULT: null
+  actual_vs_expected_comparison: null
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
+
+recording_sla:
+  oper_id: O3
+  sla_class: ORDINARY_OBSERVATION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_PROVIDED_PROCESSED_WEEKLY_CSV
+  sla_started_at: "2026-08-07T21:37:53+10:00"
+  sla_deadline_at: "2026-08-08T21:37:53+10:00"
+  evaluated_at: "2026-08-07T21:37:53+10:00"
+  actual_recorded_at: "2026-08-07T21:37:53+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008

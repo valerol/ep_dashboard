@@ -1,15 +1,17 @@
 record_id: EP-CYCLE-TYPE-REGISTRY
 record_type: CYCLE_TYPE_REGISTRY
-schema_version: "1.1"
+schema_version: "1.2"
 created_at: "2026-08-07T20:00:27+10:00"
-updated_at: "2026-08-07T20:37:37+10:00"
+updated_at: "2026-08-07T21:37:53+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-006
   - EP-DP-DR-007
   - EP-DP-DR-009
   - EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
+  - EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
   - OWNER_LPR_AUTHORIZATION:2026-08-07:CYCLE_REGISTRY_IMPLEMENTATION
+  - OWNER_LPR_DIRECTIVE:2026-08-07:WEEKLY_OZON_SALES_REVIEW
 
 type_contract:
   type_identity_field: cycle_type_id
@@ -18,6 +20,7 @@ type_contract:
   repeat_rule: NEW_INSTANCE_ID_PER_OCCURRENCE
   unknown_type_rule: PROPOSE_AND_HOLD_FOR_OWNER_LPR
   logistics_procedure_ref: EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
+  weekly_sales_review_procedure_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
 
 cycle_types:
   - cycle_type_id: IMPORT_BATCH
@@ -74,7 +77,19 @@ cycle_types:
     class_boundary_ref: EP-DP_v0.2_S1-S2
     allowed_parent_type_ids: []
     required_child_type_ids: [BATCH_ECONOMICS]
+    repeatable_child_type_ids: [OZON_WEEKLY_SALES_REVIEW]
+    repeatable_child_rule_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
     expected_result_template: Продажи партии завершены; выплаты и остаток подтверждены
+
+  - cycle_type_id: OZON_WEEKLY_SALES_REVIEW
+    title: Еженедельная проверка аналитики продаж Ozon
+    cycle_class: SALES
+    class_boundary_ref: EP-DP_v0.2_S1-S2
+    allowed_parent_type_ids: [SALES_BATCH]
+    required_child_type_ids: []
+    cadence: AT_LEAST_ONCE_PER_P7D_WHILE_PARENT_OPEN
+    protocol_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
+    expected_result_template: Недельная статистика преобразована в CSV; принято решение о следующем шаге или его отсутствии
 
   - cycle_type_id: BATCH_ECONOMICS
     title: Сведение экономики партии
@@ -83,4 +98,3 @@ cycle_types:
     allowed_parent_type_ids: [SALES_BATCH]
     required_child_type_ids: []
     expected_result_template: Фактический cashflow рассчитан и распределение ресурса зафиксировано
-
