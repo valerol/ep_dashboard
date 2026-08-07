@@ -1,0 +1,52 @@
+qa_id: EP-DP-QA-OI-032-DOMAIN-FIXTURES-20260807
+result: PASS
+fixtures:
+  hold_missing_prerequisite:
+    given: REQUIRED_PRECONDITION_MISSING
+    expected:
+      transition_decision: HOLD
+      next_transition_allowed: false
+    actual:
+      transition_decision: HOLD
+      next_transition_allowed: false
+    restore_then:
+      expected: READY_AFTER_RECHECK
+      actual: READY_AFTER_RECHECK
+    result: PASS
+  stop_repair_recontrol:
+    given: CRITICAL_DEFECT_DETECTED
+    expected_sequence:
+      - STOP
+      - ISOLATE
+      - REPAIR_ACTIVE
+      - RECONTROL_PENDING
+      - READY_AFTER_RECONTROL_PASS
+    actual_sequence:
+      - STOP
+      - ISOLATE
+      - REPAIR_ACTIVE
+      - RECONTROL_PENDING
+      - READY_AFTER_RECONTROL_PASS
+    result: PASS
+  ozon_return_saleable:
+    given: OZON_CLASSIFIES_RETURN_SALEABLE
+    expected: RETURN_TO_OZON_STOCK
+    actual: RETURN_TO_OZON_STOCK
+    financial_accounting: OZON
+    result: PASS
+  ozon_return_unsaleable:
+    given: OZON_CLASSIFIES_RETURN_UNSALEABLE
+    expected_one_of:
+      - RETURN_TO_SELLER
+      - WRITE_OFF_OR_DISPOSAL
+    actual_contract_matches: true
+    financial_accounting: OZON
+    result: PASS
+  organic_claim_without_material_origin_evidence:
+    given: ORGANIC_MATERIAL_CLAIM_REQUESTED_AND_EPDP_OI_010_OPEN
+    expected: BLOCKED_PENDING_EVIDENCE
+    actual: BLOCKED_PENDING_EVIDENCE
+    result: PASS
+notes:
+  - these are deterministic specification fixtures, not fabricated business events
+  - prospective end-to-end execution remains EPDP-OI-033
