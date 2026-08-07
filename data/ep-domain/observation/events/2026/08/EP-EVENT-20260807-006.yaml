@@ -1,0 +1,65 @@
+record_id: EP-EVENT-20260807-006
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-07T20:30:50+10:00"
+updated_at: "2026-08-07T20:30:50+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260807-004
+
+observation_event_id: EP-EVENT-20260807-006
+event_type: STATE_OBSERVED
+action_or_event_ref: PARENT_RELATION_RECORDED:SECOND_OZON_TRANSFER
+occurred_at: null
+observed_or_received_at: "2026-08-07T20:30:50+10:00"
+
+membership:
+  primary:
+    cycle_class: LOGISTIC_RUSSIA
+    cycle_instance_id: EP-LR-20260807-001
+    classification_basis_ref: OZON_TRANSFER_IS_CHILD_OF_BATCH_LOGISTICS
+  related:
+    - cycle_class: LOGISTIC_IMPORT
+      cycle_instance_id: EP-LI-20260807-001
+      relation_basis_ref: PARENT_CYCLE
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-07T20:30:50+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: CLOSED
+  new_cycle_record_state: CLOSED
+  current_step_after: CYCLE_CLOSED_AFTER_COMPLETE_ACCEPTANCE
+  result: Для второй передачи на Ozon зафиксирован родительский цикл логистики партии
+
+facts:
+  child_cycle_instance_id: EP-LR-20260807-001
+  parent_cycle_instance_id: EP-LI-20260807-001
+  relationship: CHILD_OF
+  cycle_state_changed: false
+
+closure:
+  outcome: null
+  expected_result_ref: null
+  actual_result_or_NO_FINAL_RESULT: null
+  actual_vs_expected_comparison: null
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
+
+recording_sla:
+  oper_id: O3
+  sla_class: ORDINARY_OBSERVATION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_AUTHORIZED_REGISTRY_COMPLETION
+  sla_started_at: "2026-08-07T20:30:50+10:00"
+  sla_deadline_at: "2026-08-08T20:30:50+10:00"
+  evaluated_at: "2026-08-07T20:30:50+10:00"
+  actual_recorded_at: "2026-08-07T20:30:50+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
