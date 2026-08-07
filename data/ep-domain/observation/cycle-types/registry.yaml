@@ -1,13 +1,14 @@
 record_id: EP-CYCLE-TYPE-REGISTRY
 record_type: CYCLE_TYPE_REGISTRY
-schema_version: "1.0"
+schema_version: "1.1"
 created_at: "2026-08-07T20:00:27+10:00"
-updated_at: "2026-08-07T20:00:27+10:00"
+updated_at: "2026-08-07T20:37:37+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-006
   - EP-DP-DR-007
   - EP-DP-DR-009
+  - EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
   - OWNER_LPR_AUTHORIZATION:2026-08-07:CYCLE_REGISTRY_IMPLEMENTATION
 
 type_contract:
@@ -16,6 +17,7 @@ type_contract:
   hierarchy_rule: INSTANCE_PARENT_LINK_ONLY
   repeat_rule: NEW_INSTANCE_ID_PER_OCCURRENCE
   unknown_type_rule: PROPOSE_AND_HOLD_FOR_OWNER_LPR
+  logistics_procedure_ref: EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
 
 cycle_types:
   - cycle_type_id: IMPORT_BATCH
@@ -56,7 +58,7 @@ cycle_types:
     class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
     allowed_parent_type_ids: [OZON_TRANSFER]
     required_child_type_ids: []
-    expected_result_template: Груз передан в маршрут Ozon с подтверждением отгрузки
+    expected_result_template: Груз передан в маршрут Ozon; количество и направления отгрузки подтверждены
 
   - cycle_type_id: OZON_ACCEPTANCE
     title: Приёмка партии складом Ozon
@@ -64,7 +66,7 @@ cycle_types:
     class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
     allowed_parent_type_ids: [OZON_TRANSFER]
     required_child_type_ids: []
-    expected_result_template: Получен акт приёмки; остатки сверены; расхождения отсутствуют или урегулированы
+    expected_result_template: Количество, принятое всеми складами назначения, подтверждено и сверено; расхождения отсутствуют или урегулированы
 
   - cycle_type_id: SALES_BATCH
     title: Продажа партии
@@ -81,3 +83,4 @@ cycle_types:
     allowed_parent_type_ids: [SALES_BATCH]
     required_child_type_ids: []
     expected_result_template: Фактический cashflow рассчитан и распределение ресурса зафиксировано
+
