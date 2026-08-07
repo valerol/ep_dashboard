@@ -1,0 +1,23 @@
+observation_event_id: EP-OEV-20260807-008
+oper_id: O5
+mode: RETROSPECTIVE_REAL_EVENT_VALIDATION
+recorded_at: 2026-08-07T14:50:00+10:00
+evidence_ref: data/ep-domain/entities/decisions/EP-DP-DR-018.yaml
+significance_decision:
+  authority: EP-ACTOR-OWNER-LPR
+  result: SIGNIFICANT
+  reason:
+    - CURRENT_RULE_PROVEN_INCOMPLETE
+    - CURRENT_ROUTE_REQUIRED_CORRECTION
+affected_protocol: EP-HANDOFF
+previous_version_ref: PRE_DR_018_ASSUMED_HANDOFF
+new_version_ref: data/ep-domain/observation/protocol/EP-HANDOFF/2026-08-07-DR-018.yaml
+impact_map_present: true
+version_diff_present: true
+history_preserved: true
+automatic_change: false
+owner_authorized_change: true
+result: PASS
+notes:
+  - The underlying workflow correction was a real owner-confirmed event that produced EP-DP-DR-018 before this QA run.
+  - This QA run validates traceability, significance judgment, impact mapping and versioned protocol recording; it does not fabricate a new operational change.
