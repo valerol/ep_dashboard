@@ -1,0 +1,54 @@
+record_id: EP-LR-20260807-002
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: "2026-08-07T20:16:40+10:00"
+updated_at: "2026-08-07T20:16:40+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260807-001
+  - EP-EVENT-20260807-003
+
+cycle_instance_id: EP-LR-20260807-002
+cycle_type_id: OZON_SHIPMENT
+cycle_class: LOGISTIC_RUSSIA
+series_id: EP-SERIES-OZON-SHIPMENT
+occurrence: 2
+scope:
+  class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
+  instance_subject_ref: EP-BATCH-2026-002
+
+parent_cycle_instance_id: EP-LR-20260807-001
+predecessor_cycle_instance_id: null
+continuation_reason: null
+trigger_evidence_ref: OWNER_LPR_REPORT:2026-08-07:SHIPMENT_75
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: ECONOMICS.SYSTEM
+
+goal: Отгрузить 75 единиц второй партии на склады Ozon
+cycle_record_state: CLOSED
+transition_decision: READY
+remediation_state: NONE
+current_step: CYCLE_CLOSED_AFTER_ACCEPTANCE_RECONCILIATION
+plan:
+  - Передать 43 единицы в маршрут до московского склада
+  - Передать 32 единицы в маршрут до петербургского склада
+expected_result: 75 единиц переданы в маршрут Ozon с подтверждением отгрузки
+actual_result: Отгружено 75 единиц — 43 в Москву и 32 в Санкт-Петербург
+evidence_refs:
+  - EP-EVENT-20260807-001
+
+opened_at: null
+current_closed_at: "2026-08-07T20:15:21+10:00"
+current_closure_outcome: ACHIEVED
+current_closure_event_ref: EP-EVENT-20260807-003
+closure_event_refs:
+  - EP-EVENT-20260807-003
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
