@@ -2,51 +2,40 @@ qa_id: EP-DP-QA-OI-032-20260807
 openitem_id: EPDP-OI-032
 physiology: EP-DP-v0.2
 branch: qa/ep-dp-v0.2-observation
-executed_at: 2026-08-07T14:50:00+10:00
+executed_at: 2026-08-07T14:53:00+10:00
 result: PASS
-cycles:
-  open_cycle:
-    cycle_instance_id: EP-REPAIR_PROJECT-20260807-001
-    tests:
-      O1:
-        status: PASS
-        evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-001.yaml
-      O2:
-        status: PASS
-        evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-002.yaml
-      O3:
-        status: PASS
-        evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-003.yaml
-  closed_cycle:
-    cycle_instance_id: EP-GROWTH_PROJECT-20260807-001
-    project_ref: data/ep-domain/entities/projects/EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2.yaml
-    tests:
-      O1:
-        status: PASS
-        evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-004.yaml
-      O2:
-        status: PASS
-        evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-005.yaml
-      O3:
-        status: PASS
-        evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-006.yaml
-      O4:
-        status: PASS
-        evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-007.yaml
-  protocol_change:
-    O5:
-      status: PASS
-      mode: RETROSPECTIVE_REAL_EVENT_VALIDATION
-      decision_ref: data/ep-domain/entities/decisions/EP-DP-DR-018.yaml
-      protocol_version_ref: data/ep-domain/observation/protocol/EP-HANDOFF/2026-08-07-DR-018.yaml
-      event_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-008.yaml
-      affected_rules:
-        - I5
-        - L(I)1
-        - L(I)2
+resolution_state: RESOLVED
+observation_runtime:
+  O1: PASS
+  O2: PASS
+  O3: PASS
+  O4: PASS
+  O5: PASS
+  O5_event_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-008.yaml
+  O5_decision_ref: data/ep-domain/entities/decisions/EP-DP-DR-018.yaml
+  O5_protocol_version_ref: data/ep-domain/observation/protocol/EP-HANDOFF/2026-08-07-DR-018.yaml
+sla:
+  status: PASS
+  evidence_ref: data/ep-domain/qa/EP-DP-v0.2/OI-032-sla-qa.yaml
+control_review:
+  status: PASS
+  mode: TIME_SEPARATED_SELF_RECHECK
+  evidence_ref: data/ep-domain/qa/EP-DP-v0.2/OI-032-control-review.yaml
+defect_log:
+  status: CLOSED
+  open_defects: 0
+  evidence_ref: data/ep-domain/qa/EP-DP-v0.2/OI-032-defect-log.yaml
+static_and_definition_tests:
+  source: EP-DP-QA-001
+  structural_reference: PASS
+  interfaces: PASS
+  transitions: PASS
+  economics: PASS
+  project_exit: PASS
+  compatibility: PASS
 closure_condition_remaining: []
 notes:
-  - no synthetic closure was created
   - O4 was tested on a legitimately completed project
-  - O5 was tested against a real owner-confirmed workflow correction that produced EP-DP-DR-018
-  - O5 QA validates significance decision, owner authority, impact map, version diff, traceability and preserved history
+  - O5 was tested against a real owner-confirmed process correction that produced EP-DP-DR-018
+  - SLA includes real ordinary/closure cases plus deterministic boundary fixtures
+  - this closes INTERNAL_QA_EXECUTION only; prospective real-batch pilot remains EPDP-OI-033
