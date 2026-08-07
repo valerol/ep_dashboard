@@ -22,7 +22,9 @@
 - `data/news.json` — бизнес-события;
 - `data/organs.json` — функциональные органы проекта;
 - `data/machine.json` — циклы, узлы и opers;
-- `data/ep-domain/` — канонический реестр доменных сущностей, экземпляров циклов и append-only событий;
+- `data/ep-domain/` — канонический доменный namespace;
+- `data/ep-domain/domain-physiology/CURRENT.md` — указатель на текущую доменную физиологию;
+- `data/ep-domain/repository-map.yaml` — машиночитаемая карта доменной структуры;
 - `data/site-changelog.json` — история представления сайта;
 - `data/source-registry.json` — обезличенный реестр подтверждений и пробелов;
 - `sources/` — правила обращения с приватными первоисточниками;
