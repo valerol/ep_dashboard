@@ -2,24 +2,40 @@ record_id: EP-CYCLE-INDEX
 record_type: DERIVED_CYCLE_INDEX
 schema_version: "1.0"
 created_at: "2026-08-07T20:00:27+10:00"
-updated_at: "2026-08-07T20:16:40+10:00"
+updated_at: "2026-08-07T20:30:50+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-009
 
 authority: DERIVED_NON_CANONICAL_PROJECTION
 generated_from: data/ep-domain/observation/cycles/*.yaml
-generated_at: "2026-08-07T20:16:40+10:00"
+generated_at: "2026-08-07T20:30:50+10:00"
 counts:
-  total: 3
+  total: 5
   open: 0
-  closed: 3
+  closed: 5
 cycles:
+  - cycle_instance_id: EP-LI-20260807-001
+    cycle_type_id: LOGISTICS_BATCH
+    cycle_class: LOGISTIC_IMPORT
+    occurrence: 2
+    parent_cycle_instance_id: null
+    cycle_record_state: CLOSED
+    current_closure_outcome: ACHIEVED
+    subject_ref: EP-BATCH-2026-002
+  - cycle_instance_id: EP-LI-20260807-002
+    cycle_type_id: INTERNATIONAL_DELIVERY
+    cycle_class: LOGISTIC_IMPORT
+    occurrence: 2
+    parent_cycle_instance_id: EP-LI-20260807-001
+    cycle_record_state: CLOSED
+    current_closure_outcome: ACHIEVED
+    subject_ref: EP-BATCH-2026-002
   - cycle_instance_id: EP-LR-20260807-001
     cycle_type_id: OZON_TRANSFER
     cycle_class: LOGISTIC_RUSSIA
     occurrence: 2
-    parent_cycle_instance_id: null
+    parent_cycle_instance_id: EP-LI-20260807-001
     cycle_record_state: CLOSED
     current_closure_outcome: ACHIEVED
     subject_ref: EP-BATCH-2026-002
