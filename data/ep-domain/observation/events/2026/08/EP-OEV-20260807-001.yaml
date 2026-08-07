@@ -1,0 +1,17 @@
+observation_event_id: EP-OEV-20260807-001
+oper_id: O1
+event_type: CYCLE_CLASSIFICATION
+event_at: 2026-08-07T14:35:00+10:00
+recorded_at: 2026-08-07T14:35:00+10:00
+primary_cycle_instance_id: EP-REPAIR_PROJECT-20260807-001
+primary_cycle_class: REPAIR_PROJECT
+related_cycle_classes:
+  - LOGISTIC_RUSSIA
+action_or_event_ref: MARKING_PROJECT_ACTIVE_NOT_STABILIZED
+classification_basis:
+  - marking process is not yet stabilized
+  - software configuration and validation are required
+  - terminal result is transfer to regular L(R)2-L(R)4 after successful repeatable test
+decision: CONFIRM
+authority: EP-ACTOR-OWNER-LPR
+qa_record: true
