@@ -9,6 +9,8 @@ source_refs:
   - EP-DP-DR-007
   - EP-DP-DR-008
   - EP-DP-DR-009
+  - EP-DP-DR-061
+  - EP-DP_v0.2.1_§6.9
   - OWNER_LPR_AUTHORIZATION:2026-08-07:CANONIZE_LOGISTICS_CYCLE_PROCEDURE
 
 protocol_or_instruction_id: EP-DP-LOGISTICS-CYCLE-PROTOCOL
@@ -18,8 +20,8 @@ status: ACTIVE
 canonical_effect:
   branch: main
   effective_from: "2026-08-07T20:37:37+10:00"
-  relation_to_ep_dp: NORMATIVE_DOMAIN_EXTENSION
-  governing_rules: [EP-DP-DR-006, EP-DP-DR-007, EP-DP-DR-008, EP-DP-DR-009]
+  relation_to_ep_dp: NORMATIVE_DOMAIN_EXTENSION_INTEGRATED_IN_EP_DP_V0.2.1
+  governing_rules: [EP-DP-DR-006, EP-DP-DR-007, EP-DP-DR-008, EP-DP-DR-009, EP-DP-DR-061]
 
 scope:
   applies_to_subject_type: BATCH
