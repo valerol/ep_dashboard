@@ -1,0 +1,49 @@
+record_id: EP-{CLASS}-{YYYYMMDD}-{NNN}
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: null
+updated_at: null
+data_owner: OWNER_LPR
+source_refs: []
+
+cycle_instance_id: EP-{CLASS}-{YYYYMMDD}-{NNN}
+cycle_type_id: null
+cycle_class: null
+series_id: null
+occurrence: null
+scope:
+  class_boundary_ref: null
+  instance_subject_ref: null
+
+parent_cycle_instance_id: null
+predecessor_cycle_instance_id: null
+continuation_reason: null
+trigger_evidence_ref: null
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: null
+
+goal: null
+cycle_record_state: OPEN
+transition_decision: READY
+remediation_state: NONE
+current_step: null
+plan: []
+expected_result: null
+actual_result: null
+evidence_refs: []
+
+opened_at: null
+current_closed_at: null
+current_closure_outcome: NONE
+current_closure_event_ref: null
+closure_event_refs: []
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
+
