@@ -1,0 +1,11 @@
+observation_event_id: EP-OEV-20260807-006
+oper: O3
+cycle_instance_id: EP-GROWTH_PROJECT-20260807-001
+previous_state: WORKING_CANDIDATE
+new_state: INTERNAL_QA_ENTRY_AUTHORIZED
+source_ref: sandbox:elephant_pants_domain_physiology_v0.2_internal_qa.md
+transition_decision: READY
+remediation_state: NONE
+result: PASS
+recorded_at: 2026-08-07T14:45:00+10:00
+observer: EP-ACTOR-OWNER-LPR
