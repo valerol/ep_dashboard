@@ -1,0 +1,25 @@
+qa_id: EP-DP-QA-OI-032-DEFECTS-20260807
+result: CLOSED
+defects:
+  - id: QA-DEF-001
+    issue: PHYSIOLOGY_STATE_STALE_AFTER_AUTHORIZED_TRANSITION
+    repair: SYNCHRONIZED_TO_INTERNAL_QA
+    recontrol: PASS
+    status: CLOSED
+  - id: QA-DEF-002
+    issue: STALE_OPER_COUNTERS_30_VS_32
+    repair: COUNTERS_SYNCHRONIZED_TO_32
+    recontrol: PASS
+    status: CLOSED
+  - id: QA-DEF-003
+    issue: STALE_REGULAR_OPER_HOLD_COUNTERS
+    repair: CLEARED_AFTER_DEFINITION_COMPLETENESS
+    recontrol: PASS
+    status: CLOSED
+  - id: QA-DEF-004
+    issue: E2_DISPLAY_ROUNDING_DIFFERENCE
+    repair: ROUNDING_NOTE_ADDED_GATE_RECHECKED
+    gate_affected: false
+    recontrol: PASS
+    status: CLOSED
+open_defects: 0
