@@ -1,0 +1,55 @@
+record_id: EP-S-20260807-001
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: "2026-08-07T21:37:53+10:00"
+updated_at: "2026-08-07T21:37:53+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260807-001
+  - EP-EVENT-20260807-008
+
+cycle_instance_id: EP-S-20260807-001
+cycle_type_id: SALES_BATCH
+cycle_class: SALES
+series_id: EP-SERIES-SALES-BATCH
+occurrence: 2
+scope:
+  class_boundary_ref: EP-DP_v0.2_S1-S2
+  instance_subject_ref: EP-BATCH-2026-002
+
+parent_cycle_instance_id: null
+predecessor_cycle_instance_id: null
+continuation_reason: null
+trigger_evidence_ref: EP-EVENT-20260807-001
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: ECONOMICS.SYSTEM
+
+goal: Реализовать 75 единиц второй партии через Ozon
+cycle_record_state: OPEN
+transition_decision: READY
+remediation_state: NONE
+current_step: WEEKLY_SALES_REVIEW_AND_DECISION
+plan:
+  - Не реже одного раза в 7 дней выполнять OZON_WEEKLY_SALES_REVIEW
+  - По каждому обзору фиксировать следующий шаг или отсутствие действия
+  - Продолжать продажи до достижения условия закрытия партии
+  - После завершения продаж свести экономику партии
+expected_result: Продажи второй партии завершены; выплаты и остаток подтверждены
+actual_result: На 2026-08-07 зафиксированы 2 заказа; цикл продаж продолжается
+evidence_refs:
+  - EP-EVENT-20260807-008
+
+opened_at: null
+current_closed_at: null
+current_closure_outcome: NONE
+current_closure_event_ref: null
+closure_event_refs: []
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2.1
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
