@@ -1,0 +1,59 @@
+record_id: EP-LR-20260807-001
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: "2026-08-07T20:16:40+10:00"
+updated_at: "2026-08-07T20:16:40+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260807-001
+  - EP-EVENT-20260807-004
+
+cycle_instance_id: EP-LR-20260807-001
+cycle_type_id: OZON_TRANSFER
+cycle_class: LOGISTIC_RUSSIA
+series_id: EP-SERIES-OZON-TRANSFER
+occurrence: 2
+scope:
+  class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
+  instance_subject_ref: EP-BATCH-2026-002
+
+parent_cycle_instance_id: null
+predecessor_cycle_instance_id: null
+continuation_reason: null
+trigger_evidence_ref: OWNER_LPR_REPORT:2026-08-07:SECOND_OZON_TRANSFER
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: ECONOMICS.SYSTEM
+
+goal: Передать 75 единиц второй партии на склады Ozon в Москве и Санкт-Петербурге
+cycle_record_state: CLOSED
+transition_decision: READY
+remediation_state: NONE
+current_step: CYCLE_CLOSED_AFTER_COMPLETE_ACCEPTANCE
+plan:
+  - Отгрузить 43 единицы в Москву
+  - Отгрузить 32 единицы в Санкт-Петербург
+  - Подтвердить приёмку обеих частей
+  - Сверить принятый объём с остатками и продажами
+expected_result: 75 единиц приняты Ozon без неурегулированных расхождений
+actual_result: >-
+  Ozon принял все 75 единиц: 43 в Москве и 32 в Санкт-Петербурге.
+  На 2026-08-07 две единицы московской части уже куплены; 73 единицы
+  новой партии остаются на складах. Неурегулированных расхождений нет.
+evidence_refs:
+  - EP-EVENT-20260807-001
+
+opened_at: null
+current_closed_at: "2026-08-07T20:15:21+10:00"
+current_closure_outcome: ACHIEVED
+current_closure_event_ref: EP-EVENT-20260807-004
+closure_event_refs:
+  - EP-EVENT-20260807-004
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
