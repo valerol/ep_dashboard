@@ -2,11 +2,12 @@ record_id: EP-LR-20260807-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-07T20:16:40+10:00"
-updated_at: "2026-08-07T20:16:40+10:00"
+updated_at: "2026-08-07T20:30:50+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260807-001
   - EP-EVENT-20260807-004
+  - EP-EVENT-20260807-006
 
 cycle_instance_id: EP-LR-20260807-001
 cycle_type_id: OZON_TRANSFER
@@ -17,7 +18,7 @@ scope:
   class_boundary_ref: EP-DP_v0.2_L(R)1-L(R)7
   instance_subject_ref: EP-BATCH-2026-002
 
-parent_cycle_instance_id: null
+parent_cycle_instance_id: EP-LI-20260807-001
 predecessor_cycle_instance_id: null
 continuation_reason: null
 trigger_evidence_ref: OWNER_LPR_REPORT:2026-08-07:SECOND_OZON_TRANSFER
@@ -43,6 +44,7 @@ actual_result: >-
   новой партии остаются на складах. Неурегулированных расхождений нет.
 evidence_refs:
   - EP-EVENT-20260807-001
+  - EP-EVENT-20260807-006
 
 opened_at: null
 current_closed_at: "2026-08-07T20:15:21+10:00"
