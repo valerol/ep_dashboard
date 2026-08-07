@@ -2,8 +2,8 @@ qa_id: EP-DP-QA-OI-032-20260807
 openitem_id: EPDP-OI-032
 physiology: EP-DP-v0.2
 branch: qa/ep-dp-v0.2-observation
-executed_at: 2026-08-07T14:45:00+10:00
-result: PARTIAL_PASS
+executed_at: 2026-08-07T14:50:00+10:00
+result: PASS
 cycles:
   open_cycle:
     cycle_instance_id: EP-REPAIR_PROJECT-20260807-001
@@ -35,11 +35,18 @@ cycles:
         evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-007.yaml
   protocol_change:
     O5:
-      status: NOT_TRIGGERED_YET
-      reason: NO_CONFIRMED_SIGNIFICANT_EVIDENCE_REQUIRING_PROTOCOL_CHANGE_IN_THIS_QA_RUN
-closure_condition_remaining:
-  - O5 executed on confirmed significant evidence with OWNER_LPR decision and versioned change
+      status: PASS
+      mode: RETROSPECTIVE_REAL_EVENT_VALIDATION
+      decision_ref: data/ep-domain/entities/decisions/EP-DP-DR-018.yaml
+      protocol_version_ref: data/ep-domain/observation/protocol/EP-HANDOFF/2026-08-07-DR-018.yaml
+      event_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-008.yaml
+      affected_rules:
+        - I5
+        - L(I)1
+        - L(I)2
+closure_condition_remaining: []
 notes:
   - no synthetic closure was created
   - O4 was tested on a legitimately completed project
-  - no synthetic protocol change was created
+  - O5 was tested against a real owner-confirmed workflow correction that produced EP-DP-DR-018
+  - O5 QA validates significance decision, owner authority, impact map, version diff, traceability and preserved history
