@@ -1,0 +1,56 @@
+record_id: EP-LI-20260807-002
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: "2026-08-07T20:30:50+10:00"
+updated_at: "2026-08-07T20:30:50+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260807-001
+  - EP-EVENT-20260807-004
+  - EP-EVENT-20260807-005
+
+cycle_instance_id: EP-LI-20260807-002
+cycle_type_id: INTERNATIONAL_DELIVERY
+cycle_class: LOGISTIC_IMPORT
+series_id: EP-SERIES-INTERNATIONAL-DELIVERY
+occurrence: 2
+scope:
+  class_boundary_ref: EP-DP_v0.2_L(I)1-L(I)4
+  instance_subject_ref: EP-BATCH-2026-002
+
+parent_cycle_instance_id: EP-LI-20260807-001
+predecessor_cycle_instance_id: null
+continuation_reason: null
+trigger_evidence_ref: DOWNSTREAM_OZON_TRANSFER:EP-LR-20260807-001
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: ECONOMICS.SYSTEM
+
+goal: Доставить 75 единиц второй партии от производителя в российский логистический контур
+cycle_record_state: CLOSED
+transition_decision: READY
+remediation_state: NONE
+current_step: CYCLE_CLOSED_AFTER_DOWNSTREAM_CONFIRMATION
+plan:
+  - Получить вторую партию от производителя в России
+  - Передать её в российский логистический контур
+expected_result: Партия получена в России и доступна для подготовки к Ozon
+actual_result: 75 единиц второй партии доставлены в Россию и впоследствии полностью переданы и приняты Ozon
+evidence_refs:
+  - EP-EVENT-20260807-001
+  - EP-EVENT-20260807-004
+
+opened_at: null
+current_closed_at: "2026-08-07T20:30:50+10:00"
+current_closure_outcome: ACHIEVED
+current_closure_event_ref: EP-EVENT-20260807-005
+closure_event_refs:
+  - EP-EVENT-20260807-005
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
