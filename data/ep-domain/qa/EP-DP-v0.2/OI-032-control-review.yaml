@@ -1,0 +1,51 @@
+qa_id: EP-DP-QA-OI-032-CONTROL-20260807
+control_mode: TIME_SEPARATED_SELF_RECHECK
+control_owner: EP-ACTOR-OWNER-LPR
+reviewed_at: 2026-08-07T14:52:00+10:00
+scope:
+  - O1_O5_RUNTIME_TRACE
+  - PROJECT_CLOSURE
+  - PROTOCOL_VERSION_CHANGE
+  - SLA_RESULTS
+criteria:
+  O4_not_synthetic:
+    expected: true
+    actual: true
+    evidence_ref: data/ep-domain/entities/projects/EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2.yaml
+    result: PASS
+  O5_not_synthetic:
+    expected: true
+    actual: true
+    evidence_ref: data/ep-domain/entities/decisions/EP-DP-DR-018.yaml
+    result: PASS
+  owner_authority_present:
+    expected: true
+    actual: true
+    result: PASS
+  impact_map_present_for_O5:
+    expected: true
+    actual: true
+    evidence_ref: data/ep-domain/observation/protocol/EP-HANDOFF/2026-08-07-DR-018.yaml
+    result: PASS
+  protocol_history_preserved:
+    expected: true
+    actual: true
+    result: PASS
+  observation_records_written_to_git:
+    expected: true
+    actual: true
+    result: PASS
+  qa_branch_isolated_from_main:
+    expected: true
+    actual: true
+    result: PASS
+  sla_actual_and_boundary_cases_pass:
+    expected: true
+    actual: true
+    evidence_ref: data/ep-domain/qa/EP-DP-v0.2/OI-032-sla-qa.yaml
+    result: PASS
+control_decision: CONFIRM
+result: PASS
+notes:
+  - this is a separate review pass from execution, satisfying the allowed TIME_SEPARATED_SELF_RECHECK mode
+  - it does not replace specialist review where specialist judgment is required
