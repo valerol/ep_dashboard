@@ -1,0 +1,19 @@
+observation_event_id: EP-OEV-20260807-003
+oper_id: O3
+event_type: OPEN_CYCLE_STATE_UPDATED
+event_at: 2026-08-07T14:35:00+10:00
+recorded_at: 2026-08-07T14:35:00+10:00
+primary_cycle_instance_id: EP-REPAIR_PROJECT-20260807-001
+previous_state_ref: EP-OEV-20260807-002
+new_state:
+  cycle_record_state: OPEN
+  current_step: Configure and validate marking software; candidate software: MoySklad.
+  transition_decision: READY
+  remediation_state: NONE
+  actual_result: null
+source_refs:
+  - EP-DP-DR-040
+  - EP-DP-DR-041
+decision: CONFIRM
+authority: EP-ACTOR-OWNER-LPR
+qa_record: true
