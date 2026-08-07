@@ -1,0 +1,15 @@
+observation_event_id: EP-OEV-20260807-007
+oper: O4
+cycle_instance_id: EP-GROWTH_PROJECT-20260807-001
+closure_basis: OWNER_LPR_AUTHORIZED_INTERNAL_QA_ENTRY
+expected_result: EP-DP v0.2 enters INTERNAL_QA
+actual_result: EP-DP v0.2 entered INTERNAL_QA
+outcome: ACHIEVED
+acceptance: OWNER_LPR
+closed_at: 2026-08-07T14:44:00+10:00
+evidence_refs:
+  - data/ep-domain/entities/projects/EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2.yaml
+  - sandbox:elephant_pants_domain_physiology_v0.2_internal_qa.md
+result: PASS
+recorded_at: 2026-08-07T14:45:00+10:00
+observer: EP-ACTOR-OWNER-LPR
