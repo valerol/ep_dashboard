@@ -1,0 +1,70 @@
+record_id: EP-EVENT-20260807-009
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-07T21:52:51+10:00"
+updated_at: "2026-08-07T21:52:51+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260807-008
+  - OWNER_LPR_DECISION:2026-08-07:NO_ACTION
+
+observation_event_id: EP-EVENT-20260807-009
+event_type: CYCLE_CLOSED
+action_or_event_ref: OWNER_LPR_DECISION:2026-08-07:NO_ACTION
+occurred_at: "2026-08-07T21:52:51+10:00"
+observed_or_received_at: "2026-08-07T21:52:51+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260807-002
+    classification_basis_ref: DECISION_CLOSES_WEEKLY_SALES_REVIEW
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: PARENT_SALES_BATCH_REMAINS_OPEN
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-07T21:52:51+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: CLOSED
+  current_step_after: CYCLE_CLOSED_AFTER_NO_ACTION_DECISION
+  result: По итогам недельного обзора принято решение NO_ACTION
+
+decision:
+  value: NO_ACTION
+  next_step: NONE_FOR_CURRENT_REVIEW
+  data_quality_limitation_accepted: true
+  accepted_limitation: ITEM_LEVEL_IDENTIFICATION_UNAVAILABLE_BECAUSE_ALL_SKU_VALUES_ARE_BLANK
+  parent_cycle_effect: SALES_BATCH_REMAINS_OPEN
+  next_review_due_no_later_than: "2026-08-14T21:52:51+10:00"
+
+closure:
+  outcome: ACHIEVED
+  expected_result_ref: EP-S-20260807-002#expected_result
+  actual_result_or_NO_FINAL_RESULT: Недельная статистика обработана; ограничение отсутствующих SKU явно принято; решение NO_ACTION зафиксировано
+  actual_vs_expected_comparison: Решение о следующем шаге или его отсутствии принято; выбран NO_ACTION
+  closure_basis: OWNER_LPR явно выбрала NO_ACTION и тем самым приняла агрегированный уровень анализа текущей недели
+  closure_evidence_refs:
+    - EP-EVENT-20260807-008
+    - OWNER_LPR_DECISION:2026-08-07:NO_ACTION
+  residue_disposition: NONE; следующая недельная проверка является новой итерацией
+  decided_by: OWNER_LPR
+  authority_ref: OWNER_LPR_DIRECT_DECISION:2026-08-07:NO_ACTION
+  decided_at: "2026-08-07T21:52:51+10:00"
+  closed_at: "2026-08-07T21:52:51+10:00"
+
+recording_sla:
+  oper_id: O4
+  sla_class: CLOSURE_OR_REOPEN_DECISION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_EXPLICIT_NO_ACTION_DECISION
+  sla_started_at: "2026-08-07T21:52:51+10:00"
+  sla_deadline_at: "2026-08-08T21:52:51+10:00"
+  evaluated_at: "2026-08-07T21:52:51+10:00"
+  actual_recorded_at: "2026-08-07T21:52:51+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
