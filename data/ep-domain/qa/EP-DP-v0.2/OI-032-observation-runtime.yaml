@@ -2,7 +2,7 @@ qa_id: EP-DP-QA-OI-032-20260807
 openitem_id: EPDP-OI-032
 physiology: EP-DP-v0.2
 branch: qa/ep-dp-v0.2-observation
-executed_at: 2026-08-07T14:53:00+10:00
+executed_at: 2026-08-07T14:54:00+10:00
 result: PASS
 resolution_state: RESOLVED
 observation_runtime:
@@ -21,6 +21,14 @@ control_review:
   status: PASS
   mode: TIME_SEPARATED_SELF_RECHECK
   evidence_ref: data/ep-domain/qa/EP-DP-v0.2/OI-032-control-review.yaml
+state_and_domain_fixtures:
+  status: PASS
+  covers:
+    - HOLD
+    - STOP_REPAIR_RECONTROL
+    - RETURNS
+    - CLAIM_BLOCK
+  evidence_ref: data/ep-domain/qa/EP-DP-v0.2/OI-032-state-and-domain-fixtures.yaml
 defect_log:
   status: CLOSED
   open_defects: 0
@@ -28,8 +36,8 @@ defect_log:
 static_and_definition_tests:
   source: EP-DP-QA-001
   structural_reference: PASS
+  route: PASS
   interfaces: PASS
-  transitions: PASS
   economics: PASS
   project_exit: PASS
   compatibility: PASS
@@ -38,4 +46,5 @@ notes:
   - O4 was tested on a legitimately completed project
   - O5 was tested against a real owner-confirmed process correction that produced EP-DP-DR-018
   - SLA includes real ordinary/closure cases plus deterministic boundary fixtures
+  - HOLD/STOP/returns/claim tests are deterministic specification fixtures, not fabricated business events
   - this closes INTERNAL_QA_EXECUTION only; prospective real-batch pilot remains EPDP-OI-033
