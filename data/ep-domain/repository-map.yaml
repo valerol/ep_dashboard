@@ -1,6 +1,6 @@
 record_id: EP-DOMAIN-REPOSITORY-MAP
 record_type: REPOSITORY_TOPOLOGY_MANIFEST
-schema_version: "1.0"
+schema_version: "1.1"
 snapshot_at: "2026-08-07"
 data_owner: OWNER_LPR
 authority_ref: EP-DP-DR-061
@@ -71,6 +71,12 @@ required_singletons:
   - path: data/ep-domain/observation/protocol/EP-DP-LOGISTICS-CYCLE-PROTOCOL/1.0.yaml
     role: ACTIVE_LOGISTICS_CYCLE_PROTOCOL
     authority: NORMATIVE_VERSION
+  - path: data/ep-domain/observation/cycles/README.md
+    role: CYCLE_REGISTER_INSTRUCTIONS
+    authority: INFORMATIVE
+  - path: data/ep-domain/observation/events/README.md
+    role: EVENT_REGISTER_INSTRUCTIONS
+    authority: INFORMATIVE
   - path: data/ep-domain/observation/indexes/cycles.yaml
     role: CYCLE_NAVIGATION_INDEX
     authority: DERIVED_NON_CANONICAL_PROJECTION
@@ -128,4 +134,6 @@ synchronization:
   topology_change: UPDATE_PHYSIOLOGY_AND_THIS_MANIFEST_IN_SAME_CHANGE_SET
   physiology_version_change: UPDATE_CURRENT_POINTER_AND_THIS_MANIFEST
   inventory_change_only: UPDATE_CURRENT_INVENTORY_WITHOUT_NEW_PHYSIOLOGY_VERSION
+  automatic_check: node scripts/check-domain-drift.mjs
+  ci_workflow: .github/workflows/domain-drift.yml
   drift_state: HOLD-REPOSITORY-PHYSIOLOGY-DRIFT
