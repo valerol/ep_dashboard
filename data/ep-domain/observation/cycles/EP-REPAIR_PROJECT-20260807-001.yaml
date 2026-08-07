@@ -1,0 +1,32 @@
+cycle_instance_id: EP-REPAIR_PROJECT-20260807-001
+cycle_class: REPAIR_PROJECT
+scope: MARKING_PROJECT
+membership:
+  system: PROJECT_CONTOUR
+  primary_cycle_class: REPAIR_PROJECT
+  related_cycle_classes:
+    - LOGISTIC_RUSSIA
+goal: Stabilize the marking process and validate software-assisted workflow before transfer to regular L(R)2-L(R)4.
+cycle_record_state: OPEN
+transition_decision: READY
+remediation_state: NONE
+current_step: Configure and validate marking software; candidate software: MoySklad.
+plan:
+  - load product units
+  - obtain/link marking codes
+  - generate labels
+  - print labels
+  - match each code to correct SKU
+  - verify Chestny Znak status "В ОБОРОТЕ"
+  - repeat workflow without emergency manual correction
+expected_result: Repeatable marking workflow accepted by OWNER_LPR and eligible for transfer to regular L(R)2-L(R)4.
+actual_result: null
+evidence_refs:
+  - EP-DP-DR-040
+  - EP-DP-DR-041
+opened_at: 2026-08-07T14:35:00+10:00
+updated_at: 2026-08-07T14:35:00+10:00
+closed_at: null
+instruction_version: EP-DP-v0.2-INTERNAL_QA
+observer: EP-ACTOR-OWNER-LPR
+qa_record: true
