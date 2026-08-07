@@ -1,0 +1,10 @@
+observation_event_id: EP-OEV-20260807-004
+oper: O1
+action_or_event_ref: EP-PROJECT-DOMAIN-PHYSIOLOGY-V0.2
+selected_cycle_class: GROWTH_PROJECT
+selected_cycle_instance_id: EP-GROWTH_PROJECT-20260807-001
+classification_basis: Проект имеет разовый terminal result — создание EP-DP v0.2 и вход в INTERNAL_QA
+related_cycle_classes: []
+result: PASS
+recorded_at: 2026-08-07T14:45:00+10:00
+observer: EP-ACTOR-OWNER-LPR
