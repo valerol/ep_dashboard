@@ -1,0 +1,59 @@
+record_id: EP-EVENT-20260807-002
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-07T20:16:40+10:00"
+updated_at: "2026-08-07T20:16:40+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260807-001
+
+observation_event_id: EP-EVENT-20260807-002
+event_type: CYCLE_CLOSED
+action_or_event_ref: OWNER_LPR_CLOSURE_DECISION:2026-08-07:OZON_ACCEPTANCE_2
+occurred_at: "2026-08-07T20:15:21+10:00"
+observed_or_received_at: "2026-08-07T20:15:21+10:00"
+
+membership:
+  primary:
+    cycle_class: LOGISTIC_RUSSIA
+    cycle_instance_id: EP-LR-20260807-003
+    classification_basis_ref: CLOSURE_DIRECTLY_CHANGES_ACCEPTANCE_CYCLE
+  related: []
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-07T20:15:21+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: CLOSED
+  current_step_after: CYCLE_CLOSED_AFTER_STOCK_RECONCILIATION
+  result: Полная приёмка второй партии подтверждена
+
+closure:
+  outcome: ACHIEVED
+  expected_result_ref: EP-LR-20260807-003#expected_result
+  actual_result_or_NO_FINAL_RESULT: >-
+    Принято 75 единиц: 43 в Москве и 32 в Санкт-Петербурге.
+    После двух продаж на складах остаются 73 единицы новой партии.
+  actual_vs_expected_comparison: Все применимые критерии приёмки выполнены; расхождение равно нулю
+  closure_basis: Документальная приёмка Москвы и сверка складских остатков, продаж и старого остатка
+  closure_evidence_refs:
+    - EP-EVENT-20260807-001
+  residue_disposition: NONE
+  decided_by: OWNER_LPR
+  authority_ref: OWNER_LPR_AUTHORIZATION:2026-08-07:CLOSE_SECOND_OZON_TRANSFER
+  decided_at: "2026-08-07T20:15:21+10:00"
+  closed_at: "2026-08-07T20:15:21+10:00"
+
+recording_sla:
+  oper_id: O4
+  sla_class: CLOSURE_OR_REOPEN_DECISION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_EXPLICIT_CLOSURE_REQUEST
+  sla_started_at: "2026-08-07T20:15:21+10:00"
+  sla_deadline_at: "2026-08-08T20:15:21+10:00"
+  evaluated_at: "2026-08-07T20:16:40+10:00"
+  actual_recorded_at: "2026-08-07T20:16:40+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
