@@ -1,0 +1,29 @@
+qa_id: EP-DP-QA-OI-032-20260807
+openitem_id: EPDP-OI-032
+physiology: EP-DP-v0.2
+branch: qa/ep-dp-v0.2-observation
+executed_at: 2026-08-07T14:35:00+10:00
+cycle_instance_id: EP-REPAIR_PROJECT-20260807-001
+result: PARTIAL_PASS
+tests:
+  O1:
+    status: PASS
+    evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-001.yaml
+  O2:
+    status: PASS
+    evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-002.yaml
+  O3:
+    status: PASS
+    evidence_ref: data/ep-domain/observation/events/2026/08/EP-OEV-20260807-003.yaml
+  O4:
+    status: NOT_APPLICABLE_YET
+    reason: MARKING_PROJECT_IS_OPEN
+  O5:
+    status: NOT_TRIGGERED_YET
+    reason: NO_NEW_SIGNIFICANT_EVIDENCE_REQUIRING_PROTOCOL_CHANGE_IN_THIS_QA_RUN
+closure_condition:
+  - O4 executed on a legitimately closing cycle
+  - O5 executed on confirmed significant evidence with OWNER_LPR decision and versioned change
+notes:
+  - no synthetic closure was created
+  - no synthetic protocol change was created
