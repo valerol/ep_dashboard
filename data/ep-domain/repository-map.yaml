@@ -71,6 +71,9 @@ required_singletons:
   - path: data/ep-domain/observation/protocol/EP-DP-LOGISTICS-CYCLE-PROTOCOL/1.0.yaml
     role: ACTIVE_LOGISTICS_CYCLE_PROTOCOL
     authority: NORMATIVE_VERSION
+  - path: data/ep-domain/observation/protocol/EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL/1.0.yaml
+    role: ACTIVE_WEBSITE_CYCLE_CLOSURE_PROTOCOL
+    authority: NORMATIVE_VERSION
   - path: data/ep-domain/observation/cycles/README.md
     role: CYCLE_REGISTER_INSTRUCTIONS
     authority: INFORMATIVE
@@ -122,6 +125,7 @@ current_inventory:
     - EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
     - EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
     - EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+    - EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL-1.0
   derived_indexes:
     - data/ep-domain/observation/indexes/cycles.yaml
 
