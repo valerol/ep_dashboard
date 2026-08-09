@@ -1,178 +1,210 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import currentStepData from "@/data/current-step.json";
-import machineData from "@/data/machine.json";
-import navigationData from "@/data/navigation.json";
-import newsData from "@/data/news.json";
-import organsData from "@/data/organs.json";
-import roadmapData from "@/data/roadmap.json";
-import siteChangelogData from "@/data/site-changelog.json";
-import sourceRegistryData from "@/data/source-registry.json";
+import { FormEvent, useMemo, useState } from "react";
 
-type Tab = "roadmap" | "current" | "news" | "machine" | "organ" | "history";
-type NewsType = "action" | "oper" | "cycle_closed";
-type Organ = { id: string; name: string; role: string };
-type RoadmapStage = { id: string; horizon: string; title: string; status: string; confirmation: string; current: boolean; goal: string; results: string[]; transition: string[]; organs: string[]; sourceIds: string[] };
-type ProjectTask = { id: string; title: string; status: string; org: string | null; related: string[]; evidence: string; sourceIds: string[] };
-type NewsItem = { id: string; date: string; title: string; summary: string; type: NewsType; org: string | null; task?: string; sourceIds: string[] };
-type SiteChange = { date: string; category: string; title: string; changes: string[]; note: string; sourceIds: string[] };
+type View = "state" | "cycles" | "physiology" | "projects" | "observation" | "strategy" | "service";
 
-const tabs = navigationData as { id: Tab; label: string }[];
-const organs = organsData as Organ[];
-const stages = roadmapData as RoadmapStage[];
-const tasks = currentStepData as ProjectTask[];
-const news = newsData as NewsItem[];
-const siteChangelog = siteChangelogData as SiteChange[];
-const machineOpers = machineData.opers;
-const oneOffCycles = machineData.oneOffCycles;
-const completedProjects = machineData.completedProjects;
-const sourceSummaryGroups = sourceRegistryData.summaryGroups;
+const navigation: { id: Exclude<View, "service">; index: string; label: string }[] = [
+  { id: "state", index: "01", label: "Состояние" },
+  { id: "cycles", index: "02", label: "Циклы" },
+  { id: "physiology", index: "03", label: "Физиология" },
+  { id: "projects", index: "04", label: "Проекты" },
+  { id: "observation", index: "05", label: "Наблюдение" },
+  { id: "strategy", index: "06", label: "Стратегия" },
+];
 
-const typeLabels: Record<NewsType, string> = {
-  action: "Действие",
-  oper: "Операционный результат",
-  cycle_closed: "Замкнутый цикл",
-};
+const cycles = [
+  { id: "EP-S-20260807-001", type: "SALES_BATCH", title: "Продажа второй партии", cls: "SALES", occurrence: 2, state: "OPEN", decision: "READY", outcome: "NONE", parent: null, result: "На 7 августа зафиксированы 2 заказа. Продажи продолжаются.", step: "Продолжать продажи без изменения действий до следующего недельного обзора.", evidencePolicy: "REQUIRED", evidence: ["EP-EVENT-20260807-008", "EP-EVENT-20260807-009"] },
+  { id: "EP-S-20260807-002", type: "OZON_WEEKLY_SALES_REVIEW", title: "Недельный обзор продаж Ozon", cls: "SALES", occurrence: 1, state: "CLOSED", decision: "NO_ACTION", outcome: "ACHIEVED", parent: "EP-S-20260807-001", result: "CSV создан: 33 строки, 2 заказа на 5 800 ₽, 10 249 показов. Отсутствие SKU принято как ограничение данных.", step: "Цикл закрыт. Следующий обзор — новая итерация.", evidence: ["EP-EVENT-20260807-008", "EP-EVENT-20260807-009"] },
+  { id: "EP-LI-20260807-001", type: "LOGISTICS_BATCH", title: "Логистика второй партии", cls: "LOGISTIC_IMPORT", occurrence: 2, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: null, result: "75 единиц доставлены в Россию, переданы на Ozon и полностью приняты.", step: "Цикл закрыт после закрытия обязательных дочерних циклов.", evidence: ["EP-EVENT-20260807-004", "EP-EVENT-20260807-005", "EP-EVENT-20260807-006", "EP-EVENT-20260807-007"] },
+  { id: "EP-LI-20260807-002", type: "INTERNATIONAL_DELIVERY", title: "Международная доставка", cls: "LOGISTIC_IMPORT", occurrence: 2, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: "EP-LI-20260807-001", result: "75 единиц второй партии доставлены в российский логистический контур.", step: "Закрыто по последующему подтверждённому движению партии.", evidence: ["EP-EVENT-20260807-001", "EP-EVENT-20260807-005"] },
+  { id: "EP-LR-20260807-001", type: "OZON_TRANSFER", title: "Передача партии на Ozon", cls: "LOGISTIC_RUSSIA", occurrence: 2, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: "EP-LI-20260807-001", result: "Все 75 единиц переданы и приняты Ozon без неурегулированных расхождений.", step: "Закрыто после полной приёмки.", evidence: ["EP-EVENT-20260807-001", "EP-EVENT-20260807-004"] },
+  { id: "EP-LR-20260807-002", type: "OZON_SHIPMENT", title: "Отгрузка на Ozon", cls: "LOGISTIC_RUSSIA", occurrence: 2, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: "EP-LR-20260807-001", result: "Отгружено 75 единиц: 43 в Москву и 32 в Санкт-Петербург.", step: "Закрыто после сверки приёмки.", evidence: ["EP-EVENT-20260807-001", "EP-EVENT-20260807-003"] },
+  { id: "EP-LR-20260807-003", type: "OZON_ACCEPTANCE", title: "Приёмка складами Ozon", cls: "LOGISTIC_RUSSIA", occurrence: 2, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: "EP-LR-20260807-001", result: "Принято 75 единиц; баланс 41 + 32 + 2 продажи = 75. Расхождений нет.", step: "Закрыто после сверки остатков.", evidence: ["EP-EVENT-20260807-001", "EP-EVENT-20260807-002"] },
+];
 
-function OrgLinks({ ids, onNavigate }: { ids: string[]; onNavigate?: (id: string) => void }) {
-  return <div className="organ-links">{ids.map((id) => <button key={id} data-org={id} onClick={() => onNavigate?.(id)}>{organs.find((org) => org.id === id)?.name ?? id}</button>)}</div>;
+const events = [
+  { id: "EP-EVENT-20260807-009", type: "CYCLE_CLOSED", title: "Недельный обзор продаж закрыт", detail: "Принято решение NO_ACTION; родительский цикл продаж остаётся OPEN.", cycle: "EP-S-20260807-002", evidence: "OWNER_LPR_DECISION:2026-08-07:NO_ACTION" },
+  { id: "EP-EVENT-20260807-008", type: "STATE_OBSERVED", title: "Статистика Ozon преобразована в CSV", detail: "33 строки; 2 заказа; 5 800 ₽; 10 249 показов. Идентификация товаров ограничена отсутствующими SKU.", cycle: "EP-S-20260807-002", evidence: "OZON_SALES_ANALYTICS_CSV:ozon_sales_week_2026-08-07.csv" },
+  { id: "EP-EVENT-20260807-007", type: "CYCLE_CLOSED", title: "Логистика второй партии закрыта", detail: "Международная доставка и передача на Ozon завершены с outcome ACHIEVED.", cycle: "EP-LI-20260807-001", evidence: "EP-EVENT-20260807-004..006" },
+  { id: "EP-EVENT-20260807-006", type: "STATE_OBSERVED", title: "Зафиксирована иерархия логистических циклов", detail: "Передача на Ozon связана с родительским циклом логистики партии.", cycle: "EP-LR-20260807-001", evidence: "PARENT_RELATION_RECORDED:SECOND_OZON_TRANSFER" },
+  { id: "EP-EVENT-20260807-005", type: "CYCLE_CLOSED", title: "Международная доставка закрыта", detail: "75 единиц доставлены в российский логистический контур.", cycle: "EP-LI-20260807-002", evidence: "EP-EVENT-20260807-001,004" },
+  { id: "EP-EVENT-20260807-004", type: "CYCLE_CLOSED", title: "Передача второй партии на Ozon завершена", detail: "Оба дочерних цикла — отгрузка и приёмка — закрыты.", cycle: "EP-LR-20260807-001", evidence: "EP-EVENT-20260807-001..003" },
+  { id: "EP-EVENT-20260807-003", type: "CYCLE_CLOSED", title: "Отгрузка 75 единиц подтверждена", detail: "43 единицы направлены в Москву, 32 — в Санкт-Петербург.", cycle: "EP-LR-20260807-002", evidence: "EP-EVENT-20260807-001" },
+  { id: "EP-EVENT-20260807-002", type: "CYCLE_CLOSED", title: "Полная приёмка подтверждена", detail: "75 единиц приняты, после двух продаж на складах остаются 73 единицы новой партии.", cycle: "EP-LR-20260807-003", evidence: "EP-EVENT-20260807-001" },
+  { id: "EP-EVENT-20260807-001", type: "STATE_OBSERVED", title: "Поставка и остатки сверены", detail: "Баланс новой партии подтверждён: 74 на складах − 1 старый остаток + 2 продажи = 75.", cycle: "EP-LR-20260807-003", evidence: "OZON_ACCEPTANCE_REPORT:SUPPLY-2000059753725" },
+];
+
+const operGroups = [
+  { code: "A1–A2", name: "Спрос, ассортимент, каталог", count: 2, color: "orange" },
+  { code: "I1–I5", name: "Закупка и импорт", count: 5, color: "orange" },
+  { code: "L(I)1–L(I)4", name: "Международная логистика", count: 4, color: "teal" },
+  { code: "L(R)1–L(R)7", name: "Логистика в России", count: 7, color: "teal" },
+  { code: "S1–S3", name: "Продажи и возвраты", count: 3, color: "yellow" },
+  { code: "E1–E4", name: "Экономические gates", count: 4, color: "magenta" },
+  { code: "O1–O5", name: "Наблюдение", count: 5, color: "blue" },
+  { code: "F1–F2", name: "Feedback", count: 2, color: "green" },
+];
+
+const values = [
+  ["VAL-01", "Натуральные / целлюлозные материалы"], ["VAL-02", "Яркость"], ["VAL-03", "Стиль"],
+  ["VAL-04", "Комфорт"], ["VAL-05", "Дух свободы"], ["VAL-06", "Атмосфера солнечного Таиланда"], ["VAL-07", "Йога, нью-эйдж, вайб"],
+];
+
+const projects = [
+  { name: "Декларация 3Д", type: "REPAIR", state: "TERMINAL RESULT DEFINED", tone: "repair", purpose: "Восстановить compliance-контур для легального ввоза и торговли.", result: "Декларация получена, зарегистрирована, сохранена как evidence и принята OWNER_LPR.", gate: "Если декларация не активна, заказ новой партии и финансирование импорта со счёта проекта — HOLD.", refs: "EP-DP-DR-039 · EP-DP-DR-043" },
+  { name: "Маркировка", type: "REPAIR", state: "ACTIVE_NOT_STABILIZED", tone: "repair", purpose: "Настроить и стабилизировать повторяемый marking workflow.", result: "ПО настроено; полный цикл выполнен без аварийных исправлений; результат принят и передан в L(R)2–L(R)4.", gate: "Кандидат ПО: «МойСклад». Передача в regular process запрещена до test pass.", refs: "EP-DP-DR-040 · EP-DP-DR-041" },
+  { name: "Брендирование", type: "GROWTH", state: "PROJECT CARD DEFINED", tone: "growth", purpose: "Собрать целостное визуальное и смысловое представление бренда.", result: "Айдентика, логотип, упаковка, этикетки и карточки товара согласованы и приняты OWNER_LPR.", gate: "Рост уступает ремонту при конфликте ограниченного ресурса.", refs: "EP-DP-DR-042" },
+];
+
+function Evidence({ ids }: { ids: string[] | string }) {
+  const list = Array.isArray(ids) ? ids : [ids];
+  return <div className="evidence">{list.map((id) => <span key={id}>{id}</span>)}</div>;
+}
+
+function SectionHead({ index, kicker, title, copy }: { index: string; kicker: string; title: string; copy: string }) {
+  return <header className="section-head"><div><p>{index} / {kicker}</p><h1>{title}</h1></div><p>{copy}</p></header>;
 }
 
 export default function Home() {
-  const [tab, setTab] = useState<Tab>("machine");
-  const [selectedOrg, setSelectedOrg] = useState("catalog");
-  const [newsFilter, setNewsFilter] = useState<"all" | NewsType>("all");
-  const filteredNews = useMemo(() => newsFilter === "all" ? news : news.filter((item) => item.type === newsFilter), [newsFilter]);
-  const go = (next: Tab, anchor?: string) => {
-    setTab(next);
-    requestAnimationFrame(() => anchor && document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "center" }));
+  const [view, setView] = useState<View>("state");
+  const [cycleFilter, setCycleFilter] = useState<"ALL" | "OPEN" | "CLOSED">("ALL");
+  const [eventFilter, setEventFilter] = useState<"ALL" | "STATE_OBSERVED" | "CYCLE_CLOSED">("ALL");
+  const [closingCycle, setClosingCycle] = useState<(typeof cycles)[number] | null>(null);
+  const [closureStatus, setClosureStatus] = useState<"idle" | "submitting" | "done" | "error">("idle");
+  const [closureMessage, setClosureMessage] = useState("");
+  const visibleCycles = useMemo(() => cycleFilter === "ALL" ? cycles : cycles.filter((c) => c.state === cycleFilter), [cycleFilter]);
+  const visibleEvents = useMemo(() => eventFilter === "ALL" ? events : events.filter((e) => e.type === eventFilter), [eventFilter]);
+  const go = (next: View) => { setView(next); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const submitClosure = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!closingCycle) return;
+    const form = new FormData(event.currentTarget);
+    setClosureStatus("submitting");
+    setClosureMessage("");
+    const response = await fetch("/api/cycles/close", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ cycleId: closingCycle.id, outcome: form.get("outcome"), comment: form.get("comment") }),
+    });
+    const body = await response.json().catch(() => ({}));
+    if (response.status === 401 && body.signIn) { window.location.assign(body.signIn); return; }
+    if (!response.ok) {
+      const labels: Record<string, string> = {
+        INTEGRATION_NOT_CONFIGURED: "Запись в GitHub ещё не активирована.",
+        EVIDENCE_REQUIRED: "Этот цикл нельзя закрыть без свидетельства.",
+        OPEN_CHILD_CYCLES: "Сначала закройте открытые подциклы.",
+        CYCLE_NOT_OPEN: "Цикл уже закрыт или изменён.",
+        FORBIDDEN: "У этого аккаунта нет права закрывать циклы.",
+      };
+      setClosureStatus("error");
+      setClosureMessage(labels[body.error] || "GitHub не принял изменение. Обновите страницу и повторите попытку.");
+      return;
+    }
+    setClosureStatus("done");
+    setClosureMessage(`Цикл закрыт. Событие ${body.eventId} записано в GitHub.`);
   };
-  const openOrgan = (id: string) => {
-    setSelectedOrg(id);
-    go("organ");
-  };
-  const activeOrg = organs.find((org) => org.id === selectedOrg) ?? organs[0];
-  const organTasks = tasks.filter((task) => task.org === activeOrg.id || task.related.includes(activeOrg.id));
-  const organNews = news.filter((item) => item.org === activeOrg.id || (item.task && organTasks.some((task) => task.id === item.task)));
-  const organStages = stages.filter((stage) => stage.organs.includes(activeOrg.id));
 
-  return (
-    <main>
-      <header className="masthead">
-        <div className="brand-row">
-          <a className="compact-brand" href="#top" onClick={() => setTab("machine")} aria-label="Elephant Pants — философская машина">
-            <span className="compact-mark">EP</span>
-            <span>Elephant Pants<small>философская машина проекта</small></span>
-          </a>
-          <span className="edition">МАКЕТ · 06.08.2026</span>
+  return <main>
+    <header className="masthead">
+      <button className="brand" onClick={() => go("state")} aria-label="На главную Elephant Pants"><span>EP</span><strong>Elephant Pants<small>бизнес-проект и философская машина</small></strong></button>
+      <nav aria-label="Основные разделы">{navigation.map((item) => <button key={item.id} className={view === item.id ? "active" : ""} onClick={() => go(item.id)}><i>{item.index}</i>{item.label}</button>)}</nav>
+      <div className="version">DATA · 08.08.2026</div>
+    </header>
+
+    <div className="page-shell">
+      {view === "state" && <section>
+        <SectionHead index="01" kicker="SYSTEM STATE" title="Состояние системы" copy="Текущее операционное состояние вычисляется из реестра циклов и событий Observation. Ручного параллельного статуса больше нет." />
+        <div className="status-strip">
+          <div><span>Система</span><strong>ACTIVE</strong></div><div><span>Физиология</span><strong>INTERNAL_QA</strong></div><div><span>Release</span><strong>NOT_RELEASED</strong></div><div><span>Циклы</span><strong>1 OPEN · 6 CLOSED</strong></div>
         </div>
-        <nav className="tabs" id="top" aria-label="Разделы проекта">{tabs.map((item) => <button key={item.id} className={tab === item.id ? "active" : ""} onClick={() => setTab(item.id)}>{item.label}</button>)}</nav>
-      </header>
+        <article className="focus-card">
+          <div className="focus-kicker"><span>Текущий цикл</span><em>OPEN / READY</em></div>
+          <div className="focus-grid"><div><p className="mono">EP-S-20260807-001 · SALES_BATCH · OCCURRENCE 2</p><h2>Продажа второй партии</h2><p className="lead">Реализовать 75 единиц через Ozon. На 7 августа зафиксированы 2 заказа; первый недельный обзор завершён с решением <b>NO_ACTION</b>.</p></div><div className="next-action"><span>Следующее обязательное действие</span><strong>Новый недельный обзор продаж</strong><p>Не позднее 14 августа 2026, пока родительский цикл остаётся открытым.</p><button onClick={() => go("cycles")}>Открыть цикл →</button></div></div>
+          <Evidence ids={["EP-EVENT-20260807-008", "EP-EVENT-20260807-009"]} />
+        </article>
+        <div className="two-col">
+          <section className="panel"><div className="panel-head"><span>Проектный контур</span><button onClick={() => go("projects")}>Все проекты →</button></div>{projects.map((p) => <div className="mini-row" key={p.name}><b>{p.name}</b><span>{p.type}</span><em>{p.state}</em></div>)}</section>
+          <section className="panel"><div className="panel-head"><span>Последние изменения</span><button onClick={() => go("observation")}>Весь журнал →</button></div>{events.slice(0, 4).map((e) => <div className="event-mini" key={e.id}><span>{e.id}</span><b>{e.title}</b><em>{e.type}</em></div>)}</section>
+        </div>
+      </section>}
 
-      <section className="content-shell">
-        {tab === "roadmap" && <div className="section" aria-labelledby="roadmap-title">
-          <div className="section-head">
-            <div><p className="section-index">01 / Business roadmap</p><h2 id="roadmap-title">Дорожная карта</h2></div>
-            <p>Подтверждённая траектория от первой партии до федеральной многоканальной системы. Неизвестное не заполняется предположениями.</p>
-          </div>
-          <div className="roadmap">
-            {stages.map((stage, index) => <article className={`stage ${stage.current ? "stage-current" : ""}`} key={stage.id} id={stage.id}>
-              <div className="stage-rail"><span>{String(index + 1).padStart(2, "0")}</span></div>
-              <div className="stage-main">
-                <div className="stage-meta"><span>{stage.horizon}</span><span>{stage.status}</span><span>{stage.confirmation}</span></div>
-                {stage.current && <p className="you-are-here">Мы находимся здесь</p>}
-                <h3>{stage.title}</h3>
-                <p className="stage-goal">{stage.goal}</p>
-                <div className="stage-grid">
-                  <div><h4>Ожидаемые / полученные ориентиры</h4><ul>{stage.results.map((r) => <li key={r}>{r}</li>)}</ul></div>
-                  <div><h4>Условия перехода</h4><ul>{stage.transition.map((r) => <li key={r}>{r}</li>)}</ul></div>
-                </div>
-                {stage.organs.length > 0 ? <OrgLinks ids={stage.organs} onNavigate={openOrgan} /> : <p className="muted-note">Ответственные органы не установлены.</p>}
-                {stage.current && <button className="text-link" onClick={() => go("current")}>Открыть текущий шаг →</button>}
-              </div>
-            </article>)}
-          </div>
-        </div>}
+      {view === "cycles" && <section>
+        <SectionHead index="02" kicker="CYCLE REGISTER" title="Циклы" copy="Семь зарегистрированных экземпляров. Иерархия, состояние и решение берутся из CYCLE_RECORD; протокол определяет повторяемое поведение." />
+        <div className="filter-row" role="group" aria-label="Фильтр циклов">{(["ALL", "OPEN", "CLOSED"] as const).map((f) => <button key={f} className={cycleFilter === f ? "selected" : ""} onClick={() => setCycleFilter(f)}>{f === "ALL" ? "Все · 7" : f === "OPEN" ? "Открытые · 1" : "Закрытые · 6"}</button>)}</div>
+        <div className="cycle-list">{visibleCycles.map((cycle) => <article className={`cycle-card depth-${cycle.parent ? 1 : 0}`} key={cycle.id}>
+          <div className="cycle-line"><span className={`state ${cycle.state.toLowerCase()}`}>{cycle.state}</span><span>{cycle.cls}</span><span>occurrence {cycle.occurrence}</span><span>{cycle.outcome}</span></div>
+          <div className="cycle-body"><div><p className="mono">{cycle.id} · {cycle.type}</p><h2>{cycle.title}</h2>{cycle.parent && <p className="parent">↳ parent: {cycle.parent}</p>}</div><div><h3>Фактический результат</h3><p>{cycle.result}</p><h3>Текущий шаг</h3><p>{cycle.step}</p></div></div>
+          <div className="decision">transition_decision: <b>{cycle.decision}</b></div><Evidence ids={cycle.evidence} />
+          {cycle.state === "OPEN" && <div className="cycle-close-row">
+            {cycle.evidencePolicy === "NOT_REQUIRED"
+              ? <button onClick={() => { setClosingCycle(cycle); setClosureStatus("idle"); setClosureMessage(""); }}>Закрыть цикл</button>
+              : <span>Закрытие на сайте недоступно: требуется свидетельство.</span>}
+          </div>}
+        </article>)}</div>
+        <section className="protocol-band"><div><span>Активные протоколы</span><h2>Повторяемая процедура вместо ручного статуса</h2></div><div><b>EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0</b><p>Регистрация и закрытие логистического дерева.</p><b>EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0</b><p>Скриншот → CSV → проверка → решение → closure event.</p></div></section>
+      </section>}
 
-        {tab === "current" && <div className="section" aria-labelledby="current-title">
-          <div className="section-head">
-            <div><p className="section-index">02 / Current stage</p><h2 id="current-title">Текущий шаг</h2></div>
-            <p>Проверка ассортимента, экономики и повторяемости операционного цикла. Данные актуальны по подтверждениям в беседе на 22 июля 2026.</p>
-          </div>
-          <div className="current-summary">
-            <div><span>Связанный этап</span><strong>01 · Проверка ассортимента и операционного цикла</strong></div>
-            <div><span>Подтверждённый контур</span><strong>30 товаров → 24 продано · 4 украдено на складе · 2 оставалось</strong></div>
-            <div><span>Незакрыто</span><strong>Повторный цикл, устойчивая маржа, спрос и возвраты</strong></div>
-          </div>
-          <div className="task-list">
-            {tasks.map((task) => <article className="task" key={task.id} id={task.id}>
-              <div className="task-title"><span>{task.id.replace("task-", "")}</span><h3>{task.title}</h3><em className={`status status-${task.status.toLowerCase().replaceAll(" ", "-")}`}>{task.status}</em></div>
-              <p>{task.evidence}</p>
-              <div className="task-foot"><span>Владелец:</span>{task.org ? <OrgLinks ids={[task.org]} onNavigate={openOrgan} /> : <span className="unassigned">не установлен</span>}{task.related.length > 0 && <><span>Участвуют:</span><OrgLinks ids={task.related} onNavigate={openOrgan} /></>}</div>
-            </article>)}
-          </div>
-        </div>}
+      {view === "physiology" && <section>
+        <SectionHead index="03" kicker="DOMAIN PHYSIOLOGY" title="Физиология" copy="EP-DP v0.2.1 опубликована как рабочий нормативный объект. Это INTERNAL_QA, а не выпущенный канон." />
+        <div className="qa-banner"><div><span>EP-DP · 0.2.1</span><strong>INTERNAL_QA</strong></div><div><span>release_status</span><strong>NOT_RELEASED</strong></div><div><span>Oper lifecycle</span><strong>32 × CANDIDATE</strong></div><div><span>OpenItems</span><strong>30 RESOLVED · 4 OPEN</strong></div></div>
+        <section className="system-map">
+          <div className="system-core"><img src="/machine-diagram-blue.png" alt="Схема регулярного товарного оборота Elephant Pants" /><div className="route"><b>A1/A2</b><i>→</i><b>Import</b><i>→</i><b>Logistic.Import</b><i>→</i><b>Logistic.Russia</b><i>→</i><b>Sales</b></div></div>
+          <div className="cross-control"><span>Поперечный орган</span><b>O. Observation</b><small>O1–O5 · классификация, запись, обновление, закрытие, обучение</small></div>
+          <div className="economic-control"><span>Контроль</span><b>E1–E4</b><small>launch · price · cashflow · reserve</small></div>
+          <div className="project-control"><span>Боковой контур</span><b>Repair / Growth</b><small>нестандартный дефект или новая способность</small></div>
+        </section>
+        <div className="phys-grid">
+          <section><div className="subhead"><span>32 объекта</span><h2>Opers</h2></div><div className="oper-list">{operGroups.map((g) => <article key={g.code} className={`accent-${g.color}`}><strong>{g.code}</strong><b>{g.name}</b><span>{g.count} oper</span><em>CANDIDATE</em></article>)}</div></section>
+          <section><div className="subhead"><span>Поперечный маршрут</span><h2>Observation</h2></div><ol className="observation-route"><li><b>O1</b><span>Определить цикл действия</span></li><li><b>O2</b><span>Зарегистрировать новый цикл</span></li><li><b>O3</b><span>Обновить состояние открытого</span></li><li><b>O4</b><span>Зафиксировать closure или reopening</span></li><li><b>O5</b><span>Изменить протокол по значимому evidence</span></li></ol></section>
+        </div>
+        <section className="values"><div className="subhead"><span>VALUE FILTER</span><h2>Семь ценностей</h2><p>Норматив выбора, а не автоматически подтверждённое свойство товара.</p></div><div>{values.map(([id, name]) => <article key={id}><span>{id}</span><b>{name}</b><em>CANDIDATE</em></article>)}</div></section>
+      </section>}
 
-        {tab === "news" && <div className="section" aria-labelledby="news-title">
-          <div className="section-head">
-            <div><p className="section-index">03 / Project log</p><h2 id="news-title">Новости проекта</h2></div>
-            <p>События бизнеса отделены от изменений сайта. Тип показывает глубину достигнутого результата.</p>
-          </div>
-          <div className="filter-row" role="group" aria-label="Фильтр новостей">
-            {(["all", "action", "oper", "cycle_closed"] as const).map((f) => <button key={f} className={newsFilter === f ? "selected" : ""} onClick={() => setNewsFilter(f)}>{f === "all" ? "Все" : typeLabels[f]}</button>)}
-          </div>
-          <div className="news-list">
-            {filteredNews.map((item) => <article key={item.id} className="news-item">
-              <time>{item.date}</time><div><span className={`news-type type-${item.type}`}>{typeLabels[item.type]}</span><h3>{item.title}</h3><p>{item.summary}</p><div className="news-links">{item.org ? <OrgLinks ids={[item.org]} onNavigate={openOrgan} /> : <span className="unassigned">Ответственный орган не установлен</span>}{item.task && <button className="text-link" onClick={() => go("current", item.task)}>Связанная задача →</button>}</div></div>
-            </article>)}
-          </div>
-          <aside className="classification"><h3>Как читаются типы</h3><dl><div><dt>Действие</dt><dd>Шаг выполнен, но изменение внешнего состояния ещё не подтверждено.</dd></div><div><dt>Операционный результат</dt><dd>Система приняла действие или наблюдаемое состояние изменилось.</dd></div><div><dt>Замкнутый цикл</dt><dd>Результат привёл к изменению инструкции, правила, знания или плана.</dd></div></dl></aside>
-        </div>}
+      {view === "projects" && <section>
+        <SectionHead index="04" kicker="PROJECT CONTOUR" title="Проекты" copy="Разовые циклы отделены от регулярной торговли. REPAIR получает приоритет над GROWTH при конфликте ограниченного ресурса; лимит WIP — два активных проекта." />
+        <div className="project-list">{projects.map((p, index) => <article key={p.name} className={p.tone}><div className="project-no">0{index + 1}</div><div className="project-main"><div className="project-meta"><span>{p.type}</span><em>{p.state}</em></div><h2>{p.name}</h2><p className="lead">{p.purpose}</p><div className="project-grid"><div><h3>Terminal result</h3><p>{p.result}</p></div><div><h3>Gate / handoff</h3><p>{p.gate}</p></div></div><Evidence ids={p.refs} /></div></article>)}</div>
+      </section>}
 
-        {tab === "machine" && <div className="machine-page" aria-label="Философская машина Elephant Pants">
-          <aside className="machine-sidebar" aria-label="Подразделы философской машины">
-            <a href="#opers-map"><span>01 /</span> карта opers</a>
-            <a href="#oneoff-cycles"><span>02 /</span> разовые циклы</a>
-            <a href="#completed-projects"><span>03 /</span> завершённые проекты</a>
-            <a href="#next-step"><span>04 /</span> следующий шаг</a>
-          </aside>
-          <div className="machine-main">
-            <div className="machine-diagram" id="machine-map">
-              <img src="/machine-diagram-blue.png" alt="Философская машина Elephant Pants: Catalog входит в цикл Economics, состоящий из Import, Logistic и Sales; Cashflow выходит из машины, а бюджет возвращается к новым каталогам." />
-            </div>
-          <section className="machine-section" id="opers-map"><div className="machine-section-head"><span>01 / карта opers</span><div><h2>Кто и что приводит машину в движение</h2><p>Opers распределены между тремя циклами. Узел задаёт контекст взаимодействия, но ещё не фиксирует исполнителя: он будет определён в будущей инструкции каждого oper.</p></div></div>
-            <div className="opers-table"><div className="opers-row opers-header"><span>Цикл</span><span>Узел</span><span>Opers</span><span>Инструкции</span></div>{machineOpers.map((row) => <div key={`${row.node}-${row.cycle}`} className={`opers-row row-${row.cycle}`}><strong>{row.title}</strong><b>{row.node}</b><div className="oper-pills">{row.opers.map((oper) => <span key={oper}>{oper}</span>)}</div><small>TODO · для каждого oper</small></div>)}</div>
-          </section>
-          <section className="oneoff-section" id="oneoff-cycles"><div className="machine-section-head"><span>02 / разовые циклы</span><div><h2>Проекты, которые меняют состояние машины</h2><p>В отличие от постоянного оборота Economics, каждый проект имеет конечный результат и закрывается после прохождения своих стадий.</p></div></div><div className="oneoff-grid">{oneOffCycles.map((cycle) => <article key={cycle.id}><span>{cycle.id}</span><h3>{cycle.title}</h3><p>{cycle.description}</p><div><small>цель</small><small>бюджет</small><small>стадии</small><small>отчёт</small><small>результат</small></div></article>)}</div></section>
-          <section className="completed-projects" id="completed-projects"><div className="machine-section-head"><span>03 / завершённые проекты</span><div><h2>Полученные изменения машины</h2><p>Проекты, для которых конечный результат подтверждён и цикл закрыт.</p></div></div><div className="completed-project-grid">{completedProjects.map((project) => <article key={project.id}><div><span>{project.id}</span><em>{project.status}</em></div><h3>{project.title}</h3><p>{project.result}</p><time>{project.completedAt}</time></article>)}</div></section>
-          <section className="instruction-next" id="next-step"><div><span>04 / следующий шаг</span><strong>Из схемы — в инструкции.</strong></div><div><h2>Добавить подробную инструкцию для каждого oper</h2><p>Структура машины уже зафиксирована. Следующий слой делает её исполнимой: каждая операция получает собственную детальную инструкцию.</p></div></section>
-          </div>
-        </div>}
+      {view === "observation" && <section>
+        <SectionHead index="05" kicker="OBSERVATION LOG" title="Наблюдение" copy="Append-only журнал событий. Публичная проекция показывает описание и идентификатор evidence, но не раскрывает исходные файлы." />
+        <div className="filter-row" role="group" aria-label="Фильтр событий">{(["ALL", "STATE_OBSERVED", "CYCLE_CLOSED"] as const).map((f) => <button key={f} className={eventFilter === f ? "selected" : ""} onClick={() => setEventFilter(f)}>{f === "ALL" ? "Все · 9" : f}</button>)}</div>
+        <div className="timeline">{visibleEvents.map((e) => <article key={e.id}><div className="time-mark"><span>07.08.2026</span><i /></div><div><div className="event-meta"><span>{e.type}</span><em>{e.cycle}</em></div><p className="mono">{e.id}</p><h2>{e.title}</h2><p>{e.detail}</p><div className="evidence-description"><span>Evidence</span><b>{e.evidence}</b></div></div></article>)}</div>
+      </section>}
 
-        {tab === "organ" && <div className="section" aria-labelledby="organ-title">
-          <div className="organ-detail-head">
-            <button className="back-link" onClick={() => go("machine")}>← Все органы</button>
-            <p className="section-index">ORG / {activeOrg.id}</p>
-            <h2 id="organ-title">{activeOrg.name}</h2>
-            <p>{activeOrg.role}</p>
-          </div>
-          <div className="organ-totals"><span>{organStages.length} этапов дорожной карты</span><span>{organTasks.length} связанных задач</span><span>{organNews.length} связанных новостей</span></div>
-          <div className="organ-aggregate">
-            <section><h3>Дорожная карта</h3>{organStages.length ? organStages.map((stage) => <article className="aggregate-item" key={stage.id}><p className="aggregate-meta">{stage.horizon} · {stage.status}</p><h4>{stage.title}</h4><p>{stage.goal}</p><button className="text-link" onClick={() => go("roadmap", stage.id)}>Открыть этап →</button></article>) : <p className="empty-state">Связанные этапы не зафиксированы.</p>}</section>
-            <section><h3>Задачи</h3>{organTasks.length ? organTasks.map((task) => <article className="aggregate-item" key={task.id}><p className="aggregate-meta">{task.org === activeOrg.id ? "Орган-владелец" : "Участвующий орган"} · {task.status}</p><h4>{task.title}</h4><p>{task.evidence}</p><button className="text-link" onClick={() => go("current", task.id)}>Открыть задачу →</button></article>) : <p className="empty-state">Связанные задачи не зафиксированы.</p>}</section>
-            <section><h3>Новости и результаты</h3>{organNews.length ? organNews.map((item) => <article className="aggregate-item" key={item.id}><p className="aggregate-meta">{item.date} · {typeLabels[item.type]}</p><h4>{item.title}</h4><p>{item.summary}</p>{item.task && <button className="text-link" onClick={() => go("current", item.task)}>Открыть связанную задачу →</button>}</article>) : <p className="empty-state">Связанные новости не зафиксированы.</p>}</section>
-          </div>
-        </div>}
+      {view === "strategy" && <section>
+        <SectionHead index="06" kicker="STRATEGY" title="Стратегия" copy="Дорожная карта показывает направление и условия перехода. Текущее операционное состояние остаётся в реестре циклов." />
+        <div className="roadmap">
+          <article className="current"><span>Сейчас</span><div><em>ACTIVE HORIZON</em><h2>Повторный ассортиментный эксперимент</h2><p>Вторая партия из 75 единиц полностью принята Ozon. Цикл продаж открыт; данные проверяются еженедельно.</p><ul><li>Подтвердить устойчивый спрос</li><li>Зафиксировать фактическую экономику партии</li><li>Стабилизировать маркировку и compliance-контур</li></ul></div></article>
+          <article><span>До 6 месяцев</span><div><em>NEXT</em><h2>Рабочие правила повторения</h2><p>Подтвердить цену, ассортимент, маркировку, упаковку и регулярную логистику на сопоставимых данных.</p></div></article>
+          <article><span>Около 2 лет</span><div><em>DIRECTION</em><h2>Каналы и устойчивая поставка</h2><p>Развивать каналы продаж и устойчивость поставки после восстановления детального плана и критериев перехода.</p></div></article>
+          <article><span>2031–2033</span><div><em>LONG-TERM</em><h2>Федеральная многоканальная система</h2><p>Маркетплейсы, DTC, опт и региональные партнёры: 20 000+ пар в год, 100+ оптовых клиентов и устойчивый бренд категории.</p></div></article>
+        </div>
+      </section>}
 
-        {tab === "history" && <div className="section" aria-labelledby="history-title">
-          <div className="section-head"><div><p className="section-index">05 / Site changelog</p><h2 id="history-title">История сайта</h2></div><p>Здесь фиксируются только изменения представления проекта. Продажи, поставки и маркировка остаются в новостях бизнеса.</p></div>
-          {siteChangelog.map((entry) => <article className="change-entry" key={`${entry.date}-${entry.title}`}><div><time>{entry.date}</time><span>{entry.category}</span></div><h3>{entry.title}</h3><ul>{entry.changes.map((change) => <li key={change}>{change}</li>)}</ul><p className="change-note">{entry.note}</p></article>)}
-          <article className="source-register"><h3>Реестр источников и пробелов</h3><div className="source-grid">{sourceSummaryGroups.map((group) => <div key={group.title}><h4>{group.title}</h4><p>{group.text}</p></div>)}</div></article>
-        </div>}
+      {view === "service" && <section>
+        <SectionHead index="00" kicker="SERVICE" title="Служебный раздел" copy="Метаданные публичной проекции, история версий и состояние связи с источником истины." />
+        <div className="service-grid"><article><span>Текущая версия сайта</span><strong>18</strong><p>Новая информационная архитектура на основе data/ep-domain.</p></article><article><span>Доменная физиология</span><strong>EP-DP v0.2.1</strong><p>INTERNAL_QA / NOT_RELEASED</p></article><article><span>Данные обновлены</span><strong>8 августа 2026</strong><p>Последний доменный snapshot: 7 августа 2026.</p></article><article><span>Синхронизация</span><strong>IN SYNC</strong><p>Сайт использует канонические records как единственный источник текущего состояния.</p></article></div>
+        <div className="history"><h2>История сайта</h2><article><time>08.08.2026</time><div><b>v18 · Доменная миграция</b><p>Состояние, циклы, физиология, проекты и Observation заменили старые ручные страницы и статусы. Страницы «органов» удалены.</p></div></article><article><time>05–07.08.2026</time><div><b>v13–17 · Философская машина</b><p>Добавлена и отредактирована упрощённая схема регулярного товарного оборота.</p></div></article><article><time>22.07.2026</time><div><b>Первая публичная структура</b><p>Дорожная карта, текущий шаг, новости и страницы функциональных областей.</p></div></article></div>
+        <a className="repo-link" href="https://github.com/valerol/ep_dashboard" target="_blank" rel="noreferrer">Открыть valerol/ep_dashboard →</a>
+      </section>}
+    </div>
+
+    {closingCycle && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => event.target === event.currentTarget && setClosingCycle(null)}>
+      <section className="closure-modal" role="dialog" aria-modal="true" aria-labelledby="closure-title">
+        <button className="modal-close" onClick={() => setClosingCycle(null)} aria-label="Закрыть окно">×</button>
+        <p className="mono">{closingCycle.id}</p>
+        <h2 id="closure-title">Закрыть цикл</h2>
+        <p>{closingCycle.title}</p>
+        <form onSubmit={submitClosure}>
+          <label>Результат<select name="outcome" defaultValue="ACHIEVED" required><option value="ACHIEVED">ACHIEVED</option><option value="PARTIAL">PARTIAL</option><option value="FAILED">FAILED</option><option value="CANCELLED">CANCELLED</option></select></label>
+          <label>Комментарий<textarea name="comment" minLength={3} maxLength={1000} required placeholder="Что получено и почему цикл можно закрыть" /></label>
+          <button type="submit" disabled={closureStatus === "submitting"}>{closureStatus === "submitting" ? "Записываю…" : "Подтвердить закрытие"}</button>
+        </form>
+        {closureMessage && <p className={`closure-message ${closureStatus}`}>{closureMessage}</p>}
       </section>
+    </div>}
 
-      <footer><span>Elephant Pants</span><p>Рабочая история проекта · только подтверждённые сведения</p><button onClick={() => setTab("history")}>Метод и источники</button></footer>
-    </main>
-  );
+    <footer><div><span>EP</span><p>Elephant Pants · business system</p></div><p>EP-DP v0.2.1 · INTERNAL_QA / NOT_RELEASED</p><button onClick={() => go("service")}>Служебный раздел →</button></footer>
+  </main>;
 }
