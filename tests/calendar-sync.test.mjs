@@ -36,6 +36,7 @@ test("all-day cycle becomes a stable transparent calendar event", () => {
   assert.equal(first.extendedProperties.private.requested_reminder_before, "P1D");
   assert.equal(first.extendedProperties.private.cycle_instance_id, "EP-S-20260809-001");
   assert.match(first.description, /Due: 2026-08-14/);
+  assert.match(first.description, /Requested reminder: P1D/);
   assert.match(first.description, /Timezone: Asia\/Vladivostok/);
 });
 
