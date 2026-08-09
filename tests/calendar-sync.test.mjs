@@ -32,7 +32,8 @@ test("all-day cycle becomes a stable transparent calendar event", () => {
   assert.deepEqual(first.start, { date: "2026-08-14" });
   assert.deepEqual(first.end, { date: "2026-08-15" });
   assert.equal(first.transparency, "transparent");
-  assert.deepEqual(first.reminders.overrides, [{ method: "popup", minutes: 1440 }]);
+  assert.deepEqual(first.reminders, { useDefault: true });
+  assert.equal(first.extendedProperties.private.requested_reminder_before, "P1D");
   assert.equal(first.extendedProperties.private.cycle_instance_id, "EP-S-20260809-001");
   assert.match(first.description, /Due: 2026-08-14/);
   assert.match(first.description, /Timezone: Asia\/Vladivostok/);
@@ -67,7 +68,7 @@ test("timed cycles require an offset and use the configured duration", () => {
   const event = buildCalendarEvent(timed);
   assert.equal(event.start.dateTime, "2026-08-14T00:00:00.000Z");
   assert.equal(event.end.dateTime, "2026-08-14T00:45:00.000Z");
-  assert.equal(event.reminders.overrides[0].minutes, 120);
+  assert.equal(event.extendedProperties.private.requested_reminder_before, "PT2H");
 });
 
 test("publishing requires exactly one temporal field", () => {
