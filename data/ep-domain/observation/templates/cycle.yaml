@@ -33,6 +33,7 @@ plan: []
 expected_result: null
 actual_result: null
 evidence_refs: []
+evidence_policy: REQUIRED
 
 schedule:
   kind: null
