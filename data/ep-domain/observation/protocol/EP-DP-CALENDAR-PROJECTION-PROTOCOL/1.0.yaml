@@ -28,7 +28,7 @@ source_of_truth:
 target:
   provider: GOOGLE_CALENDAR
   calendar_name: Elephant Pants
-  calendar_id_storage: GITHUB_SECRET_EP_GOOGLE_CALENDAR_ID
+  calendar_id_storage: GITHUB_SECRET_GOOGLE_CALENDAR_ID
   timezone: Asia/Vladivostok
 
 eligibility:
@@ -53,7 +53,8 @@ state_projection:
 defaults:
   date_event: ALL_DAY_TRANSPARENT
   datetime_event: TIMED_BUSY
-  reminder_before: P1D
+  requested_reminder_before: P1D
+  reminder_application: VIEWER_CALENDAR_DEFAULT
   datetime_duration_minutes: 30
 
 execution:
@@ -69,3 +70,4 @@ invariants:
   - REPEATING_DOMAIN_CYCLES_USE_DISTINCT_OCCURRENCE_RECORDS_NOT_GOOGLE_RECURRENCE
   - MANUAL_CALENDAR_EDITS_MAY_BE_OVERWRITTEN
   - PAST_MANAGED_EVENTS_ARE_NOT_DELETED_BY_RECONCILIATION
+  - REMINDERS_ARE_APPLIED_BY_EACH_VIEWERS_CALENDAR_DEFAULT
