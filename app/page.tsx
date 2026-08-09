@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 
 type View = "state" | "cycles" | "physiology" | "projects" | "observation" | "strategy" | "service";
+type ClosableCycle = { id: string; type: string; title: string; parent: string | null; evidencePolicy: "NOT_REQUIRED" };
 
 const navigation: { id: Exclude<View, "service">; index: string; label: string }[] = [
   { id: "state", index: "01", label: "Состояние" },
@@ -70,11 +71,26 @@ export default function Home() {
   const [view, setView] = useState<View>("state");
   const [cycleFilter, setCycleFilter] = useState<"ALL" | "OPEN" | "CLOSED">("ALL");
   const [eventFilter, setEventFilter] = useState<"ALL" | "STATE_OBSERVED" | "CYCLE_CLOSED">("ALL");
-  const [closingCycle, setClosingCycle] = useState<(typeof cycles)[number] | null>(null);
+  const [closingCycle, setClosingCycle] = useState<ClosableCycle | null>(null);
+  const [closableCycles, setClosableCycles] = useState<ClosableCycle[]>([]);
+  const [closableState, setClosableState] = useState<"loading" | "ready" | "auth" | "unconfigured" | "error">("loading");
   const [closureStatus, setClosureStatus] = useState<"idle" | "submitting" | "done" | "error">("idle");
   const [closureMessage, setClosureMessage] = useState("");
   const visibleCycles = useMemo(() => cycleFilter === "ALL" ? cycles : cycles.filter((c) => c.state === cycleFilter), [cycleFilter]);
   const visibleEvents = useMemo(() => eventFilter === "ALL" ? events : events.filter((e) => e.type === eventFilter), [eventFilter]);
+  useEffect(() => {
+    if (view !== "cycles") return;
+    let active = true;
+    fetch("/api/cycles/close", { headers: { accept: "application/json" } }).then(async (response) => {
+      const body = await response.json().catch(() => ({}));
+      if (!active) return;
+      if (response.ok) { setClosableCycles(body.cycles || []); setClosableState("ready"); }
+      else if (response.status === 401) setClosableState("auth");
+      else if (body.error === "INTEGRATION_NOT_CONFIGURED") setClosableState("unconfigured");
+      else setClosableState("error");
+    });
+    return () => { active = false; };
+  }, [view]);
   const go = (next: View) => { setView(next); window.scrollTo({ top: 0, behavior: "smooth" }); };
   const submitClosure = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -103,6 +119,7 @@ export default function Home() {
     }
     setClosureStatus("done");
     setClosureMessage(`Цикл закрыт. Событие ${body.eventId} записано в GitHub.`);
+    setClosableCycles((items) => items.filter((item) => item.id !== closingCycle.id));
   };
 
   return <main>
@@ -131,16 +148,23 @@ export default function Home() {
 
       {view === "cycles" && <section>
         <SectionHead index="02" kicker="CYCLE REGISTER" title="Циклы" copy="Семь зарегистрированных экземпляров. Иерархия, состояние и решение берутся из CYCLE_RECORD; протокол определяет повторяемое поведение." />
+        <section className="closure-console">
+          <div><span>Закрытие без свидетельств</span><h2>Доступные циклы</h2><p>Показываются только OPEN-циклы с явной политикой NOT_REQUIRED и без открытых подциклов.</p></div>
+          <div className="closable-list">
+            {closableState === "loading" && <p>Проверяю GitHub…</p>}
+            {closableState === "auth" && <a href="/signin-with-chatgpt?return_to=%2F">Войти с ChatGPT для управления →</a>}
+            {closableState === "unconfigured" && <p>Запись в GitHub ещё не активирована.</p>}
+            {closableState === "error" && <p>Не удалось получить актуальный список.</p>}
+            {closableState === "ready" && closableCycles.length === 0 && <p>Сейчас нет циклов, которые разрешено закрыть без свидетельств.</p>}
+            {closableCycles.map((cycle) => <article key={cycle.id}><div><span>{cycle.id} · {cycle.type}</span><strong>{cycle.title}</strong></div><button onClick={() => { setClosingCycle(cycle); setClosureStatus("idle"); setClosureMessage(""); }}>Закрыть</button></article>)}
+          </div>
+        </section>
         <div className="filter-row" role="group" aria-label="Фильтр циклов">{(["ALL", "OPEN", "CLOSED"] as const).map((f) => <button key={f} className={cycleFilter === f ? "selected" : ""} onClick={() => setCycleFilter(f)}>{f === "ALL" ? "Все · 7" : f === "OPEN" ? "Открытые · 1" : "Закрытые · 6"}</button>)}</div>
         <div className="cycle-list">{visibleCycles.map((cycle) => <article className={`cycle-card depth-${cycle.parent ? 1 : 0}`} key={cycle.id}>
           <div className="cycle-line"><span className={`state ${cycle.state.toLowerCase()}`}>{cycle.state}</span><span>{cycle.cls}</span><span>occurrence {cycle.occurrence}</span><span>{cycle.outcome}</span></div>
           <div className="cycle-body"><div><p className="mono">{cycle.id} · {cycle.type}</p><h2>{cycle.title}</h2>{cycle.parent && <p className="parent">↳ parent: {cycle.parent}</p>}</div><div><h3>Фактический результат</h3><p>{cycle.result}</p><h3>Текущий шаг</h3><p>{cycle.step}</p></div></div>
           <div className="decision">transition_decision: <b>{cycle.decision}</b></div><Evidence ids={cycle.evidence} />
-          {cycle.state === "OPEN" && <div className="cycle-close-row">
-            {cycle.evidencePolicy === "NOT_REQUIRED"
-              ? <button onClick={() => { setClosingCycle(cycle); setClosureStatus("idle"); setClosureMessage(""); }}>Закрыть цикл</button>
-              : <span>Закрытие на сайте недоступно: требуется свидетельство.</span>}
-          </div>}
+          {cycle.state === "OPEN" && <div className="cycle-close-row"><span>Закрытие на сайте: {cycle.evidencePolicy === "NOT_REQUIRED" ? "доступно в панели выше" : "требуется свидетельство"}.</span></div>}
         </article>)}</div>
         <section className="protocol-band"><div><span>Активные протоколы</span><h2>Повторяемая процедура вместо ручного статуса</h2></div><div><b>EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0</b><p>Регистрация и закрытие логистического дерева.</p><b>EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0</b><p>Скриншот → CSV → проверка → решение → closure event.</p></div></section>
       </section>}
