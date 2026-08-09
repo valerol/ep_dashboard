@@ -46,3 +46,21 @@ npm test
 ## Публикация
 
 `.openai/hosting.json` связывает проект с существующим сайтом Sites. Секреты и реальные документы в репозитории не хранятся.
+
+## Проекция циклов в Google Calendar
+
+Датированные циклы с `schedule.calendar_publish: true` автоматически отражаются в календаре `Elephant Pants`. Канонический источник — только `data/ep-domain/observation/cycles`; обратная синхронизация из Google Calendar запрещена.
+
+Локальная проверка без доступа к календарю:
+
+```bash
+npm run sync:calendar:dry-run
+npm run test:calendar-sync
+```
+
+GitHub Actions запускает синхронизацию после изменений циклов и ежедневно в 08:00 `Asia/Vladivostok`. Для активации нужны Repository Secrets:
+
+- `EP_GOOGLE_CALENDAR_ID` — идентификатор календаря `Elephant Pants`;
+- `GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON` — JSON ключ сервисного аккаунта Google Cloud с включённым Calendar API.
+
+Календарь `Elephant Pants` должен быть предоставлен адресу `client_email` из ключа с правом изменения событий. Секреты и идентификатор календаря не добавляются в файлы репозитория.

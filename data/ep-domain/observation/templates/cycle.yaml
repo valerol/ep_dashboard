@@ -34,6 +34,18 @@ expected_result: null
 actual_result: null
 evidence_refs: []
 
+schedule:
+  kind: null
+  date: null
+  datetime: null
+  timezone: Asia/Vladivostok
+  duration_minutes: 30
+  reminder_before: P1D
+  calendar_publish: false
+  transparency: transparent
+  title: null
+  projection_protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+
 opened_at: null
 current_closed_at: null
 current_closure_outcome: NONE
@@ -46,4 +58,3 @@ instruction_version: EP-DP-v0.2
 observer: OWNER_LPR
 identity_rule_ref: EP-DP-DR-006
 closure_rule_ref: EP-DP-DR-007
-
