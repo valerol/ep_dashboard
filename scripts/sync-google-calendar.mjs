@@ -39,14 +39,6 @@ function nextDate(dateString) {
   return date.toISOString().slice(0, 10);
 }
 
-function reminderMinutes(value = "P1D") {
-  const match = value.match(/^P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?)?$/);
-  if (!match) throw new Error(`Unsupported reminder_before value: ${value}`);
-  const minutes = Number(match[1] || 0) * 1440 + Number(match[2] || 0) * 60 + Number(match[3] || 0);
-  if (!minutes) throw new Error(`reminder_before must be greater than zero: ${value}`);
-  return minutes;
-}
-
 function eventId(cycleInstanceId) {
   return `ep${createHash("sha256").update(cycleInstanceId).digest("hex").slice(0, 40)}`;
 }
@@ -60,6 +52,7 @@ function eventDescription(cycle) {
     `State: ${cycle.cycle_record_state}`,
     `Due: ${due}`,
     `Timezone: ${cycle.schedule?.timezone || DEFAULT_TIMEZONE}`,
+    `Requested reminder: ${cycle.schedule?.reminder_before || "P1D"} (viewer calendar default)`,
     `Current step: ${cycle.current_step ?? "NONE"}`,
     `Protocol: ${cycle.protocol_ref ?? "NONE"}`,
     "Evidence policy: description and ID only; no source file",
@@ -94,7 +87,7 @@ export function buildCalendarEvent(cycle) {
   const schedule = validateSchedule(cycle);
   if (!schedule) return null;
   const timezone = schedule.timezone || DEFAULT_TIMEZONE;
-  const minutes = reminderMinutes(schedule.reminder_before || "P1D");
+  const requestedReminder = schedule.reminder_before || "P1D";
   const allDay = Boolean(schedule.date);
   let start;
   let end;
@@ -122,13 +115,14 @@ export function buildCalendarEvent(cycle) {
     start,
     end,
     transparency: schedule.transparency || (allDay ? "transparent" : "opaque"),
-    reminders: { useDefault: false, overrides: [{ method: "popup", minutes }] },
+    reminders: { useDefault: true },
     extendedProperties: {
       private: {
         epManaged: "true",
         cycle_instance_id: cycle.cycle_instance_id,
         cycle_record_state: cycle.cycle_record_state,
         schedule_kind: schedule.kind,
+        requested_reminder_before: requestedReminder,
       },
     },
   };
