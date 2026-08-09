@@ -109,6 +109,7 @@ current_inventory:
     - EP-S-20260807-002
     - EP-S-20260809-001
     - EP-GP-20260809-001
+    - EP-GP-20260809-002
   observation_events:
     - EP-EVENT-20260807-001
     - EP-EVENT-20260807-002
