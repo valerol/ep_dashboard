@@ -1,8 +1,8 @@
 record_id: EP-CYCLE-TYPE-REGISTRY
 record_type: CYCLE_TYPE_REGISTRY
-schema_version: "1.3"
+schema_version: "1.4"
 created_at: "2026-08-07T20:00:27+10:00"
-updated_at: "2026-08-09T11:30:00+10:00"
+updated_at: "2026-08-09T14:00:00+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-006
@@ -13,6 +13,7 @@ source_refs:
   - OWNER_LPR_AUTHORIZATION:2026-08-07:CYCLE_REGISTRY_IMPLEMENTATION
   - OWNER_LPR_DIRECTIVE:2026-08-07:WEEKLY_OZON_SALES_REVIEW
   - OWNER_LPR_COMPLETION:2026-08-09:CALENDAR_PROJECTION_AUTOMATION
+  - OWNER_LPR_DIRECTIVE:2026-08-09:WEBSITE_PROJECT_CLOSURE
 
 type_contract:
   type_identity_field: cycle_type_id
@@ -22,6 +23,7 @@ type_contract:
   unknown_type_rule: PROPOSE_AND_HOLD_FOR_OWNER_LPR
   logistics_procedure_ref: EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
   weekly_sales_review_procedure_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
+  website_cycle_closure_procedure_ref: EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL-1.0
 
 cycle_types:
   - cycle_type_id: IMPORT_BATCH
@@ -108,3 +110,12 @@ cycle_types:
     required_child_type_ids: []
     protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
     expected_result_template: Датированные доменные циклы автоматически и идемпотентно отражаются в календаре Elephant Pants
+
+  - cycle_type_id: WEBSITE_CYCLE_CLOSURE_AUTOMATION
+    title: Закрытие циклов и проектов через сайт
+    cycle_class: GROWTH_PROJECT
+    class_boundary_ref: EP-DP_v0.2.1_GROWTH_PROJECT
+    allowed_parent_type_ids: []
+    required_child_type_ids: []
+    protocol_ref: EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL-1.0
+    expected_result_template: Допустимые циклы и проектные циклы закрываются через сайт; атомарное изменение подтверждено в GitHub
