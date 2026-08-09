@@ -9,6 +9,7 @@
 - [`repository-map.yaml`](repository-map.yaml) — машиночитаемое зеркало структуры и текущий инвентарь.
 - [`observation/protocol/EP-DP-LOGISTICS-CYCLE-PROTOCOL/1.0.yaml`](observation/protocol/EP-DP-LOGISTICS-CYCLE-PROTOCOL/1.0.yaml) — активная логистическая процедура.
 - [`observation/protocol/EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL/1.0.yaml`](observation/protocol/EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL/1.0.yaml) — активная процедура еженедельной проверки продаж Ozon.
+- [`observation/protocol/EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL/1.0.yaml`](observation/protocol/EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL/1.0.yaml) — закрытие циклов без внешних свидетельств через сайт.
 
 Физиология содержит нормативную топологию репозитория; репозиторий содержит точный текущий текст физиологии. Правило синхронизации и взаимного восстановления определено `EP-DP-DR-061`.
 
@@ -65,6 +66,12 @@ SALES_BATCH
 4. В GitHub записываются только извлечённые факты, качество данных и ссылки на внешние свидетельства.
 5. Подцикл закрывается только после решения `NEXT_STEP_SELECTED` или `NO_ACTION`; дефект данных допускает `HOLD_FOR_DATA_REPAIR`.
 6. Закрытие обзора не закрывает родительский цикл продаж и запускает отсчёт до следующей обязательной проверки.
+
+## Закрытие через сайт
+
+Сайт может закрыть только цикл в состоянии `OPEN` с явной политикой `evidence_policy: NOT_REQUIRED`. Результат и комментарий владельца обязательны. Открытые дочерние циклы блокируют закрытие родителя. Изменение цикла, append-only closure-событие, индекс и инвентарь записываются одним Git commit согласно `EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL / 1.0`.
+
+Отсутствующая политика трактуется как запрет. Циклы с `REQUIRED` закрываются только после отдельной процедуры добавления свидетельства.
 
 ## Правила записи
 

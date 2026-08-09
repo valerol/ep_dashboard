@@ -1,0 +1,68 @@
+record_id: EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL-1.0
+record_type: PROTOCOL_VERSION
+schema_version: "1.0"
+created_at: "2026-08-09T13:00:00+10:00"
+updated_at: "2026-08-09T13:00:00+10:00"
+data_owner: OWNER_LPR
+status: ACTIVE
+
+protocol_id: EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL
+version_id: "1.0"
+purpose: Разрешить владельцу закрывать циклы без внешних свидетельств через сайт с атомарной записью в GitHub
+
+eligibility:
+  required_cycle_record_state: OPEN
+  required_evidence_policy: NOT_REQUIRED
+  required_child_state: CLOSED
+  unspecified_evidence_policy: DENY
+
+operator_input:
+  required:
+    - outcome
+    - comment
+  allowed_outcomes:
+    - ACHIEVED
+    - PARTIAL
+    - FAILED
+    - CANCELLED
+  comment_length:
+    minimum: 3
+    maximum: 1000
+
+authorization:
+  authentication: CHATGPT_SIWC
+  authorization: OWNER_EMAIL_ALLOWLIST
+  client_side_github_token: PROHIBITED
+  repository_secret_location: SITES_SERVER_RUNTIME_ONLY
+
+transition:
+  cycle_record_state: OPEN_TO_CLOSED
+  transition_decision: COMPLETE
+  current_step: CYCLE_CLOSED
+  closure_basis: OPERATOR_CONFIRMATION_EVIDENCE_NOT_REQUIRED
+  external_evidence_created: false
+  observation_event_type: CYCLE_CLOSED
+  parent_auto_close: false
+
+atomic_write:
+  canonical_target: valerol/ep_dashboard@main
+  files:
+    - data/ep-domain/observation/cycles/<cycle_instance_id>.yaml
+    - data/ep-domain/observation/events/<YYYY>/<MM>/<observation_event_id>.yaml
+    - data/ep-domain/observation/indexes/cycles.yaml
+    - data/ep-domain/repository-map.yaml
+  strategy: ONE_GIT_COMMIT
+  concurrent_main_change: REJECT_WITHOUT_FORCE
+  partial_write: PROHIBITED
+
+failure_rules:
+  evidence_required: DENY
+  open_child_cycle: HOLD
+  stale_cycle_state: CONFLICT
+  github_ref_conflict: RETRY_AFTER_REFRESH
+
+authority_refs:
+  - EP-DP-DR-006
+  - EP-DP-DR-007
+  - EP-DP-DR-008
+  - EP-DP-DR-009
