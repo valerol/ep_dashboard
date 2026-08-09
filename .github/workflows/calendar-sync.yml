@@ -33,7 +33,7 @@ jobs:
       - name: Check calendar credentials
         id: calendar_credentials
         env:
-          EP_GOOGLE_CALENDAR_ID: ${{ secrets.EP_GOOGLE_CALENDAR_ID }}
+          EP_GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
           GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON }}
         run: |
           if [ -n "$EP_GOOGLE_CALENDAR_ID" ] && [ -n "$GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON" ]; then
@@ -45,6 +45,6 @@ jobs:
       - name: Synchronize Elephant Pants calendar
         if: steps.calendar_credentials.outputs.enabled == 'true'
         env:
-          EP_GOOGLE_CALENDAR_ID: ${{ secrets.EP_GOOGLE_CALENDAR_ID }}
+          EP_GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
           GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON }}
         run: npm run sync:calendar
