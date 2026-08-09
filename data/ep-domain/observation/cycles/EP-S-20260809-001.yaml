@@ -1,0 +1,68 @@
+record_id: EP-S-20260809-001
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: "2026-08-09T10:07:42+10:00"
+updated_at: "2026-08-09T10:07:42+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260809-001
+  - EP-EVENT-20260807-009
+  - OWNER_LPR_DIRECTIVE:2026-08-09:AUTOMATIC_CALENDAR_PROJECTION
+
+cycle_instance_id: EP-S-20260809-001
+cycle_type_id: OZON_WEEKLY_SALES_REVIEW
+cycle_class: SALES
+series_id: EP-SERIES-OZON-WEEKLY-SALES-REVIEW
+occurrence: 2
+scope:
+  class_boundary_ref: EP-DP_v0.2_S1-S2
+  instance_subject_ref: EP-BATCH-2026-002
+
+parent_cycle_instance_id: EP-S-20260807-001
+predecessor_cycle_instance_id: EP-S-20260807-002
+continuation_reason: WEEKLY_REVIEW_REQUIRED_WHILE_PARENT_SALES_BATCH_IS_OPEN
+trigger_evidence_ref: EP-EVENT-20260807-009
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: ECONOMICS.SYSTEM
+
+goal: Проверить недельную статистику Ozon и принять решение о следующем шаге или его отсутствии
+cycle_record_state: OPEN
+transition_decision: READY
+remediation_state: NONE
+current_step: CAPTURE_WEEKLY_OZON_SALES_ANALYTICS_SCREENSHOT
+plan:
+  - Получить скриншот недельной аналитики Ozon
+  - Преобразовать его в CSV с пятью каноническими колонками
+  - Проверить структуру и полноту SKU
+  - Принять решение NEXT_STEP_SELECTED, NO_ACTION или HOLD_FOR_DATA_REPAIR
+  - Закрыть обзор отдельным closure-событием
+expected_result: Недельная статистика преобразована в валидный CSV; принято решение о следующем шаге или его отсутствии
+actual_result: null
+evidence_refs: []
+
+schedule:
+  kind: CHECK
+  date: "2026-08-14"
+  timezone: Asia/Vladivostok
+  duration_minutes: 30
+  reminder_before: P1D
+  calendar_publish: true
+  transparency: transparent
+  title: Elephant Pants · Проверить продажи Ozon
+  projection_protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+
+opened_at: "2026-08-09T10:07:42+10:00"
+current_closed_at: null
+current_closure_outcome: NONE
+current_closure_event_ref: null
+closure_event_refs: []
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2.1
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
+protocol_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0

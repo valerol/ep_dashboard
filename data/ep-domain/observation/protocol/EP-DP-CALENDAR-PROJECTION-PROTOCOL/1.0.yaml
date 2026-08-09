@@ -1,0 +1,71 @@
+record_id: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+record_type: PROTOCOL_VERSION
+schema_version: "1.0"
+created_at: "2026-08-09T10:07:42+10:00"
+updated_at: "2026-08-09T10:07:42+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_DIRECTIVE:2026-08-09:AUTOMATIC_CALENDAR_PROJECTION
+  - EP-DP-DR-006
+  - EP-DP-DR-009
+
+protocol_or_instruction_id: EP-DP-CALENDAR-PROJECTION-PROTOCOL
+version_id: "1.0"
+title: Проекция датированных циклов в Google Calendar
+status: ACTIVE
+canonical_effect:
+  branch: main
+  effective_from: "2026-08-09T10:07:42+10:00"
+  relation_to_ep_dp: DERIVED_INTERFACE_AUTOMATION_REGISTERED_BY_EP_DP_DR_009
+  governing_rules: [EP-DP-DR-006, EP-DP-DR-009]
+
+source_of_truth:
+  root: data/ep-domain/observation/cycles
+  authority: CANONICAL_CYCLE_RECORDS
+  calendar_role: ONE_WAY_DERIVED_PROJECTION
+  reverse_sync: FORBIDDEN
+
+target:
+  provider: GOOGLE_CALENDAR
+  calendar_name: Elephant Pants
+  calendar_id_storage: GITHUB_SECRET_EP_GOOGLE_CALENDAR_ID
+  timezone: Asia/Vladivostok
+
+eligibility:
+  calendar_publish_required: true
+  exactly_one_temporal_field_required: [date, datetime]
+  allowed_kinds: [ACTION, CHECK, DEADLINE, EXTERNAL_EVENT]
+
+event_identity:
+  source: cycle_instance_id
+  algorithm: ep_plus_sha256_prefix
+  duplicate_policy: UPDATE_EXISTING_EVENT_WITH_SAME_TECHNICAL_ID
+  private_property: cycle_instance_id
+
+state_projection:
+  open_dated_cycle: CREATE_OR_UPDATE
+  date_or_current_step_changed: UPDATE
+  future_event_after_date_removed: DELETE
+  future_event_after_early_closure: DELETE
+  past_event_after_closure: KEEP_AND_ADD_RESULT
+  calendar_publish_false: DO_NOT_CREATE
+
+defaults:
+  date_event: ALL_DAY_TRANSPARENT
+  datetime_event: TIMED_BUSY
+  reminder_before: P1D
+  datetime_duration_minutes: 30
+
+execution:
+  script: scripts/sync-google-calendar.mjs
+  on_domain_change: .github/workflows/calendar-sync.yml
+  daily_reconciliation: "08:00 Asia/Vladivostok"
+  credentials_storage: GITHUB_SECRET_GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON
+  secret_content_in_repository: FORBIDDEN
+
+invariants:
+  - GOOGLE_CALENDAR_DOES_NOT_DEFINE_OR_MUTATE_DOMAIN_CYCLES
+  - ONE_CYCLE_INSTANCE_MAPS_TO_AT_MOST_ONE_CALENDAR_EVENT
+  - REPEATING_DOMAIN_CYCLES_USE_DISTINCT_OCCURRENCE_RECORDS_NOT_GOOGLE_RECURRENCE
+  - MANUAL_CALENDAR_EDITS_MAY_BE_OVERWRITTEN
+  - PAST_MANAGED_EVENTS_ARE_NOT_DELETED_BY_RECONCILIATION
