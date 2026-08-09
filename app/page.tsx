@@ -26,6 +26,7 @@ const news = newsData as NewsItem[];
 const siteChangelog = siteChangelogData as SiteChange[];
 const machineOpers = machineData.opers;
 const oneOffCycles = machineData.oneOffCycles;
+const completedProjects = machineData.completedProjects;
 const sourceSummaryGroups = sourceRegistryData.summaryGroups;
 
 const typeLabels: Record<NewsType, string> = {
@@ -133,7 +134,8 @@ export default function Home() {
           <aside className="machine-sidebar" aria-label="Подразделы философской машины">
             <a href="#opers-map"><span>01 /</span> карта opers</a>
             <a href="#oneoff-cycles"><span>02 /</span> разовые циклы</a>
-            <a href="#next-step"><span>03 /</span> следующий шаг</a>
+            <a href="#completed-projects"><span>03 /</span> завершённые проекты</a>
+            <a href="#next-step"><span>04 /</span> следующий шаг</a>
           </aside>
           <div className="machine-main">
             <div className="machine-diagram" id="machine-map">
@@ -143,7 +145,8 @@ export default function Home() {
             <div className="opers-table"><div className="opers-row opers-header"><span>Цикл</span><span>Узел</span><span>Opers</span><span>Инструкции</span></div>{machineOpers.map((row) => <div key={`${row.node}-${row.cycle}`} className={`opers-row row-${row.cycle}`}><strong>{row.title}</strong><b>{row.node}</b><div className="oper-pills">{row.opers.map((oper) => <span key={oper}>{oper}</span>)}</div><small>TODO · для каждого oper</small></div>)}</div>
           </section>
           <section className="oneoff-section" id="oneoff-cycles"><div className="machine-section-head"><span>02 / разовые циклы</span><div><h2>Проекты, которые меняют состояние машины</h2><p>В отличие от постоянного оборота Economics, каждый проект имеет конечный результат и закрывается после прохождения своих стадий.</p></div></div><div className="oneoff-grid">{oneOffCycles.map((cycle) => <article key={cycle.id}><span>{cycle.id}</span><h3>{cycle.title}</h3><p>{cycle.description}</p><div><small>цель</small><small>бюджет</small><small>стадии</small><small>отчёт</small><small>результат</small></div></article>)}</div></section>
-          <section className="instruction-next" id="next-step"><div><span>03 / следующий шаг</span><strong>Из схемы — в инструкции.</strong></div><div><h2>Добавить подробную инструкцию для каждого oper</h2><p>Структура машины уже зафиксирована. Следующий слой делает её исполнимой: каждая операция получает собственную детальную инструкцию.</p></div></section>
+          <section className="completed-projects" id="completed-projects"><div className="machine-section-head"><span>03 / завершённые проекты</span><div><h2>Полученные изменения машины</h2><p>Проекты, для которых конечный результат подтверждён и цикл закрыт.</p></div></div><div className="completed-project-grid">{completedProjects.map((project) => <article key={project.id}><div><span>{project.id}</span><em>{project.status}</em></div><h3>{project.title}</h3><p>{project.result}</p><time>{project.completedAt}</time></article>)}</div></section>
+          <section className="instruction-next" id="next-step"><div><span>04 / следующий шаг</span><strong>Из схемы — в инструкции.</strong></div><div><h2>Добавить подробную инструкцию для каждого oper</h2><p>Структура машины уже зафиксирована. Следующий слой делает её исполнимой: каждая операция получает собственную детальную инструкцию.</p></div></section>
           </div>
         </div>}
 

@@ -1,0 +1,66 @@
+record_id: EP-EVENT-20260809-002
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-09T11:30:00+10:00"
+updated_at: "2026-08-09T11:30:00+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+  - GITHUB:valerol/ep_dashboard@main:9de9797edd7cc1c61c1191af327e0e97b999390c
+  - GITHUB:valerol/ep_dashboard@main:59c3c76cc8e3edacc923cbd7dc4b3fd5d9f8b330
+  - OWNER_LPR_COMPLETION:2026-08-09:CALENDAR_PROJECTION_AUTOMATION
+
+observation_event_id: EP-EVENT-20260809-002
+event_type: CYCLE_CLOSED
+action_or_event_ref: OWNER_LPR_COMPLETION:2026-08-09:CALENDAR_PROJECTION_AUTOMATION
+occurred_at: "2026-08-09T11:30:00+10:00"
+observed_or_received_at: "2026-08-09T11:30:00+10:00"
+
+membership:
+  primary:
+    cycle_class: GROWTH_PROJECT
+    cycle_instance_id: EP-GP-20260809-001
+    classification_basis_ref: CALENDAR_PROJECTION_CAPABILITY_CONFIRMED_OPERATIONAL
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260809-001
+      relation_basis_ref: FIRST_AUTOMATICALLY_PROJECTED_DATED_CYCLE
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-09T11:30:00+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: CLOSED
+  current_step_after: PROJECT_COMPLETED
+  result: Автоматическая проекция датированных циклов в Google Calendar подтверждена и введена в регулярную эксплуатацию
+
+closure:
+  outcome: ACHIEVED
+  expected_result_ref: EP-GP-20260809-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: Событие создано автоматически, повторная синхронизация не создала дубль, уведомление за сутки настроено
+  actual_vs_expected_comparison: EXPECTED_RESULT_FULLY_ACHIEVED
+  closure_basis: OWNER_LPR подтвердила видимость события и завершение настройки
+  closure_evidence_refs:
+    - EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+    - GITHUB:valerol/ep_dashboard@main:9de9797edd7cc1c61c1191af327e0e97b999390c
+    - GITHUB:valerol/ep_dashboard@main:59c3c76cc8e3edacc923cbd7dc4b3fd5d9f8b330
+    - OWNER_LPR_COMPLETION:2026-08-09:CALENDAR_PROJECTION_AUTOMATION
+  residue_disposition: Автоматизация передана в регулярный процесс; ежедневная сверка выполняется GitHub Actions
+  decided_by: OWNER_LPR
+  authority_ref: OWNER_LPR_DIRECT_COMPLETION:2026-08-09
+  decided_at: "2026-08-09T11:30:00+10:00"
+  closed_at: "2026-08-09T11:30:00+10:00"
+
+recording_sla:
+  oper_id: O4
+  sla_class: CLOSURE_OR_REOPEN_DECISION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_EXPLICIT_COMPLETION_CONFIRMATION
+  sla_started_at: "2026-08-09T11:30:00+10:00"
+  sla_deadline_at: "2026-08-10T11:30:00+10:00"
+  evaluated_at: "2026-08-09T11:30:00+10:00"
+  actual_recorded_at: "2026-08-09T11:30:00+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
