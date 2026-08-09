@@ -2,17 +2,17 @@ record_id: EP-CYCLE-INDEX
 record_type: DERIVED_CYCLE_INDEX
 schema_version: "1.0"
 created_at: "2026-08-07T20:00:27+10:00"
-updated_at: "2026-08-09T11:30:00+10:00"
+updated_at: "2026-08-09T14:00:00+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-009
 
 authority: DERIVED_NON_CANONICAL_PROJECTION
 generated_from: data/ep-domain/observation/cycles/*.yaml
-generated_at: "2026-08-09T11:30:00+10:00"
+generated_at: "2026-08-09T14:00:00+10:00"
 counts:
-  total: 9
-  open: 2
+  total: 10
+  open: 3
   closed: 7
 cycles:
   - cycle_instance_id: EP-LI-20260807-001
@@ -87,3 +87,11 @@ cycles:
     cycle_record_state: CLOSED
     current_closure_outcome: ACHIEVED
     subject_ref: EP-CAPABILITY-CALENDAR-PROJECTION
+  - cycle_instance_id: EP-GP-20260809-002
+    cycle_type_id: WEBSITE_CYCLE_CLOSURE_AUTOMATION
+    cycle_class: GROWTH_PROJECT
+    occurrence: 1
+    parent_cycle_instance_id: null
+    cycle_record_state: OPEN
+    current_closure_outcome: NONE
+    subject_ref: EP-CAPABILITY-WEBSITE-CYCLE-CLOSURE
