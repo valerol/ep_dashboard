@@ -2,12 +2,12 @@ record_id: EP-GP-20260809-002
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-09T14:00:00+10:00"
-updated_at: "2026-08-09T14:00:00+10:00"
+updated_at: "2026-08-09T03:43:24.305+00:00"
 data_owner: OWNER_LPR
 source_refs:
   - OWNER_LPR_DIRECTIVE:2026-08-09:WEBSITE_PROJECT_CLOSURE
   - EP-DP-WEBSITE-CYCLE-CLOSURE-PROTOCOL-1.0
-
+  - EP-EVENT-20260809-003
 cycle_instance_id: EP-GP-20260809-002
 cycle_type_id: WEBSITE_CYCLE_CLOSURE_AUTOMATION
 cycle_class: GROWTH_PROJECT
@@ -16,32 +16,30 @@ occurrence: 1
 scope:
   class_boundary_ref: EP-DP_v0.2.1_GROWTH_PROJECT
   instance_subject_ref: EP-CAPABILITY-WEBSITE-CYCLE-CLOSURE
-
 parent_cycle_instance_id: null
 predecessor_cycle_instance_id: null
 continuation_reason: null
 trigger_evidence_ref: OWNER_LPR_DIRECTIVE:2026-08-09:WEBSITE_PROJECT_CLOSURE
-
 domain_membership:
   local_domain_label: ELEPHANT_PANTS
 contour_membership: OBSERVATION
-
 goal: Разрешить закрытие допустимых циклов и проектных циклов через сайт с атомарным экспортом состояния в GitHub
-cycle_record_state: OPEN
-transition_decision: READY
+cycle_record_state: CLOSED
+transition_decision: COMPLETE
 remediation_state: NONE
-current_step: CLOSE_THIS_PROJECT_THROUGH_WEBSITE_TO_CONFIRM_END_TO_END_CIRCUIT
+current_step: CYCLE_CLOSED
 plan:
   - Отображать открытые циклы с evidence_policy NOT_REQUIRED на сайте
   - Отображать проектные циклы в разделе Проекты
   - Разрешить закрытие проектного цикла через тот же защищённый контур
   - Закрыть этот проект через сайт
   - Подтвердить атомарное обновление CYCLE_RECORD, события, индекса и карты репозитория
-expected_result: Допустимые циклы и проекты закрываются через сайт; закрытие этого проекта зафиксировано в GitHub без дублей и частичной записи
-actual_result: Минимальная версия реализована и опубликована; требуется первое фактическое закрытие проектного цикла через сайт
+expected_result: >-
+  Допустимые циклы и проекты закрываются через сайт; закрытие этого проекта зафиксировано в GitHub без дублей и
+  частичной записи
+actual_result: Проверка функицонала
 evidence_policy: NOT_REQUIRED
 evidence_refs: []
-
 schedule:
   kind: null
   date: null
@@ -53,15 +51,14 @@ schedule:
   transparency: transparent
   title: null
   projection_protocol_ref: null
-
 opened_at: "2026-08-09T14:00:00+10:00"
-current_closed_at: null
-current_closure_outcome: NONE
-current_closure_event_ref: null
-closure_event_refs: []
+current_closed_at: "2026-08-09T03:43:24.305+00:00"
+current_closure_outcome: ACHIEVED
+current_closure_event_ref: EP-EVENT-20260809-003
+closure_event_refs:
+  - EP-EVENT-20260809-003
 reopen_event_refs: []
 post_close_evidence_refs: []
-
 instruction_version: EP-DP-v0.2.1
 observer: OWNER_LPR
 identity_rule_ref: EP-DP-DR-006

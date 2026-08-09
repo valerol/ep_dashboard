@@ -1,0 +1,56 @@
+record_id: EP-EVENT-20260809-003
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-09T03:43:24.305+00:00"
+updated_at: "2026-08-09T03:43:24.305+00:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_WEB_CONFIRMATION:2026-08-09T03:43:24.305+00:00
+observation_event_id: EP-EVENT-20260809-003
+event_type: CYCLE_CLOSED
+action_or_event_ref: WEBSITE_CLOSE:EP-GP-20260809-002
+occurred_at: "2026-08-09T03:43:24.305+00:00"
+observed_or_received_at: "2026-08-09T03:43:24.305+00:00"
+membership:
+  primary:
+    cycle_class: GROWTH_PROJECT
+    cycle_instance_id: EP-GP-20260809-002
+    classification_basis_ref: EP-DP-DR-006
+  related: []
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-09T03:43:24.305+00:00"
+  decision_ref: EP-DP-DR-007
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: CLOSED
+  current_step_after: CYCLE_CLOSED
+  result: Проверка функицонала
+closure:
+  outcome: ACHIEVED
+  expected_result_ref: >-
+    Допустимые циклы и проекты закрываются через сайт; закрытие этого проекта зафиксировано в GitHub без дублей и
+    частичной записи
+  actual_result_or_NO_FINAL_RESULT: Проверка функицонала
+  actual_vs_expected_comparison: ACHIEVED
+  closure_basis: OPERATOR_CONFIRMATION_EVIDENCE_NOT_REQUIRED
+  closure_evidence_refs: []
+  residue_disposition: NONE
+  decided_by: OWNER_LPR
+  authority_ref: WEBSITE_CLOSE_POLICY_NOT_REQUIRED
+  decided_at: "2026-08-09T03:43:24.305+00:00"
+  closed_at: "2026-08-09T03:43:24.305+00:00"
+operator:
+  method: CHATGPT_SIWC
+  actor: xolepa83@gmail.com
+recording_sla:
+  oper_id: O4
+  sla_class: ORDINARY_OBSERVATION
+  classification_resolution_state: FINAL
+  classification_basis_ref: EP-DP-DR-007
+  sla_started_at: "2026-08-09T03:43:24.305+00:00"
+  sla_deadline_at: "2026-08-09T03:43:24.305+00:00"
+  evaluated_at: "2026-08-09T03:43:24.305+00:00"
+  actual_recorded_at: "2026-08-09T03:43:24.305+00:00"
+  recording_sla_status: MET
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
