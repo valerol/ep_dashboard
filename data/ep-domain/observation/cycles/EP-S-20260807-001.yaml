@@ -2,12 +2,15 @@ record_id: EP-S-20260807-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-07T21:37:53+10:00"
-updated_at: "2026-08-07T21:52:51+10:00"
+updated_at: "2026-08-14T21:27:05+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260807-001
   - EP-EVENT-20260807-008
   - EP-EVENT-20260807-009
+  - EP-EVENT-20260814-001
+  - EP-EVENT-20260814-002
+  - EP-EVENT-20260814-003
 
 cycle_instance_id: EP-S-20260807-001
 cycle_type_id: SALES_BATCH
@@ -38,10 +41,13 @@ plan:
   - Продолжать продажи до достижения условия закрытия партии
   - После завершения продаж свести экономику партии
 expected_result: Продажи второй партии завершены; выплаты и остаток подтверждены
-actual_result: На 2026-08-07 зафиксированы 2 заказа; по первому недельному обзору принято NO_ACTION; цикл продаж продолжается
+actual_result: На 2026-08-14 зафиксированы 3 заказа на 8700 RUB и 6108 показов за неделю; принято NO_ACTION; распроданный chi-vintagerosemandala-navy подтвержден оператором; следующая проверка назначена на 2026-08-21
 evidence_refs:
   - EP-EVENT-20260807-008
   - EP-EVENT-20260807-009
+  - EP-EVENT-20260814-001
+  - EP-EVENT-20260814-002
+  - EP-EVENT-20260814-003
 
 opened_at: null
 current_closed_at: null
@@ -55,3 +61,4 @@ instruction_version: EP-DP-v0.2.1
 observer: OWNER_LPR
 identity_rule_ref: EP-DP-DR-006
 closure_rule_ref: EP-DP-DR-007
+

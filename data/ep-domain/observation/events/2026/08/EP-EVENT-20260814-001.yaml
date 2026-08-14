@@ -1,0 +1,105 @@
+record_id: EP-EVENT-20260814-001
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-14T21:27:05+10:00"
+updated_at: "2026-08-14T21:27:05+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OZON_SALES_ANALYTICS_SCREENSHOT:WEEK_ENDING_2026-08-14
+  - OZON_SALES_ANALYTICS_CSV:ozon_sales_week_2026-08-14.csv
+  - OWNER_LPR_FACT:2026-08-14:CHI_VINTAGEROSEMANDALA_NAVY_SOLD_OUT
+
+observation_event_id: EP-EVENT-20260814-001
+event_type: STATE_OBSERVED
+action_or_event_ref: OZON_WEEKLY_SALES_REVIEW_OCCURRENCE_2
+occurred_at: "2026-08-14T21:27:05+10:00"
+observed_or_received_at: "2026-08-14T21:27:05+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260809-001
+    classification_basis_ref: WEEKLY_SALES_REVIEW_OUTPUT_DIRECTLY_OBSERVED
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: REPEATING_CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-14T21:27:05+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: OPEN
+  current_step_after: DECIDE_NEXT_STEP_OR_NO_ACTION
+  result: Недельная статистика преобразована в CSV; все строки идентифицированы по SKU; решение ожидается
+
+facts:
+  source_period: WEEK_ENDING_2026-08-14
+  source_location: OZON_SELLER/Цены и акции/Цены/Аналитика по продажам
+  source_document_storage: NOT_COPIED_TO_REPOSITORY
+  csv_filename_ref: ozon_sales_week_2026-08-14.csv
+  csv_schema:
+    - sku
+    - заказано на сумму
+    - заказано товаров
+    - показы всего
+    - конверсия
+  row_count: 32
+  rows_with_blank_sku: 0
+  aggregate:
+    ordered_amount_rub: 8700
+    ordered_items: 3
+    total_impressions: 6108
+    rows_with_orders: 3
+    aggregate_conversion: 0.0004911591
+  prior_week_comparison:
+    prior_week_ending: "2026-08-07"
+    ordered_items_change: 1
+    ordered_items_change_percent: 50.0
+    ordered_amount_change_rub: 2900
+    total_impressions_change: -4141
+    total_impressions_change_percent: -40.4
+  ordered_skus:
+    - chi-ancientpottery-navy
+    - chi-vintagerosemandala-pine
+    - chi-teardropmandala-purple
+  stock_fact:
+    sku: chi-vintagerosemandala-navy
+    current_report_presence: ABSENT
+    absence_explanation: SOLD_OUT
+    buyer_concentration_note: OWNER_REPORTED_SAME_BUYER_FROM_RUSSIAN_FAR_EAST
+  data_quality:
+    status: COMPLETE
+    limitation: NONE_FOR_REPORTED_ROWS
+    row_set_note: 32_ROWS_BECAUSE_CHI_VINTAGEROSEMANDALA_NAVY_IS_SOLD_OUT
+  decision:
+    status: PENDING
+    allowed_next_values: [NEXT_STEP_SELECTED, NO_ACTION, HOLD_FOR_DATA_REPAIR]
+
+closure:
+  outcome: null
+  expected_result_ref: null
+  actual_result_or_NO_FINAL_RESULT: null
+  actual_vs_expected_comparison: null
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
+
+recording_sla:
+  oper_id: O3
+  sla_class: ORDINARY_OBSERVATION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_PROVIDED_PROCESSED_WEEKLY_CSV_AND_SKU_EXPLANATION
+  sla_started_at: "2026-08-14T21:27:05+10:00"
+  sla_deadline_at: "2026-08-15T21:27:05+10:00"
+  evaluated_at: "2026-08-14T21:27:05+10:00"
+  actual_recorded_at: "2026-08-14T21:27:05+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
+

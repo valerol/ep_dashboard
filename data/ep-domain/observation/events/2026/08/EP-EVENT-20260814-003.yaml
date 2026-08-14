@@ -1,0 +1,64 @@
+record_id: EP-EVENT-20260814-003
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-14T21:27:05+10:00"
+updated_at: "2026-08-14T21:27:05+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260814-002
+  - OWNER_LPR_DIRECTIVE:2026-08-09:AUTOMATIC_CALENDAR_PROJECTION
+
+observation_event_id: EP-EVENT-20260814-003
+event_type: CYCLE_OPENED
+action_or_event_ref: PROTOCOL_DERIVED_NEXT_OCCURRENCE:EP-S-20260809-001
+occurred_at: "2026-08-14T21:27:05+10:00"
+observed_or_received_at: "2026-08-14T21:27:05+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260814-001
+    classification_basis_ref: WEEKLY_REVIEW_PROTOCOL_REQUIRES_NEW_OCCURRENCE
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: PARENT_SALES_BATCH_IS_OPEN
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260809-001
+      relation_basis_ref: PREVIOUS_WEEKLY_REVIEW
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-14T21:27:05+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: null
+  new_cycle_record_state: OPEN
+  current_step_after: CAPTURE_WEEKLY_OZON_SALES_ANALYTICS_SCREENSHOT
+  result: Создана третья итерация недельного обзора со сроком 2026-08-21
+
+closure:
+  outcome: null
+  expected_result_ref: EP-S-20260814-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: NO_FINAL_RESULT
+  actual_vs_expected_comparison: NOT_YET_EVALUATED
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
+
+recording_sla:
+  oper_id: O2
+  sla_class: ORDINARY_OBSERVATION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_APPROVED_AUTOMATIC_CALENDAR_MECHANISM_AND_NEXT_OCCURRENCE
+  sla_started_at: "2026-08-14T21:27:05+10:00"
+  sla_deadline_at: "2026-08-15T21:27:05+10:00"
+  evaluated_at: "2026-08-14T21:27:05+10:00"
+  actual_recorded_at: "2026-08-14T21:27:05+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
+
