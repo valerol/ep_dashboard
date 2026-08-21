@@ -1,0 +1,80 @@
+record_id: EP-EVENT-20260822-002
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-22T07:52:44+10:00"
+updated_at: "2026-08-22T07:52:44+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260822-001
+  - OWNER_LPR_DECISION:2026-08-22:NEXT_STEP_SELECTED
+
+observation_event_id: EP-EVENT-20260822-002
+event_type: CYCLE_CLOSED
+action_or_event_ref: OWNER_LPR_DECISION:2026-08-22:NEXT_STEP_SELECTED
+occurred_at: "2026-08-22T07:52:44+10:00"
+observed_or_received_at: "2026-08-22T07:52:44+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260814-001
+    classification_basis_ref: DECISION_CLOSES_WEEKLY_SALES_REVIEW
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: PARENT_SALES_BATCH_REMAINS_OPEN
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-22T07:52:44+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: CLOSED
+  current_step_after: CYCLE_CLOSED_AFTER_NEXT_STEP_SELECTED
+  result: По итогам недельного обзора принято решение провести недельный тест точечного продвижения четырёх SKU
+
+decision:
+  value: NEXT_STEP_SELECTED
+  next_step:
+    action: RUN_TARGETED_PROMOTION_TEST
+    duration: P7D
+    selected_skus:
+      - chi-himatun-sky
+      - chi-ethniclanna-mint
+      - chi-vintagerosemandala-pine
+      - chi-teardropmandala-purple
+    control_rule: OTHER_CARDS_UNCHANGED
+    evaluation: COMPARE_ORDERS_IMPRESSIONS_AND_CONVERSION_AT_NEXT_WEEKLY_REVIEW
+  data_quality_limitation_accepted: false
+  accepted_limitation: NONE
+  parent_cycle_effect: SALES_BATCH_REMAINS_OPEN
+  next_review_due_no_later_than: "2026-08-29T07:52:44+10:00"
+
+closure:
+  outcome: ACHIEVED
+  expected_result_ref: EP-S-20260814-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: Недельная статистика обработана; 32 SKU идентифицированы; 2 заказа на 5800 RUB и 4999 показов; выбран недельный тест точечного продвижения четырёх SKU
+  actual_vs_expected_comparison: Решение о следующем шаге принято; выбран NEXT_STEP_SELECTED
+  closure_basis: OWNER_LPR приняла вариант точечного продвижения четырёх SKU с подтверждёнными продажами
+  closure_evidence_refs:
+    - EP-EVENT-20260822-001
+    - OWNER_LPR_DECISION:2026-08-22:NEXT_STEP_SELECTED
+  residue_disposition: NONE; следующая недельная проверка является новой итерацией и включает оценку теста
+  decided_by: OWNER_LPR
+  authority_ref: OWNER_LPR_DIRECT_DECISION:2026-08-22:NEXT_STEP_SELECTED
+  decided_at: "2026-08-22T07:52:44+10:00"
+  closed_at: "2026-08-22T07:52:44+10:00"
+
+recording_sla:
+  oper_id: O4
+  sla_class: CLOSURE_OR_REOPEN_DECISION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_EXPLICIT_NEXT_STEP_SELECTED_DECISION
+  sla_started_at: "2026-08-22T07:52:44+10:00"
+  sla_deadline_at: "2026-08-23T07:52:44+10:00"
+  evaluated_at: "2026-08-22T07:52:44+10:00"
+  actual_recorded_at: "2026-08-22T07:52:44+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
+
