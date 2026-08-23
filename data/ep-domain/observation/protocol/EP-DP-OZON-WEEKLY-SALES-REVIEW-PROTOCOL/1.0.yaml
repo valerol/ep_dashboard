@@ -2,7 +2,7 @@ record_id: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
 record_type: PROTOCOL_VERSION
 schema_version: "1.0"
 created_at: "2026-08-07T21:37:53+10:00"
-updated_at: "2026-08-07T21:37:53+10:00"
+updated_at: "2026-08-23T11:30:00+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-006
@@ -11,6 +11,7 @@ source_refs:
   - EP-DP-DR-009
   - EP-DP-DR-061
   - OWNER_LPR_DIRECTIVE:2026-08-07:WEEKLY_OZON_SALES_REVIEW
+  - OWNER_LPR_DIRECTIVE:2026-08-23:CANONICAL_OZON_ANALYTICS_PATH
 
 protocol_or_instruction_id: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL
 version_id: "1.0"
@@ -40,7 +41,7 @@ cadence:
 
 source_capture:
   system: OZON_SELLER
-  navigation_path: Цены и акции → Цены → Аналитика по продажам
+  navigation_path: Цены и акции → Цены → Аналитика по продажам → последние 7 дней
   reporting_period: ONE_WEEK
   capture_form: SCREENSHOT
   repository_storage: FACTS_AND_STABLE_REFS_ONLY
