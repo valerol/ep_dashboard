@@ -140,6 +140,18 @@ export default function Home() {
           <div className="focus-grid"><div><p className="mono">EP-S-20260807-001 · SALES_BATCH · OCCURRENCE 2</p><h2>Продажа второй партии</h2><p className="lead">Реализовать 75 единиц через Ozon. На 7 августа зафиксированы 2 заказа; первый недельный обзор завершён с решением <b>NO_ACTION</b>.</p></div><div className="next-action"><span>Следующее обязательное действие</span><strong>Новый недельный обзор продаж</strong><p>Не позднее 14 августа 2026, пока родительский цикл остаётся открытым.</p><button onClick={() => go("cycles")}>Открыть цикл →</button></div></div>
           <Evidence ids={["EP-EVENT-20260807-008", "EP-EVENT-20260807-009"]} />
         </article>
+        <aside className="sales-path-card" aria-labelledby="sales-path-title">
+          <div>
+            <span>Шпаргалка Ozon</span>
+            <h2 id="sales-path-title">Где посмотреть статистику продаж за неделю</h2>
+          </div>
+          <ol aria-label="Путь к аналитике продаж Ozon за последние 7 дней">
+            <li>Цены и акции</li>
+            <li>Цены</li>
+            <li>Аналитика по продажам</li>
+            <li>Последние 7 дней</li>
+          </ol>
+        </aside>
         <div className="two-col">
           <section className="panel"><div className="panel-head"><span>Проектный контур</span><button onClick={() => go("projects")}>Все проекты →</button></div>{projects.map((p) => <div className="mini-row" key={p.name}><b>{p.name}</b><span>{p.type}</span><em>{p.state}</em></div>)}</section>
           <section className="panel"><div className="panel-head"><span>Последние изменения</span><button onClick={() => go("observation")}>Весь журнал →</button></div>{events.slice(0, 4).map((e) => <div className="event-mini" key={e.id}><span>{e.id}</span><b>{e.title}</b><em>{e.type}</em></div>)}</section>

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 test("renders the Elephant Pants project surface", async () => {
@@ -30,4 +31,13 @@ test("renders the Elephant Pants project surface", async () => {
   assert.match(html, /Elephant Pants/);
   assert.match(html, /Философская машина/);
   assert.match(html, /Дорожная карта/);
+});
+
+
+test("keeps the weekly Ozon sales path visible on the site", async () => {
+  const source = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+
+  assert.match(source, /Цены и акции/);
+  assert.match(source, /Аналитика по продажам/);
+  assert.match(source, /Последние 7 дней/);
 });
