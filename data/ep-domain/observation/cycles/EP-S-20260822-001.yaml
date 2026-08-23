@@ -2,12 +2,14 @@ record_id: EP-S-20260822-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-22T07:52:44+10:00"
-updated_at: "2026-08-22T07:52:44+10:00"
+updated_at: "2026-08-23T10:59:00+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260822-002
   - EP-EVENT-20260822-003
+  - EP-EVENT-20260823-001
   - OWNER_LPR_DECISION:2026-08-22:NEXT_STEP_SELECTED
+  - OWNER_LPR_ACTION:2026-08-23:ELASTIC_BOOSTING_15_PERCENT
   - OWNER_LPR_DIRECTIVE:2026-08-09:AUTOMATIC_CALENDAR_PROJECTION
 
 cycle_instance_id: EP-S-20260822-001
@@ -32,17 +34,19 @@ goal: Провести недельный тест точечного продв
 cycle_record_state: OPEN
 transition_decision: READY
 remediation_state: NONE
-current_step: RUN_TARGETED_PROMOTION_TEST
+current_step: MONITOR_ELASTIC_BOOSTING_RESULTS_UNTIL_NEXT_REVIEW
 plan:
-  - Точечно продвигать chi-himatun-sky, chi-ethniclanna-mint, chi-vintagerosemandala-pine и chi-teardropmandala-purple
+  - Применить эластичный бустинг 15% к chi-himatun-sky, chi-ethniclanna-mint, chi-vintagerosemandala-pine и chi-teardropmandala-purple
   - Остальные карточки оставить без изменений как контрольный фон
+  - Учитывать возможный дополнительный охват цветовых вариантов, объединённых с продвигаемыми SKU в общих карточках
   - Получить скриншот недельной аналитики Ozon
   - Преобразовать его в CSV с пятью каноническими колонками
   - Сравнить продажи, показы и конверсию тестовой группы с текущей неделей
   - Принять решение NEXT_STEP_SELECTED, NO_ACTION или HOLD_FOR_DATA_REPAIR
-expected_result: Получена следующая недельная статистика; оценён результат точечного продвижения четырёх SKU; принято решение о продолжении или изменении действия
+expected_result: Получена следующая недельная статистика; оценён результат эластичного бустинга 15% для четырёх SKU и возможный сопутствующий эффект на цветовые варианты; принято решение о продолжении или изменении действия
 actual_result: null
-evidence_refs: []
+evidence_refs:
+  - EP-EVENT-20260823-001
 
 schedule:
   kind: CHECK
