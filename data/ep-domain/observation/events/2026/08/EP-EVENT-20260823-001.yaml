@@ -1,0 +1,95 @@
+record_id: EP-EVENT-20260823-001
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-23T10:59:00+10:00"
+updated_at: "2026-08-23T10:59:00+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_ACTION:2026-08-23:ELASTIC_BOOSTING_15_PERCENT
+  - OZON_ELASTIC_BOOSTING_SCREENSHOT:Screenshot_2026-08-23_at_10.56.38.JPG
+
+observation_event_id: EP-EVENT-20260823-001
+event_type: STATE_OBSERVED
+action_or_event_ref: OWNER_LPR_ACTION:2026-08-23:ELASTIC_BOOSTING_15_PERCENT
+occurred_at: "2026-08-23T10:56:38+10:00"
+observed_or_received_at: "2026-08-23T10:59:00+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260822-001
+    classification_basis_ref: PROMOTION_TEST_IMPLEMENTATION_DIRECTLY_REPORTED_BY_OWNER
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-23T10:59:00+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: OPEN
+  current_step_after: MONITOR_ELASTIC_BOOSTING_RESULTS_UNTIL_NEXT_REVIEW
+  result: Для четырёх выбранных SKU установлен эластичный бустинг 15%; результат будет оценён по недельной статистике 29 августа
+
+facts:
+  promotion_mechanism:
+    selected: ELASTIC_BOOSTING
+    rate_percent: 15
+    alternative_rejected: PAY_PER_CLICK
+    rejection_reason: MINIMUM_WEEKLY_BUDGET_TOO_HIGH
+    pay_per_click_minimum_budget_rub_per_sku_per_week: 2000
+    pay_per_click_minimum_budget_rub_for_four_skus_per_week: 8000
+  promoted_skus:
+    - chi-himatun-sky
+    - chi-ethniclanna-mint
+    - chi-vintagerosemandala-pine
+    - chi-teardropmandala-purple
+  catalog_structure:
+    promoted_skus_share_product_cards_with_other_color_variants: true
+    expected_secondary_effect: OTHER_COLOR_VARIANTS_MAY_RECEIVE_ADDITIONAL_VISIBILITY_THROUGH_SHARED_CARDS
+    effect_status: HYPOTHESIS_TO_BE_EVALUATED
+  screenshot_observation:
+    sku: chi-teardropmandala-purple
+    configured_boost_percent: 15
+    displayed_search_lift_percent: 15.1
+    displayed_own_price_rub: 2655
+    displayed_price_before_discount_rub: 3300
+    displayed_minimum_price_before_adjustment_rub: 2900
+    source_document_storage: NOT_COPIED_TO_REPOSITORY
+  evaluation:
+    due_date: "2026-08-29"
+    metrics:
+      - ORDERED_ITEMS
+      - ORDERED_AMOUNT_RUB
+      - IMPRESSIONS
+      - CONVERSION
+      - OTHER_COLOR_VARIANT_ACTIVITY_IF_VISIBLE
+
+closure:
+  outcome: null
+  expected_result_ref: EP-S-20260822-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: NO_FINAL_RESULT
+  actual_vs_expected_comparison: TEST_RUNNING
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
+
+recording_sla:
+  oper_id: O3
+  sla_class: ORDINARY_OBSERVATION
+  classification_resolution_state: FINAL
+  classification_basis_ref: OWNER_LPR_REPORTED_PROMOTION_CONFIGURATION_AND_PROVIDED_SCREENSHOT
+  sla_started_at: "2026-08-23T10:59:00+10:00"
+  sla_deadline_at: "2026-08-24T10:59:00+10:00"
+  evaluated_at: "2026-08-23T10:59:00+10:00"
+  actual_recorded_at: "2026-08-23T10:59:00+10:00"
+  recording_sla_status: ON_TIME
+  late_flag: false
+  sla_rule_ref: EP-DP-DR-008
+
