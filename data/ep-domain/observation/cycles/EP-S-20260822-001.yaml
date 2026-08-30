@@ -2,14 +2,16 @@ record_id: EP-S-20260822-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-22T07:52:44+10:00"
-updated_at: "2026-08-23T10:59:00+10:00"
+updated_at: "2026-08-30T17:46:00+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260822-002
   - EP-EVENT-20260822-003
   - EP-EVENT-20260823-001
+  - EP-EVENT-20260830-001
   - OWNER_LPR_DECISION:2026-08-22:NEXT_STEP_SELECTED
   - OWNER_LPR_ACTION:2026-08-23:ELASTIC_BOOSTING_15_PERCENT
+  - OWNER_LPR_OBSERVATION:2026-08-30:OZON_WEEKLY_ANALYTICS
   - OWNER_LPR_DIRECTIVE:2026-08-09:AUTOMATIC_CALENDAR_PROJECTION
 
 cycle_instance_id: EP-S-20260822-001
@@ -31,22 +33,22 @@ domain_membership:
 contour_membership: ECONOMICS.SYSTEM
 
 goal: Провести недельный тест точечного продвижения четырёх SKU и оценить результат по следующей недельной статистике Ozon
-cycle_record_state: OPEN
-transition_decision: READY
+cycle_record_state: CLOSED
+transition_decision: NEXT_STEP_SELECTED
 remediation_state: NONE
-current_step: MONITOR_ELASTIC_BOOSTING_RESULTS_UNTIL_NEXT_REVIEW
+current_step: START_PRODUCT_CARD_CONVERSION_TEST
 plan:
   - Применить эластичный бустинг 15% к chi-himatun-sky, chi-ethniclanna-mint, chi-vintagerosemandala-pine и chi-teardropmandala-purple
   - Остальные карточки оставить без изменений как контрольный фон
   - Учитывать возможный дополнительный охват цветовых вариантов, объединённых с продвигаемыми SKU в общих карточках
-  - Получить скриншот недельной аналитики Ozon
-  - Преобразовать его в CSV с пятью каноническими колонками
-  - Сравнить продажи, показы и конверсию тестовой группы с текущей неделей
-  - Принять решение NEXT_STEP_SELECTED, NO_ACTION или HOLD_FOR_DATA_REPAIR
+  - Получить недельную аналитику Ozon
+  - Сравнить продажи, показы и конверсию тестовой группы с предыдущей неделей и остальным ассортиментом
+  - Принять решение о следующем эксперименте
 expected_result: Получена следующая недельная статистика; оценён результат эластичного бустинга 15% для четырёх SKU и возможный сопутствующий эффект на цветовые варианты; принято решение о продолжении или изменении действия
-actual_result: null
+actual_result: За последние 7 дней зафиксирован 1 заказ на 2 900 ₽ при 4 076 показах. Продвигаемые четыре SKU получили суммарно 898 показов против примерно 894 на предыдущей неделе, то есть сохранили трафик на фоне общего падения показов примерно на 10%. Остальные SKU снизились примерно на 13%. Ни один продвигаемый SKU не дал заказа; единственная продажа пришлась на chi-ancientpottery-black. Эластичный бустинг показал измеримый эффект удержания видимости, но не дал конверсии в продажи.
 evidence_refs:
   - EP-EVENT-20260823-001
+  - EP-EVENT-20260830-001
 
 schedule:
   kind: CHECK
@@ -60,10 +62,11 @@ schedule:
   projection_protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
 
 opened_at: "2026-08-22T07:52:44+10:00"
-current_closed_at: null
-current_closure_outcome: NONE
-current_closure_event_ref: null
-closure_event_refs: []
+current_closed_at: "2026-08-30T17:46:00+10:00"
+current_closure_outcome: ACHIEVED
+current_closure_event_ref: EP-EVENT-20260830-001
+closure_event_refs:
+  - EP-EVENT-20260830-001
 reopen_event_refs: []
 post_close_evidence_refs: []
 
@@ -72,4 +75,3 @@ observer: OWNER_LPR
 identity_rule_ref: EP-DP-DR-006
 closure_rule_ref: EP-DP-DR-007
 protocol_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
-
