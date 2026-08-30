@@ -1,0 +1,72 @@
+record_id: EP-EVENT-20260830-002
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-30T18:00:00+10:00"
+updated_at: "2026-08-30T18:00:00+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_DECISION:2026-08-30:TEST_PRODUCT_CARD_IMAGE
+  - OWNER_LPR_APPROVED_ASSET:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_MAIN_IMAGE
+
+observation_event_id: EP-EVENT-20260830-002
+event_type: STATE_OBSERVED
+action_or_event_ref: OWNER_LPR_DECISION:2026-08-30:TEST_PRODUCT_CARD_IMAGE
+occurred_at: "2026-08-30T18:00:00+10:00"
+observed_or_received_at: "2026-08-30T18:00:00+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260830-001
+    classification_basis_ref: OWNER_SELECTED_NEXT_CONVERSION_EXPERIMENT
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-30T18:00:00+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: NOT_CREATED
+  new_cycle_record_state: OPEN
+  current_step_after: UPLOAD_EXPERIMENTAL_MAIN_IMAGE_AND_MONITOR_7_DAYS
+  result: Выбран следующий тест конверсии — новая главная карточка для chi-vintagerosemandala-pine при неизменной контрольной карточке chi-ethniclanna-mint
+
+facts:
+  experiment_type: PRODUCT_CARD_MAIN_IMAGE
+  experimental_sku: chi-vintagerosemandala-pine
+  control_sku: chi-ethniclanna-mint
+  promotion_state:
+    elastic_boosting_percent: 15
+    keep_existing_boosting_unchanged: true
+  experimental_asset:
+    status: PREPARED_NOT_YET_CONFIRMED_UPLOADED_TO_OZON
+    format: PORTRAIT_3_TO_4
+    claims:
+      - 100% вискоза
+      - Лёгкая ткань
+      - Глубокий карман
+      - Единый размер 42–46
+      - Для дома, йоги и пляжа
+    product_fidelity:
+      visible_pockets: 1
+      colorway: PINE_GREEN
+  hypothesis: При неизменном продвижении новая главная карточка повысит конверсию chi-vintagerosemandala-pine относительно его предыдущей недели и контрольного chi-ethniclanna-mint
+  evaluation_metrics:
+    - IMPRESSIONS
+    - ORDERED_ITEMS
+    - CONVERSION_FROM_IMPRESSION_TO_ORDER
+
+closure:
+  outcome: null
+  expected_result_ref: EP-S-20260830-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: NO_FINAL_RESULT
+  actual_vs_expected_comparison: TEST_PREPARED
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
