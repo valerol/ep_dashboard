@@ -15,7 +15,11 @@ const navigation: { id: Exclude<View, "service">; index: string; label: string }
 ];
 
 const cycles = [
-  { id: "EP-S-20260807-001", type: "SALES_BATCH", title: "Продажа второй партии", cls: "SALES", occurrence: 2, state: "OPEN", decision: "READY", outcome: "NONE", parent: null, result: "На 7 августа зафиксированы 2 заказа. Продажи продолжаются.", step: "Продолжать продажи без изменения действий до следующего недельного обзора.", evidencePolicy: "REQUIRED", evidence: ["EP-EVENT-20260807-008", "EP-EVENT-20260807-009"] },
+  { id: "EP-S-20260830-001", type: "OZON_WEEKLY_SALES_REVIEW", title: "Тест главного изображения Ozon", cls: "SALES", occurrence: 5, state: "OPEN", decision: "READY", outcome: "NONE", parent: "EP-S-20260807-001", result: "Новая главная карточка chi-vintagerosemandala-pine размещена на Ozon. База теста: 350 показов / 0 заказов; контроль chi-ethniclanna-mint — 290 / 0.", step: "Сохранять бустинг 15% и остальные факторы без изменений; наблюдать до недельной проверки 6 сентября.", evidencePolicy: "REQUIRED", evidence: ["EP-EVENT-20260830-002", "EP-EVENT-20260830-003"] },
+  { id: "EP-S-20260822-001", type: "OZON_WEEKLY_SALES_REVIEW", title: "Тест эластичного бустинга", cls: "SALES", occurrence: 4, state: "CLOSED", decision: "NEXT_STEP_SELECTED", outcome: "ACHIEVED", parent: "EP-S-20260807-001", result: "1 заказ на 2 900 ₽ при 4 076 показах. Продвигаемые 4 SKU: 898 показов против ≈894 неделей ранее; остальной ассортимент снизился примерно на 13%. Заказов в тестовой группе не было.", step: "Тест закрыт. Следующий эксперимент — конверсия главной карточки chi-vintagerosemandala-pine.", evidence: ["EP-EVENT-20260830-001"] },
+  { id: "EP-S-20260814-001", type: "OZON_WEEKLY_SALES_REVIEW", title: "Недельный обзор продаж Ozon", cls: "SALES", occurrence: 3, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: "EP-S-20260807-001", result: "32 SKU, 2 заказа на 5 800 ₽ и 4 999 показов; выбран недельный тест точечного продвижения четырёх SKU.", step: "Цикл закрыт после выбора следующего теста.", evidence: ["EP-EVENT-20260822-001", "EP-EVENT-20260822-002"] },
+  { id: "EP-S-20260809-001", type: "OZON_WEEKLY_SALES_REVIEW", title: "Недельный обзор продаж Ozon", cls: "SALES", occurrence: 2, state: "CLOSED", decision: "NO_ACTION", outcome: "ACHIEVED", parent: "EP-S-20260807-001", result: "32 строки, 3 заказа на 8 700 ₽ и 6 108 показов; принято решение NO_ACTION.", step: "Цикл закрыт. Следующий обзор — новая итерация.", evidence: ["EP-EVENT-20260814-001", "EP-EVENT-20260814-002"] },
+  { id: "EP-S-20260807-001", type: "SALES_BATCH", title: "Продажа второй партии", cls: "SALES", occurrence: 2, state: "OPEN", decision: "READY", outcome: "NONE", parent: null, result: "Родительский цикл второй партии остаётся открыт; продажи и недельные эксперименты продолжаются.", step: "Продолжать недельные обзоры и эксперименты до достижения критерия закрытия партии.", evidencePolicy: "REQUIRED", evidence: ["EP-EVENT-20260830-001", "EP-EVENT-20260830-003"] },
   { id: "EP-S-20260807-002", type: "OZON_WEEKLY_SALES_REVIEW", title: "Недельный обзор продаж Ozon", cls: "SALES", occurrence: 1, state: "CLOSED", decision: "NO_ACTION", outcome: "ACHIEVED", parent: "EP-S-20260807-001", result: "CSV создан: 33 строки, 2 заказа на 5 800 ₽, 10 249 показов. Отсутствие SKU принято как ограничение данных.", step: "Цикл закрыт. Следующий обзор — новая итерация.", evidence: ["EP-EVENT-20260807-008", "EP-EVENT-20260807-009"] },
   { id: "EP-LI-20260807-001", type: "LOGISTICS_BATCH", title: "Логистика второй партии", cls: "LOGISTIC_IMPORT", occurrence: 2, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: null, result: "75 единиц доставлены в Россию, переданы на Ozon и полностью приняты.", step: "Цикл закрыт после закрытия обязательных дочерних циклов.", evidence: ["EP-EVENT-20260807-004", "EP-EVENT-20260807-005", "EP-EVENT-20260807-006", "EP-EVENT-20260807-007"] },
   { id: "EP-LI-20260807-002", type: "INTERNATIONAL_DELIVERY", title: "Международная доставка", cls: "LOGISTIC_IMPORT", occurrence: 2, state: "CLOSED", decision: "READY", outcome: "ACHIEVED", parent: "EP-LI-20260807-001", result: "75 единиц второй партии доставлены в российский логистический контур.", step: "Закрыто по последующему подтверждённому движению партии.", evidence: ["EP-EVENT-20260807-001", "EP-EVENT-20260807-005"] },
@@ -25,15 +29,18 @@ const cycles = [
 ];
 
 const events = [
-  { id: "EP-EVENT-20260807-009", type: "CYCLE_CLOSED", title: "Недельный обзор продаж закрыт", detail: "Принято решение NO_ACTION; родительский цикл продаж остаётся OPEN.", cycle: "EP-S-20260807-002", evidence: "OWNER_LPR_DECISION:2026-08-07:NO_ACTION" },
-  { id: "EP-EVENT-20260807-008", type: "STATE_OBSERVED", title: "Статистика Ozon преобразована в CSV", detail: "33 строки; 2 заказа; 5 800 ₽; 10 249 показов. Идентификация товаров ограничена отсутствующими SKU.", cycle: "EP-S-20260807-002", evidence: "OZON_SALES_ANALYTICS_CSV:ozon_sales_week_2026-08-07.csv" },
-  { id: "EP-EVENT-20260807-007", type: "CYCLE_CLOSED", title: "Логистика второй партии закрыта", detail: "Международная доставка и передача на Ozon завершены с outcome ACHIEVED.", cycle: "EP-LI-20260807-001", evidence: "EP-EVENT-20260807-004..006" },
-  { id: "EP-EVENT-20260807-006", type: "STATE_OBSERVED", title: "Зафиксирована иерархия логистических циклов", detail: "Передача на Ozon связана с родительским циклом логистики партии.", cycle: "EP-LR-20260807-001", evidence: "PARENT_RELATION_RECORDED:SECOND_OZON_TRANSFER" },
-  { id: "EP-EVENT-20260807-005", type: "CYCLE_CLOSED", title: "Международная доставка закрыта", detail: "75 единиц доставлены в российский логистический контур.", cycle: "EP-LI-20260807-002", evidence: "EP-EVENT-20260807-001,004" },
-  { id: "EP-EVENT-20260807-004", type: "CYCLE_CLOSED", title: "Передача второй партии на Ozon завершена", detail: "Оба дочерних цикла — отгрузка и приёмка — закрыты.", cycle: "EP-LR-20260807-001", evidence: "EP-EVENT-20260807-001..003" },
-  { id: "EP-EVENT-20260807-003", type: "CYCLE_CLOSED", title: "Отгрузка 75 единиц подтверждена", detail: "43 единицы направлены в Москву, 32 — в Санкт-Петербург.", cycle: "EP-LR-20260807-002", evidence: "EP-EVENT-20260807-001" },
-  { id: "EP-EVENT-20260807-002", type: "CYCLE_CLOSED", title: "Полная приёмка подтверждена", detail: "75 единиц приняты, после двух продаж на складах остаются 73 единицы новой партии.", cycle: "EP-LR-20260807-003", evidence: "EP-EVENT-20260807-001" },
-  { id: "EP-EVENT-20260807-001", type: "STATE_OBSERVED", title: "Поставка и остатки сверены", detail: "Баланс новой партии подтверждён: 74 на складах − 1 старый остаток + 2 продажи = 75.", cycle: "EP-LR-20260807-003", evidence: "OZON_ACCEPTANCE_REPORT:SUPPLY-2000059753725" },
+  { id: "EP-EVENT-20260830-003", date: "30.08.2026", type: "STATE_OBSERVED", title: "Экспериментальная карточка размещена на Ozon", detail: "Новая главная карточка chi-vintagerosemandala-pine опубликована. Эксперимент перешёл из подготовки в недельное наблюдение; контроль — chi-ethniclanna-mint.", cycle: "EP-S-20260830-001", evidence: "OWNER_LPR_ACTION:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_IMAGE_UPLOADED_TO_OZON" },
+  { id: "EP-EVENT-20260830-002", date: "30.08.2026", type: "STATE_OBSERVED", title: "Выбран тест новой главной карточки", detail: "Экспериментальный SKU — chi-vintagerosemandala-pine; контроль — chi-ethniclanna-mint. Бустинг 15% сохраняется неизменным.", cycle: "EP-S-20260830-001", evidence: "OWNER_LPR_DECISION:2026-08-30:TEST_PRODUCT_CARD_IMAGE" },
+  { id: "EP-EVENT-20260830-001", date: "30.08.2026", type: "CYCLE_CLOSED", title: "Тест эластичного бустинга завершён", detail: "Продвигаемые SKU сохранили суммарные показы на уровне предыдущей недели на фоне общего падения трафика, но не дали заказов; выбран следующий тест конверсии.", cycle: "EP-S-20260822-001", evidence: "OWNER_LPR_OBSERVATION:2026-08-30:OZON_WEEKLY_ANALYTICS" },
+  { id: "EP-EVENT-20260807-009", date: "07.08.2026", type: "CYCLE_CLOSED", title: "Недельный обзор продаж закрыт", detail: "Принято решение NO_ACTION; родительский цикл продаж остаётся OPEN.", cycle: "EP-S-20260807-002", evidence: "OWNER_LPR_DECISION:2026-08-07:NO_ACTION" },
+  { id: "EP-EVENT-20260807-008", date: "07.08.2026", type: "STATE_OBSERVED", title: "Статистика Ozon преобразована в CSV", detail: "33 строки; 2 заказа; 5 800 ₽; 10 249 показов. Идентификация товаров ограничена отсутствующими SKU.", cycle: "EP-S-20260807-002", evidence: "OZON_SALES_ANALYTICS_CSV:ozon_sales_week_2026-08-07.csv" },
+  { id: "EP-EVENT-20260807-007", date: "07.08.2026", type: "CYCLE_CLOSED", title: "Логистика второй партии закрыта", detail: "Международная доставка и передача на Ozon завершены с outcome ACHIEVED.", cycle: "EP-LI-20260807-001", evidence: "EP-EVENT-20260807-004..006" },
+  { id: "EP-EVENT-20260807-006", date: "07.08.2026", type: "STATE_OBSERVED", title: "Зафиксирована иерархия логистических циклов", detail: "Передача на Ozon связана с родительским циклом логистики партии.", cycle: "EP-LR-20260807-001", evidence: "PARENT_RELATION_RECORDED:SECOND_OZON_TRANSFER" },
+  { id: "EP-EVENT-20260807-005", date: "07.08.2026", type: "CYCLE_CLOSED", title: "Международная доставка закрыта", detail: "75 единиц доставлены в российский логистический контур.", cycle: "EP-LI-20260807-002", evidence: "EP-EVENT-20260807-001,004" },
+  { id: "EP-EVENT-20260807-004", date: "07.08.2026", type: "CYCLE_CLOSED", title: "Передача второй партии на Ozon завершена", detail: "Оба дочерних цикла — отгрузка и приёмка — закрыты.", cycle: "EP-LR-20260807-001", evidence: "EP-EVENT-20260807-001..003" },
+  { id: "EP-EVENT-20260807-003", date: "07.08.2026", type: "CYCLE_CLOSED", title: "Отгрузка 75 единиц подтверждена", detail: "43 единицы направлены в Москву, 32 — в Санкт-Петербург.", cycle: "EP-LR-20260807-002", evidence: "EP-EVENT-20260807-001" },
+  { id: "EP-EVENT-20260807-002", date: "07.08.2026", type: "CYCLE_CLOSED", title: "Полная приёмка подтверждена", detail: "75 единиц приняты, после двух продаж на складах остаются 73 единицы новой партии.", cycle: "EP-LR-20260807-003", evidence: "EP-EVENT-20260807-001" },
+  { id: "EP-EVENT-20260807-001", date: "07.08.2026", type: "STATE_OBSERVED", title: "Поставка и остатки сверены", detail: "Баланс новой партии подтверждён: 74 на складах − 1 старый остаток + 2 продажи = 75.", cycle: "EP-LR-20260807-003", evidence: "OZON_ACCEPTANCE_REPORT:SUPPLY-2000059753725" },
 ];
 
 const operGroups = [
@@ -126,19 +133,19 @@ export default function Home() {
     <header className="masthead">
       <button className="brand" onClick={() => go("state")} aria-label="На главную Elephant Pants"><span>EP</span><strong>Elephant Pants<small>бизнес-проект и философская машина</small></strong></button>
       <nav aria-label="Основные разделы">{navigation.map((item) => <button key={item.id} className={view === item.id ? "active" : ""} onClick={() => go(item.id)}><i>{item.index}</i>{item.label}</button>)}</nav>
-      <div className="version">DATA · 08.08.2026</div>
+      <div className="version">DATA · 30.08.2026</div>
     </header>
 
     <div className="page-shell">
       {view === "state" && <section>
         <SectionHead index="01" kicker="SYSTEM STATE" title="Состояние системы" copy="Текущее операционное состояние вычисляется из реестра циклов и событий Observation. Ручного параллельного статуса больше нет." />
         <div className="status-strip">
-          <div><span>Система</span><strong>ACTIVE</strong></div><div><span>Физиология</span><strong>INTERNAL_QA</strong></div><div><span>Release</span><strong>NOT_RELEASED</strong></div><div><span>Циклы</span><strong>1 OPEN · 6 CLOSED</strong></div>
+          <div><span>Система</span><strong>ACTIVE</strong></div><div><span>Физиология</span><strong>INTERNAL_QA</strong></div><div><span>Release</span><strong>NOT_RELEASED</strong></div><div><span>Циклы в интерфейсе</span><strong>2 OPEN · 9 CLOSED</strong></div>
         </div>
         <article className="focus-card">
-          <div className="focus-kicker"><span>Текущий цикл</span><em>OPEN / READY</em></div>
-          <div className="focus-grid"><div><p className="mono">EP-S-20260807-001 · SALES_BATCH · OCCURRENCE 2</p><h2>Продажа второй партии</h2><p className="lead">Реализовать 75 единиц через Ozon. На 7 августа зафиксированы 2 заказа; первый недельный обзор завершён с решением <b>NO_ACTION</b>.</p></div><div className="next-action"><span>Следующее обязательное действие</span><strong>Новый недельный обзор продаж</strong><p>Не позднее 14 августа 2026, пока родительский цикл остаётся открытым.</p><button onClick={() => go("cycles")}>Открыть цикл →</button></div></div>
-          <Evidence ids={["EP-EVENT-20260807-008", "EP-EVENT-20260807-009"]} />
+          <div className="focus-kicker"><span>Текущий эксперимент</span><em>OPEN / RUNNING</em></div>
+          <div className="focus-grid"><div><p className="mono">EP-S-20260830-001 · OZON_WEEKLY_SALES_REVIEW · OCCURRENCE 5</p><h2>Тест главного изображения chi-vintagerosemandala-pine</h2><p className="lead">Новая карточка уже размещена на Ozon. Экспериментальный SKU получил на базовой неделе 350 показов и 0 заказов; контрольный <b>chi-ethniclanna-mint</b> — 290 показов и 0 заказов.</p></div><div className="next-action"><span>Следующее обязательное действие</span><strong>Не менять остальные факторы</strong><p>Сохранять эластичный бустинг 15% и проверить показы, заказы и конверсию 6 сентября.</p><button onClick={() => go("cycles")}>Открыть цикл →</button></div></div>
+          <Evidence ids={["EP-EVENT-20260830-002", "EP-EVENT-20260830-003"]} />
         </article>
         <aside className="sales-path-card" aria-labelledby="sales-path-title">
           <div>
@@ -159,7 +166,7 @@ export default function Home() {
       </section>}
 
       {view === "cycles" && <section>
-        <SectionHead index="02" kicker="CYCLE REGISTER" title="Циклы" copy="Семь зарегистрированных экземпляров. Иерархия, состояние и решение берутся из CYCLE_RECORD; протокол определяет повторяемое поведение." />
+        <SectionHead index="02" kicker="CYCLE REGISTER" title="Циклы" copy="Одиннадцать операционных экземпляров отображаются в интерфейсе; два открыты. Иерархия, состояние и решение берутся из CYCLE_RECORD." />
         <section className="closure-console">
           <div><span>Закрытие без свидетельств</span><h2>Доступные циклы</h2><p>Показываются только OPEN-циклы с явной политикой NOT_REQUIRED и без открытых подциклов.</p></div>
           <div className="closable-list">
@@ -171,14 +178,14 @@ export default function Home() {
             {closableCycles.map((cycle) => <article key={cycle.id}><div><span>{cycle.id} · {cycle.type}</span><strong>{cycle.title}</strong></div><button onClick={() => { setClosingCycle(cycle); setClosureStatus("idle"); setClosureMessage(""); }}>Закрыть</button></article>)}
           </div>
         </section>
-        <div className="filter-row" role="group" aria-label="Фильтр циклов">{(["ALL", "OPEN", "CLOSED"] as const).map((f) => <button key={f} className={cycleFilter === f ? "selected" : ""} onClick={() => setCycleFilter(f)}>{f === "ALL" ? "Все · 7" : f === "OPEN" ? "Открытые · 1" : "Закрытые · 6"}</button>)}</div>
+        <div className="filter-row" role="group" aria-label="Фильтр циклов">{(["ALL", "OPEN", "CLOSED"] as const).map((f) => <button key={f} className={cycleFilter === f ? "selected" : ""} onClick={() => setCycleFilter(f)}>{f === "ALL" ? "Все · 11" : f === "OPEN" ? "Открытые · 2" : "Закрытые · 9"}</button>)}</div>
         <div className="cycle-list">{visibleCycles.map((cycle) => <article className={`cycle-card depth-${cycle.parent ? 1 : 0}`} key={cycle.id}>
           <div className="cycle-line"><span className={`state ${cycle.state.toLowerCase()}`}>{cycle.state}</span><span>{cycle.cls}</span><span>occurrence {cycle.occurrence}</span><span>{cycle.outcome}</span></div>
           <div className="cycle-body"><div><p className="mono">{cycle.id} · {cycle.type}</p><h2>{cycle.title}</h2>{cycle.parent && <p className="parent">↳ parent: {cycle.parent}</p>}</div><div><h3>Фактический результат</h3><p>{cycle.result}</p><h3>Текущий шаг</h3><p>{cycle.step}</p></div></div>
           <div className="decision">transition_decision: <b>{cycle.decision}</b></div><Evidence ids={cycle.evidence} />
           {cycle.state === "OPEN" && <div className="cycle-close-row"><span>Закрытие на сайте: {cycle.evidencePolicy === "NOT_REQUIRED" ? "доступно в панели выше" : "требуется свидетельство"}.</span></div>}
         </article>)}</div>
-        <section className="protocol-band"><div><span>Активные протоколы</span><h2>Повторяемая процедура вместо ручного статуса</h2></div><div><b>EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0</b><p>Регистрация и закрытие логистического дерева.</p><b>EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0</b><p>Скриншот → CSV → проверка → решение → closure event.</p></div></section>
+        <section className="protocol-band"><div><span>Активные протоколы</span><h2>Повторяемая процедура вместо ручного статуса</h2></div><div><b>EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0</b><p>Регистрация и закрытие логистического дерева.</p><b>EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0</b><p>Скриншот → проверка → эксперимент → решение → closure event.</p></div></section>
       </section>}
 
       {view === "physiology" && <section>
@@ -204,14 +211,14 @@ export default function Home() {
 
       {view === "observation" && <section>
         <SectionHead index="05" kicker="OBSERVATION LOG" title="Наблюдение" copy="Append-only журнал событий. Публичная проекция показывает описание и идентификатор evidence, но не раскрывает исходные файлы." />
-        <div className="filter-row" role="group" aria-label="Фильтр событий">{(["ALL", "STATE_OBSERVED", "CYCLE_CLOSED"] as const).map((f) => <button key={f} className={eventFilter === f ? "selected" : ""} onClick={() => setEventFilter(f)}>{f === "ALL" ? "Все · 9" : f}</button>)}</div>
-        <div className="timeline">{visibleEvents.map((e) => <article key={e.id}><div className="time-mark"><span>07.08.2026</span><i /></div><div><div className="event-meta"><span>{e.type}</span><em>{e.cycle}</em></div><p className="mono">{e.id}</p><h2>{e.title}</h2><p>{e.detail}</p><div className="evidence-description"><span>Evidence</span><b>{e.evidence}</b></div></div></article>)}</div>
+        <div className="filter-row" role="group" aria-label="Фильтр событий">{(["ALL", "STATE_OBSERVED", "CYCLE_CLOSED"] as const).map((f) => <button key={f} className={eventFilter === f ? "selected" : ""} onClick={() => setEventFilter(f)}>{f === "ALL" ? `Все · ${events.length}` : f}</button>)}</div>
+        <div className="timeline">{visibleEvents.map((e) => <article key={e.id}><div className="time-mark"><span>{e.date}</span><i /></div><div><div className="event-meta"><span>{e.type}</span><em>{e.cycle}</em></div><p className="mono">{e.id}</p><h2>{e.title}</h2><p>{e.detail}</p><div className="evidence-description"><span>Evidence</span><b>{e.evidence}</b></div></div></article>)}</div>
       </section>}
 
       {view === "strategy" && <section>
         <SectionHead index="06" kicker="STRATEGY" title="Стратегия" copy="Дорожная карта показывает направление и условия перехода. Текущее операционное состояние остаётся в реестре циклов." />
         <div className="roadmap">
-          <article className="current"><span>Сейчас</span><div><em>ACTIVE HORIZON</em><h2>Повторный ассортиментный эксперимент</h2><p>Вторая партия из 75 единиц полностью принята Ozon. Цикл продаж открыт; данные проверяются еженедельно.</p><ul><li>Подтвердить устойчивый спрос</li><li>Зафиксировать фактическую экономику партии</li><li>Стабилизировать маркировку и compliance-контур</li></ul></div></article>
+          <article className="current"><span>Сейчас</span><div><em>ACTIVE HORIZON</em><h2>Оптимизация конверсии второй партии</h2><p>После теста эластичного бустинга начат тест главного изображения chi-vintagerosemandala-pine. Продвижение сохраняется неизменным, чтобы изолировать влияние карточки.</p><ul><li>Проверить результат 6 сентября</li><li>Сравнить экспериментальный SKU с контролем chi-ethniclanna-mint</li><li>Сохранять цену и остальные элементы карточки без изменений</li></ul></div></article>
           <article><span>До 6 месяцев</span><div><em>NEXT</em><h2>Рабочие правила повторения</h2><p>Подтвердить цену, ассортимент, маркировку, упаковку и регулярную логистику на сопоставимых данных.</p></div></article>
           <article><span>Около 2 лет</span><div><em>DIRECTION</em><h2>Каналы и устойчивая поставка</h2><p>Развивать каналы продаж и устойчивость поставки после восстановления детального плана и критериев перехода.</p></div></article>
           <article><span>2031–2033</span><div><em>LONG-TERM</em><h2>Федеральная многоканальная система</h2><p>Маркетплейсы, DTC, опт и региональные партнёры: 20 000+ пар в год, 100+ оптовых клиентов и устойчивый бренд категории.</p></div></article>
@@ -220,8 +227,8 @@ export default function Home() {
 
       {view === "service" && <section>
         <SectionHead index="00" kicker="SERVICE" title="Служебный раздел" copy="Метаданные публичной проекции, история версий и состояние связи с источником истины." />
-        <div className="service-grid"><article><span>Текущая версия сайта</span><strong>18</strong><p>Новая информационная архитектура на основе data/ep-domain.</p></article><article><span>Доменная физиология</span><strong>EP-DP v0.2.1</strong><p>INTERNAL_QA / NOT_RELEASED</p></article><article><span>Данные обновлены</span><strong>8 августа 2026</strong><p>Последний доменный snapshot: 7 августа 2026.</p></article><article><span>Синхронизация</span><strong>IN SYNC</strong><p>Сайт использует канонические records как единственный источник текущего состояния.</p></article></div>
-        <div className="history"><h2>История сайта</h2><article><time>08.08.2026</time><div><b>v18 · Доменная миграция</b><p>Состояние, циклы, физиология, проекты и Observation заменили старые ручные страницы и статусы. Страницы «органов» удалены.</p></div></article><article><time>05–07.08.2026</time><div><b>v13–17 · Философская машина</b><p>Добавлена и отредактирована упрощённая схема регулярного товарного оборота.</p></div></article><article><time>22.07.2026</time><div><b>Первая публичная структура</b><p>Дорожная карта, текущий шаг, новости и страницы функциональных областей.</p></div></article></div>
+        <div className="service-grid"><article><span>Текущая версия сайта</span><strong>19</strong><p>Актуализированы недельные sales-циклы и текущий эксперимент карточки.</p></article><article><span>Доменная физиология</span><strong>EP-DP v0.2.1</strong><p>INTERNAL_QA / NOT_RELEASED</p></article><article><span>Данные обновлены</span><strong>30 августа 2026</strong><p>Текущий sales-тест запущен на Ozon.</p></article><article><span>Синхронизация</span><strong>IN SYNC</strong><p>Интерфейс актуализирован по каноническим records текущего sales-контура.</p></article></div>
+        <div className="history"><h2>История сайта</h2><article><time>30.08.2026</time><div><b>v19 · Sales experiments</b><p>Добавлены результат теста эластичного бустинга и текущий тест новой главной карточки chi-vintagerosemandala-pine.</p></div></article><article><time>08.08.2026</time><div><b>v18 · Доменная миграция</b><p>Состояние, циклы, физиология, проекты и Observation заменили старые ручные страницы и статусы. Страницы «органов» удалены.</p></div></article><article><time>05–07.08.2026</time><div><b>v13–17 · Философская машина</b><p>Добавлена и отредактирована упрощённая схема регулярного товарного оборота.</p></div></article><article><time>22.07.2026</time><div><b>Первая публичная структура</b><p>Дорожная карта, текущий шаг, новости и страницы функциональных областей.</p></div></article></div>
         <a className="repo-link" href="https://github.com/valerol/ep_dashboard" target="_blank" rel="noreferrer">Открыть valerol/ep_dashboard →</a>
       </section>}
     </div>
