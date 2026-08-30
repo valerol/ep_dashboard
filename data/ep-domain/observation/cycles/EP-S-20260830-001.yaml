@@ -2,13 +2,14 @@ record_id: EP-S-20260830-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-30T18:00:00+10:00"
-updated_at: "2026-08-30T18:00:00+10:00"
+updated_at: "2026-08-30T18:18:00+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260830-001
   - EP-EVENT-20260830-002
   - OWNER_LPR_DECISION:2026-08-30:TEST_PRODUCT_CARD_IMAGE
   - OWNER_LPR_APPROVED_ASSET:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_MAIN_IMAGE
+  - OWNER_LPR_ACTION:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_IMAGE_UPLOADED_TO_OZON
 
 cycle_instance_id: EP-S-20260830-001
 cycle_type_id: OZON_WEEKLY_SALES_REVIEW
@@ -32,12 +33,12 @@ goal: Проверить, повышает ли новая главная кар
 cycle_record_state: OPEN
 transition_decision: READY
 remediation_state: NONE
-current_step: UPLOAD_EXPERIMENTAL_MAIN_IMAGE_AND_MONITOR_7_DAYS
+current_step: MONITOR_EXPERIMENTAL_MAIN_IMAGE_FOR_7_DAYS
 plan:
   - Использовать chi-vintagerosemandala-pine как экспериментальный SKU
   - Использовать chi-ethniclanna-mint как контрольный SKU без изменений карточки
   - Сохранить текущий эластичный бустинг 15% на продвигаемых SKU без изменения рекламного фактора
-  - Заменить главное изображение chi-vintagerosemandala-pine на подготовленную вертикальную карточку 3:4
+  - Использовать новое главное изображение chi-vintagerosemandala-pine в формате 3:4
   - Не менять цену, описание и остальные существенные элементы экспериментальной карточки в течение теста
   - Через 7 дней снять аналитику Ozon и сравнить показы, заказы и конверсию экспериментального SKU с его предыдущей неделей и контрольным SKU
 expected_result: При сопоставимом рекламном воздействии изменение главного изображения даст измеримый рост конверсии chi-vintagerosemandala-pine либо покажет отсутствие такого эффекта
@@ -55,7 +56,9 @@ experiment:
     control_impressions_last_week: 290
     control_orders_last_week: 0
   asset:
-    status: PREPARED_NOT_YET_CONFIRMED_UPLOADED_TO_OZON
+    status: UPLOADED_TO_OZON
+    uploaded_at: "2026-08-30"
+    upload_confirmation_source: OWNER_LPR_DIRECT_REPORT
     format: "3:4"
     visible_pockets: 1
     size_claim: "42–46"
