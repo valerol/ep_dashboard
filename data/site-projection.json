@@ -1,0 +1,1392 @@
+{
+  "generatedAt": "2026-08-30T18:18:00+10:00",
+  "dataDate": "2026-08-30",
+  "counts": {
+    "total": 13,
+    "open": 2,
+    "closed": 11
+  },
+  "currentCycle": {
+    "id": "EP-S-20260830-001",
+    "type": "OZON_WEEKLY_SALES_REVIEW",
+    "title": "Еженедельная проверка аналитики продаж Ozon",
+    "goal": "Проверить, повышает ли новая главная карточка конверсию chi-vintagerosemandala-pine при сохранении текущего эластичного бустинга",
+    "cls": "SALES",
+    "occurrence": 5,
+    "state": "OPEN",
+    "decision": "READY",
+    "outcome": "NONE",
+    "parent": "EP-S-20260807-001",
+    "result": "Новая главная карточка chi-vintagerosemandala-pine размещена на Ozon; эксперимент перешёл из подготовки в наблюдение",
+    "step": "MONITOR_EXPERIMENTAL_MAIN_IMAGE_FOR_7_DAYS",
+    "plan": [
+      "Использовать chi-vintagerosemandala-pine как экспериментальный SKU",
+      "Использовать chi-ethniclanna-mint как контрольный SKU без изменений карточки",
+      "Сохранить текущий эластичный бустинг 15% на продвигаемых SKU без изменения рекламного фактора",
+      "Использовать новое главное изображение chi-vintagerosemandala-pine в формате 3:4",
+      "Не менять цену, описание и остальные существенные элементы экспериментальной карточки в течение теста",
+      "Через 7 дней снять аналитику Ozon и сравнить показы, заказы и конверсию экспериментального SKU с его предыдущей неделей и контрольным SKU"
+    ],
+    "evidencePolicy": "REQUIRED",
+    "evidence": [
+      "EP-EVENT-20260830-002",
+      "EP-EVENT-20260830-003"
+    ],
+    "schedule": {
+      "kind": "CHECK",
+      "date": "2026-09-06",
+      "timezone": "Asia/Vladivostok",
+      "duration_minutes": 30,
+      "reminder_before": "P1D",
+      "calendar_publish": true,
+      "transparency": "transparent",
+      "title": "Elephant Pants · Проверить тест карточки Ozon",
+      "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
+    },
+    "experiment": {
+      "variable": "MAIN_PRODUCT_IMAGE",
+      "experimental_sku": "chi-vintagerosemandala-pine",
+      "control_sku": "chi-ethniclanna-mint",
+      "baseline": {
+        "experimental_impressions_last_week": 350,
+        "experimental_orders_last_week": 0,
+        "control_impressions_last_week": 290,
+        "control_orders_last_week": 0
+      },
+      "asset": {
+        "status": "UPLOADED_TO_OZON",
+        "uploaded_at": "2026-08-30",
+        "upload_confirmation_source": "OWNER_LPR_DIRECT_REPORT",
+        "format": "3:4",
+        "visible_pockets": 1,
+        "size_claim": "42–46",
+        "claims": [
+          "100% вискоза",
+          "Лёгкая ткань",
+          "Глубокий карман",
+          "Для дома, йоги и пляжа"
+        ]
+      }
+    },
+    "updatedAt": "2026-08-30T18:18:00+10:00"
+  },
+  "cycles": [
+    {
+      "id": "EP-S-20260830-001",
+      "type": "OZON_WEEKLY_SALES_REVIEW",
+      "title": "Еженедельная проверка аналитики продаж Ozon",
+      "goal": "Проверить, повышает ли новая главная карточка конверсию chi-vintagerosemandala-pine при сохранении текущего эластичного бустинга",
+      "cls": "SALES",
+      "occurrence": 5,
+      "state": "OPEN",
+      "decision": "READY",
+      "outcome": "NONE",
+      "parent": "EP-S-20260807-001",
+      "result": "Новая главная карточка chi-vintagerosemandala-pine размещена на Ozon; эксперимент перешёл из подготовки в наблюдение",
+      "step": "MONITOR_EXPERIMENTAL_MAIN_IMAGE_FOR_7_DAYS",
+      "plan": [
+        "Использовать chi-vintagerosemandala-pine как экспериментальный SKU",
+        "Использовать chi-ethniclanna-mint как контрольный SKU без изменений карточки",
+        "Сохранить текущий эластичный бустинг 15% на продвигаемых SKU без изменения рекламного фактора",
+        "Использовать новое главное изображение chi-vintagerosemandala-pine в формате 3:4",
+        "Не менять цену, описание и остальные существенные элементы экспериментальной карточки в течение теста",
+        "Через 7 дней снять аналитику Ozon и сравнить показы, заказы и конверсию экспериментального SKU с его предыдущей неделей и контрольным SKU"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260830-002",
+        "EP-EVENT-20260830-003"
+      ],
+      "schedule": {
+        "kind": "CHECK",
+        "date": "2026-09-06",
+        "timezone": "Asia/Vladivostok",
+        "duration_minutes": 30,
+        "reminder_before": "P1D",
+        "calendar_publish": true,
+        "transparency": "transparent",
+        "title": "Elephant Pants · Проверить тест карточки Ozon",
+        "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
+      },
+      "experiment": {
+        "variable": "MAIN_PRODUCT_IMAGE",
+        "experimental_sku": "chi-vintagerosemandala-pine",
+        "control_sku": "chi-ethniclanna-mint",
+        "baseline": {
+          "experimental_impressions_last_week": 350,
+          "experimental_orders_last_week": 0,
+          "control_impressions_last_week": 290,
+          "control_orders_last_week": 0
+        },
+        "asset": {
+          "status": "UPLOADED_TO_OZON",
+          "uploaded_at": "2026-08-30",
+          "upload_confirmation_source": "OWNER_LPR_DIRECT_REPORT",
+          "format": "3:4",
+          "visible_pockets": 1,
+          "size_claim": "42–46",
+          "claims": [
+            "100% вискоза",
+            "Лёгкая ткань",
+            "Глубокий карман",
+            "Для дома, йоги и пляжа"
+          ]
+        }
+      },
+      "updatedAt": "2026-08-30T18:18:00+10:00"
+    },
+    {
+      "id": "EP-S-20260822-001",
+      "type": "OZON_WEEKLY_SALES_REVIEW",
+      "title": "Еженедельная проверка аналитики продаж Ozon",
+      "goal": "Провести недельный тест точечного продвижения четырёх SKU и оценить результат по следующей недельной статистике Ozon",
+      "cls": "SALES",
+      "occurrence": 4,
+      "state": "CLOSED",
+      "decision": "NEXT_STEP_SELECTED",
+      "outcome": "ACHIEVED",
+      "parent": "EP-S-20260807-001",
+      "result": "За последние 7 дней зафиксирован 1 заказ на 2 900 ₽ при 4 076 показах. Продвигаемые четыре SKU получили суммарно 898 показов против примерно 894 на предыдущей неделе, то есть сохранили трафик на фоне общего падения показов примерно на 10%. Остальные SKU снизились примерно на 13%. Ни один продвигаемый SKU не дал заказа; единственная продажа пришлась на chi-ancientpottery-black. Эластичный бустинг показал измеримый эффект удержания видимости, но не дал конверсии в продажи.",
+      "step": "START_PRODUCT_CARD_CONVERSION_TEST",
+      "plan": [
+        "Применить эластичный бустинг 15% к chi-himatun-sky, chi-ethniclanna-mint, chi-vintagerosemandala-pine и chi-teardropmandala-purple",
+        "Остальные карточки оставить без изменений как контрольный фон",
+        "Учитывать возможный дополнительный охват цветовых вариантов, объединённых с продвигаемыми SKU в общих карточках",
+        "Получить недельную аналитику Ozon",
+        "Сравнить продажи, показы и конверсию тестовой группы с предыдущей неделей и остальным ассортиментом",
+        "Принять решение о следующем эксперименте"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260823-001",
+        "EP-EVENT-20260830-001",
+        "EP-EVENT-20260822-003"
+      ],
+      "schedule": {
+        "kind": "CHECK",
+        "date": "2026-08-29",
+        "timezone": "Asia/Vladivostok",
+        "duration_minutes": 30,
+        "reminder_before": "P1D",
+        "calendar_publish": true,
+        "transparency": "transparent",
+        "title": "Elephant Pants · Проверить продажи Ozon",
+        "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
+      },
+      "experiment": null,
+      "updatedAt": "2026-08-30T17:46:00+10:00"
+    },
+    {
+      "id": "EP-S-20260814-001",
+      "type": "OZON_WEEKLY_SALES_REVIEW",
+      "title": "Еженедельная проверка аналитики продаж Ozon",
+      "goal": "Проверить недельную статистику Ozon и принять решение о следующем шаге или его отсутствии",
+      "cls": "SALES",
+      "occurrence": 3,
+      "state": "CLOSED",
+      "decision": "READY",
+      "outcome": "ACHIEVED",
+      "parent": "EP-S-20260807-001",
+      "result": "Недельная статистика обработана; 32 SKU идентифицированы; 2 заказа на 5800 RUB и 4999 показов; выбран недельный тест точечного продвижения четырёх SKU",
+      "step": "CYCLE_CLOSED_AFTER_NEXT_STEP_SELECTED",
+      "plan": [
+        "Получить скриншот недельной аналитики Ozon",
+        "Преобразовать его в CSV с пятью каноническими колонками",
+        "Проверить структуру и полноту SKU",
+        "Принять решение NEXT_STEP_SELECTED, NO_ACTION или HOLD_FOR_DATA_REPAIR",
+        "Закрыть обзор отдельным closure-событием"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260822-001",
+        "EP-EVENT-20260814-003",
+        "EP-EVENT-20260822-002"
+      ],
+      "schedule": {
+        "kind": "CHECK",
+        "date": "2026-08-21",
+        "timezone": "Asia/Vladivostok",
+        "duration_minutes": 30,
+        "reminder_before": "P1D",
+        "calendar_publish": true,
+        "transparency": "transparent",
+        "title": "Elephant Pants · Проверить продажи Ozon",
+        "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
+      },
+      "experiment": null,
+      "updatedAt": "2026-08-22T07:52:44+10:00"
+    },
+    {
+      "id": "EP-S-20260809-001",
+      "type": "OZON_WEEKLY_SALES_REVIEW",
+      "title": "Еженедельная проверка аналитики продаж Ozon",
+      "goal": "Проверить недельную статистику Ozon и принять решение о следующем шаге или его отсутствии",
+      "cls": "SALES",
+      "occurrence": 2,
+      "state": "CLOSED",
+      "decision": "NO_ACTION",
+      "outcome": "ACHIEVED",
+      "parent": "EP-S-20260807-001",
+      "result": "CSV создан; 32 строки, 3 заказа на 8700 RUB и 6108 показов; SKU заполнены во всех строках; отсутствие chi-vintagerosemandala-navy объяснено распродажей; OWNER_LPR выбрала NO_ACTION",
+      "step": "CYCLE_CLOSED_AFTER_NO_ACTION_DECISION",
+      "plan": [
+        "Получить скриншот недельной аналитики Ozon",
+        "Преобразовать его в CSV с пятью каноническими колонками",
+        "Проверить структуру и полноту SKU",
+        "Принять решение NEXT_STEP_SELECTED, NO_ACTION или HOLD_FOR_DATA_REPAIR",
+        "Закрыть обзор отдельным closure-событием"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260814-001",
+        "EP-EVENT-20260814-002",
+        "EP-EVENT-20260809-001"
+      ],
+      "schedule": {
+        "kind": "CHECK",
+        "date": "2026-08-14",
+        "timezone": "Asia/Vladivostok",
+        "duration_minutes": 30,
+        "reminder_before": "P1D",
+        "calendar_publish": true,
+        "transparency": "transparent",
+        "title": "Elephant Pants · Проверить продажи Ozon",
+        "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
+      },
+      "experiment": null,
+      "updatedAt": "2026-08-14T21:27:05+10:00"
+    },
+    {
+      "id": "EP-S-20260807-001",
+      "type": "SALES_BATCH",
+      "title": "Продажа партии",
+      "goal": "Реализовать 75 единиц второй партии через Ozon",
+      "cls": "SALES",
+      "occurrence": 2,
+      "state": "OPEN",
+      "decision": "READY",
+      "outcome": "NONE",
+      "parent": null,
+      "result": "На 2026-08-14 зафиксированы 3 заказа на 8700 RUB и 6108 показов за неделю; принято NO_ACTION; распроданный chi-vintagerosemandala-navy подтвержден оператором; следующая проверка назначена на 2026-08-21",
+      "step": "CONTINUE_SALES_WITH_NO_ACTION_UNTIL_NEXT_WEEKLY_REVIEW",
+      "plan": [
+        "Не реже одного раза в 7 дней выполнять OZON_WEEKLY_SALES_REVIEW",
+        "По каждому обзору фиксировать следующий шаг или отсутствие действия",
+        "Продолжать продажи до достижения условия закрытия партии",
+        "После завершения продаж свести экономику партии"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260807-008",
+        "EP-EVENT-20260807-009",
+        "EP-EVENT-20260814-001",
+        "EP-EVENT-20260814-002",
+        "EP-EVENT-20260814-003"
+      ],
+      "schedule": null,
+      "experiment": null,
+      "updatedAt": "2026-08-14T21:27:05+10:00"
+    },
+    {
+      "id": "EP-GP-20260809-001",
+      "type": "CALENDAR_PROJECTION_AUTOMATION",
+      "title": "Автоматическая проекция циклов в Google Calendar",
+      "goal": "Автоматически проецировать датированные доменные циклы в общий календарь Elephant Pants",
+      "cls": "GROWTH_PROJECT",
+      "occurrence": 1,
+      "state": "CLOSED",
+      "decision": "COMPLETE",
+      "outcome": "ACHIEVED",
+      "parent": null,
+      "result": "Реализация объединена в main; GitHub Actions создал событие на 14 августа 2026 года, повторный запуск обновил его без дубля; уведомление за сутки настроено",
+      "step": "PROJECT_COMPLETED",
+      "plan": [
+        "Зафиксировать календарную схему в доменном протоколе",
+        "Реализовать идемпотентную синхронизацию Google Calendar",
+        "Настроить сервисный аккаунт и GitHub Secrets",
+        "Подтвердить создание события без дубля",
+        "Настроить пользовательское уведомление за сутки"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260809-002",
+        "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0",
+        "GITHUB:valerol/ep_dashboard@main:9de9797edd7cc1c61c1191af327e0e97b999390c",
+        "GITHUB:valerol/ep_dashboard@main:59c3c76cc8e3edacc923cbd7dc4b3fd5d9f8b330"
+      ],
+      "schedule": {
+        "kind": null,
+        "date": null,
+        "datetime": null,
+        "timezone": "Asia/Vladivostok",
+        "duration_minutes": 30,
+        "reminder_before": "P1D",
+        "calendar_publish": false,
+        "transparency": "transparent",
+        "title": null,
+        "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
+      },
+      "experiment": null,
+      "updatedAt": "2026-08-09T11:30:00+10:00"
+    },
+    {
+      "id": "EP-GP-20260809-002",
+      "type": "WEBSITE_CYCLE_CLOSURE_AUTOMATION",
+      "title": "Закрытие циклов и проектов через сайт",
+      "goal": "Разрешить закрытие допустимых циклов и проектных циклов через сайт с атомарным экспортом состояния в GitHub",
+      "cls": "GROWTH_PROJECT",
+      "occurrence": 1,
+      "state": "CLOSED",
+      "decision": "COMPLETE",
+      "outcome": "ACHIEVED",
+      "parent": null,
+      "result": "Проверка функицонала",
+      "step": "CYCLE_CLOSED",
+      "plan": [
+        "Отображать открытые циклы с evidence_policy NOT_REQUIRED на сайте",
+        "Отображать проектные циклы в разделе Проекты",
+        "Разрешить закрытие проектного цикла через тот же защищённый контур",
+        "Закрыть этот проект через сайт",
+        "Подтвердить атомарное обновление CYCLE_RECORD, события, индекса и карты репозитория"
+      ],
+      "evidencePolicy": "NOT_REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260809-003"
+      ],
+      "schedule": {
+        "kind": null,
+        "date": null,
+        "datetime": null,
+        "timezone": "Asia/Vladivostok",
+        "duration_minutes": null,
+        "reminder_before": null,
+        "calendar_publish": false,
+        "transparency": "transparent",
+        "title": null,
+        "projection_protocol_ref": null
+      },
+      "experiment": null,
+      "updatedAt": "2026-08-09T03:43:24.305+00:00"
+    },
+    {
+      "id": "EP-S-20260807-002",
+      "type": "OZON_WEEKLY_SALES_REVIEW",
+      "title": "Еженедельная проверка аналитики продаж Ozon",
+      "goal": "Проверить недельную статистику Ozon и принять решение о следующем шаге или его отсутствии",
+      "cls": "SALES",
+      "occurrence": 1,
+      "state": "CLOSED",
+      "decision": "NO_ACTION",
+      "outcome": "ACHIEVED",
+      "parent": "EP-S-20260807-001",
+      "result": "CSV создан; 33 строки, 2 заказа на 5800 RUB и 10249 показов; SKU отсутствуют во всех 33 строках; OWNER_LPR приняла агрегированное ограничение и выбрала NO_ACTION",
+      "step": "CYCLE_CLOSED_AFTER_NO_ACTION_DECISION",
+      "plan": [
+        "Получить скриншот недельной аналитики Ozon",
+        "Преобразовать его в CSV с пятью каноническими колонками",
+        "Проверить структуру и полноту SKU",
+        "Принять решение NEXT_STEP_SELECTED, NO_ACTION или HOLD_FOR_DATA_REPAIR",
+        "Закрыть обзор отдельным closure-событием"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260807-008",
+        "EP-EVENT-20260807-009"
+      ],
+      "schedule": null,
+      "experiment": null,
+      "updatedAt": "2026-08-07T21:52:51+10:00"
+    },
+    {
+      "id": "EP-LR-20260807-001",
+      "type": "OZON_TRANSFER",
+      "title": "Передача партии на Ozon",
+      "goal": "Передать 75 единиц второй партии на склады Ozon в Москве и Санкт-Петербурге",
+      "cls": "LOGISTIC_RUSSIA",
+      "occurrence": 2,
+      "state": "CLOSED",
+      "decision": "READY",
+      "outcome": "ACHIEVED",
+      "parent": "EP-LI-20260807-001",
+      "result": "Ozon принял все 75 единиц: 43 в Москве и 32 в Санкт-Петербурге. На 2026-08-07 две единицы московской части уже куплены; 73 единицы новой партии остаются на складах. Неурегулированных расхождений нет.",
+      "step": "CYCLE_CLOSED_AFTER_COMPLETE_ACCEPTANCE",
+      "plan": [
+        "Отгрузить 43 единицы в Москву",
+        "Отгрузить 32 единицы в Санкт-Петербург",
+        "Подтвердить приёмку обеих частей",
+        "Сверить принятый объём с остатками и продажами"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260807-001",
+        "EP-EVENT-20260807-006",
+        "EP-EVENT-20260807-004"
+      ],
+      "schedule": null,
+      "experiment": null,
+      "updatedAt": "2026-08-07T20:30:50+10:00"
+    },
+    {
+      "id": "EP-LI-20260807-002",
+      "type": "INTERNATIONAL_DELIVERY",
+      "title": "Доставка от производителя в Россию",
+      "goal": "Доставить 75 единиц второй партии от производителя в российский логистический контур",
+      "cls": "LOGISTIC_IMPORT",
+      "occurrence": 2,
+      "state": "CLOSED",
+      "decision": "READY",
+      "outcome": "ACHIEVED",
+      "parent": "EP-LI-20260807-001",
+      "result": "75 единиц второй партии доставлены в Россию и впоследствии полностью переданы и приняты Ozon",
+      "step": "CYCLE_CLOSED_AFTER_DOWNSTREAM_CONFIRMATION",
+      "plan": [
+        "Получить вторую партию от производителя в России",
+        "Передать её в российский логистический контур"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260807-001",
+        "EP-EVENT-20260807-004",
+        "EP-EVENT-20260807-005"
+      ],
+      "schedule": null,
+      "experiment": null,
+      "updatedAt": "2026-08-07T20:30:50+10:00"
+    },
+    {
+      "id": "EP-LI-20260807-001",
+      "type": "LOGISTICS_BATCH",
+      "title": "Логистика партии",
+      "goal": "Доставить 75 единиц второй партии от производителя до складов Ozon",
+      "cls": "LOGISTIC_IMPORT",
+      "occurrence": 2,
+      "state": "CLOSED",
+      "decision": "READY",
+      "outcome": "ACHIEVED",
+      "parent": null,
+      "result": "75 единиц доставлены в Россию, переданы на Ozon и полностью приняты; неурегулированных расхождений нет",
+      "step": "CYCLE_CLOSED_AFTER_ALL_REQUIRED_CHILDREN",
+      "plan": [
+        "Доставить партию от производителя в Россию",
+        "Передать партию на склады Ozon",
+        "Подтвердить полную приёмку"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260807-004",
+        "EP-EVENT-20260807-005",
+        "EP-EVENT-20260807-006",
+        "EP-EVENT-20260807-007"
+      ],
+      "schedule": null,
+      "experiment": null,
+      "updatedAt": "2026-08-07T20:30:50+10:00"
+    },
+    {
+      "id": "EP-LR-20260807-003",
+      "type": "OZON_ACCEPTANCE",
+      "title": "Приёмка партии складом Ozon",
+      "goal": "Подтвердить полную приёмку 75 единиц второй партии складами Ozon",
+      "cls": "LOGISTIC_RUSSIA",
+      "occurrence": 2,
+      "state": "CLOSED",
+      "decision": "READY",
+      "outcome": "ACHIEVED",
+      "parent": "EP-LR-20260807-001",
+      "result": "Принято 75 единиц. Московский акт подтверждает 43 из 43 без расхождений. Остатки на 2026-08-07 подтверждают 32 единицы в Санкт-Петербурге и 41 единицу в Москве после продажи двух единиц; одна единица в Краснодаре относится к предыдущей партии. Баланс новой партии: 41 + 32 + 2 = 75.",
+      "step": "CYCLE_CLOSED_AFTER_STOCK_RECONCILIATION",
+      "plan": [
+        "Подтвердить приёмку 43 единиц в Москве",
+        "Подтвердить приёмку 32 единиц в Санкт-Петербурге",
+        "Исключить старый остаток и учесть продажи после приёмки"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260807-001",
+        "EP-EVENT-20260807-002"
+      ],
+      "schedule": null,
+      "experiment": null,
+      "updatedAt": "2026-08-07T20:16:40+10:00"
+    },
+    {
+      "id": "EP-LR-20260807-002",
+      "type": "OZON_SHIPMENT",
+      "title": "Отгрузка партии на Ozon",
+      "goal": "Отгрузить 75 единиц второй партии на склады Ozon",
+      "cls": "LOGISTIC_RUSSIA",
+      "occurrence": 2,
+      "state": "CLOSED",
+      "decision": "READY",
+      "outcome": "ACHIEVED",
+      "parent": "EP-LR-20260807-001",
+      "result": "Отгружено 75 единиц — 43 в Москву и 32 в Санкт-Петербург",
+      "step": "CYCLE_CLOSED_AFTER_ACCEPTANCE_RECONCILIATION",
+      "plan": [
+        "Передать 43 единицы в маршрут до московского склада",
+        "Передать 32 единицы в маршрут до петербургского склада"
+      ],
+      "evidencePolicy": "REQUIRED",
+      "evidence": [
+        "EP-EVENT-20260807-001",
+        "EP-EVENT-20260807-003"
+      ],
+      "schedule": null,
+      "experiment": null,
+      "updatedAt": "2026-08-07T20:16:40+10:00"
+    }
+  ],
+  "events": [
+    {
+      "id": "EP-EVENT-20260830-003",
+      "date": "30.08.2026",
+      "occurredAt": "2026-08-30T18:18:00+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Новая главная карточка chi-vintagerosemandala-pine размещена на Ozon; эксперимент перешёл из подготовки в наблюдение",
+      "detail": "Новая главная карточка chi-vintagerosemandala-pine размещена на Ozon; эксперимент перешёл из подготовки в наблюдение",
+      "cycle": "EP-S-20260830-001",
+      "evidence": "OWNER_LPR_ACTION:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_IMAGE_UPLOADED_TO_OZON",
+      "facts": {
+        "experimental_sku": "chi-vintagerosemandala-pine",
+        "control_sku": "chi-ethniclanna-mint",
+        "experimental_asset_status": "UPLOADED_TO_OZON",
+        "upload_confirmation_source": "OWNER_LPR_DIRECT_REPORT",
+        "elastic_boosting_percent": 15,
+        "evaluation_date": "2026-09-06"
+      }
+    },
+    {
+      "id": "EP-EVENT-20260830-002",
+      "date": "30.08.2026",
+      "occurredAt": "2026-08-30T18:00:00+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Выбран следующий тест конверсии — новая главная карточка для chi-vintagerosemandala-pine при неизменной контрольной карточке chi-ethniclanna-mint",
+      "detail": "Выбран следующий тест конверсии — новая главная карточка для chi-vintagerosemandala-pine при неизменной контрольной карточке chi-ethniclanna-mint",
+      "cycle": "EP-S-20260830-001",
+      "evidence": "OWNER_LPR_DECISION:2026-08-30:TEST_PRODUCT_CARD_IMAGE",
+      "facts": {
+        "experiment_type": "PRODUCT_CARD_MAIN_IMAGE",
+        "experimental_sku": "chi-vintagerosemandala-pine",
+        "control_sku": "chi-ethniclanna-mint",
+        "promotion_state": {
+          "elastic_boosting_percent": 15,
+          "keep_existing_boosting_unchanged": true
+        },
+        "experimental_asset": {
+          "status": "PREPARED_NOT_YET_CONFIRMED_UPLOADED_TO_OZON",
+          "format": "PORTRAIT_3_TO_4",
+          "claims": [
+            "100% вискоза",
+            "Лёгкая ткань",
+            "Глубокий карман",
+            "Единый размер 42–46",
+            "Для дома, йоги и пляжа"
+          ],
+          "product_fidelity": {
+            "visible_pockets": 1,
+            "colorway": "PINE_GREEN"
+          }
+        },
+        "hypothesis": "При неизменном продвижении новая главная карточка повысит конверсию chi-vintagerosemandala-pine относительно его предыдущей недели и контрольного chi-ethniclanna-mint",
+        "evaluation_metrics": [
+          "IMPRESSIONS",
+          "ORDERED_ITEMS",
+          "CONVERSION_FROM_IMPRESSION_TO_ORDER"
+        ]
+      }
+    },
+    {
+      "id": "EP-EVENT-20260830-001",
+      "date": "30.08.2026",
+      "occurredAt": "2026-08-30T17:46:00+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Эластичный бустинг сохранил видимость четырёх продвигаемых SKU на фоне падения общего трафика, но не дал заказов в тестовой группе",
+      "detail": "Эластичный бустинг сохранил видимость четырёх продвигаемых SKU на фоне падения общего трафика, но не дал заказов в тестовой группе",
+      "cycle": "EP-S-20260822-001",
+      "evidence": "OWNER_LPR_OBSERVATION:2026-08-30:OZON_WEEKLY_ANALYTICS",
+      "facts": {
+        "period": "LAST_7_DAYS_AS_OF_2026-08-30",
+        "store_total": {
+          "ordered_items": 1,
+          "ordered_amount_rub": 2900,
+          "impressions": 4076
+        },
+        "promoted_group": {
+          "skus": [
+            "chi-himatun-sky",
+            "chi-ethniclanna-mint",
+            "chi-vintagerosemandala-pine",
+            "chi-teardropmandala-purple"
+          ],
+          "current_impressions": 898,
+          "previous_impressions_approx": 894,
+          "impression_change_approx_percent": 0.4,
+          "ordered_items": 0
+        },
+        "non_promoted_group": {
+          "current_impressions": 3178,
+          "previous_impressions_approx": 3649,
+          "impression_change_approx_percent": -13
+        },
+        "store_impression_change_approx_percent": -10,
+        "only_selling_sku": "chi-ancientpottery-black",
+        "interpretation": "PROMOTION_VISIBILITY_EFFECT_OBSERVED_WITHOUT_SALES_CONVERSION"
+      }
+    },
+    {
+      "id": "EP-EVENT-20260823-001",
+      "date": "23.08.2026",
+      "occurredAt": "2026-08-23T10:56:38+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Для четырёх выбранных SKU установлен эластичный бустинг 15%; результат будет оценён по недельной статистике 29 августа",
+      "detail": "Для четырёх выбранных SKU установлен эластичный бустинг 15%; результат будет оценён по недельной статистике 29 августа",
+      "cycle": "EP-S-20260822-001",
+      "evidence": "OWNER_LPR_ACTION:2026-08-23:ELASTIC_BOOSTING_15_PERCENT",
+      "facts": {
+        "promotion_mechanism": {
+          "selected": "ELASTIC_BOOSTING",
+          "rate_percent": 15,
+          "alternative_rejected": "PAY_PER_CLICK",
+          "rejection_reason": "MINIMUM_WEEKLY_BUDGET_TOO_HIGH",
+          "pay_per_click_minimum_budget_rub_per_sku_per_week": 2000,
+          "pay_per_click_minimum_budget_rub_for_four_skus_per_week": 8000
+        },
+        "promoted_skus": [
+          "chi-himatun-sky",
+          "chi-ethniclanna-mint",
+          "chi-vintagerosemandala-pine",
+          "chi-teardropmandala-purple"
+        ],
+        "catalog_structure": {
+          "promoted_skus_share_product_cards_with_other_color_variants": true,
+          "expected_secondary_effect": "OTHER_COLOR_VARIANTS_MAY_RECEIVE_ADDITIONAL_VISIBILITY_THROUGH_SHARED_CARDS",
+          "effect_status": "HYPOTHESIS_TO_BE_EVALUATED"
+        },
+        "screenshot_observation": {
+          "sku": "chi-teardropmandala-purple",
+          "configured_boost_percent": 15,
+          "displayed_search_lift_percent": 15.1,
+          "displayed_own_price_rub": 2655,
+          "displayed_price_before_discount_rub": 3300,
+          "displayed_minimum_price_before_adjustment_rub": 2900,
+          "source_document_storage": "NOT_COPIED_TO_REPOSITORY"
+        },
+        "evaluation": {
+          "due_date": "2026-08-29",
+          "metrics": [
+            "ORDERED_ITEMS",
+            "ORDERED_AMOUNT_RUB",
+            "IMPRESSIONS",
+            "CONVERSION",
+            "OTHER_COLOR_VARIANT_ACTIVITY_IF_VISIBLE"
+          ]
+        }
+      }
+    },
+    {
+      "id": "EP-EVENT-20260822-001",
+      "date": "22.08.2026",
+      "occurredAt": "2026-08-22T07:52:44+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Недельная статистика преобразована в CSV; все 32 строки идентифицированы по SKU; выбран недельный тест точечного продвижения четырёх SKU",
+      "detail": "Недельная статистика преобразована в CSV; все 32 строки идентифицированы по SKU; выбран недельный тест точечного продвижения четырёх SKU",
+      "cycle": "EP-S-20260814-001",
+      "evidence": "OZON_WEEKLY_SALES_REVIEW_OCCURRENCE_3",
+      "facts": {
+        "source_period": "WEEK_ENDING_2026-08-22",
+        "source_location": "OZON_SELLER/Цены и акции/Цены/Аналитика по продажам",
+        "source_document_storage": "NOT_COPIED_TO_REPOSITORY",
+        "csv_filename_ref": "ozon_sales_week_2026-08-22.csv",
+        "csv_sha256": "9223ec25418f4c670776b928cc642c51c1dea99d6eb13917c89f67780f60d703",
+        "csv_schema": [
+          "sku",
+          "заказано на сумму",
+          "заказано товаров",
+          "показы всего",
+          "конверсия"
+        ],
+        "row_count": 32,
+        "rows_with_blank_sku": 0,
+        "duplicate_sku_count": 0,
+        "aggregate": {
+          "ordered_amount_rub": 5800,
+          "ordered_items": 2,
+          "total_impressions": 4999,
+          "rows_with_orders": 2,
+          "aggregate_conversion": 0.00040008
+        },
+        "prior_week_comparison": {
+          "prior_week_ending": "2026-08-14",
+          "ordered_items_change": -1,
+          "ordered_items_change_percent": -33.3,
+          "ordered_amount_change_rub": -2900,
+          "total_impressions_change": -1109,
+          "total_impressions_change_percent": -18.2
+        },
+        "ordered_skus": [
+          "chi-himatun-sky",
+          "chi-ethniclanna-mint"
+        ],
+        "test_selection": {
+          "action": "RUN_TARGETED_PROMOTION_TEST",
+          "duration": "P7D",
+          "selected_skus": [
+            "chi-himatun-sky",
+            "chi-ethniclanna-mint",
+            "chi-vintagerosemandala-pine",
+            "chi-teardropmandala-purple"
+          ],
+          "control_rule": "OTHER_CARDS_UNCHANGED"
+        },
+        "stock_fact": {
+          "sku": "chi-vintagerosemandala-navy",
+          "current_report_presence": "ABSENT",
+          "absence_explanation": "SOLD_OUT_PREVIOUSLY_CONFIRMED"
+        },
+        "data_quality": {
+          "status": "COMPLETE",
+          "limitation": "NONE_FOR_REPORTED_ROWS",
+          "row_set_note": "32_ROWS; CHI_VINTAGEROSEMANDALA_NAVY_REMAINS_ABSENT_AFTER_SELL_OUT"
+        },
+        "decision": {
+          "status": "SELECTED",
+          "value": "NEXT_STEP_SELECTED",
+          "next_step": "RUN_TARGETED_PROMOTION_TEST_FOR_FOUR_SKUS_DURING_NEXT_WEEK"
+        }
+      }
+    },
+    {
+      "id": "EP-EVENT-20260822-002",
+      "date": "22.08.2026",
+      "occurredAt": "2026-08-22T07:52:44+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "По итогам недельного обзора принято решение провести недельный тест точечного продвижения четырёх SKU",
+      "detail": "По итогам недельного обзора принято решение провести недельный тест точечного продвижения четырёх SKU",
+      "cycle": "EP-S-20260814-001",
+      "evidence": "OWNER_LPR_DECISION:2026-08-22:NEXT_STEP_SELECTED",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260822-003",
+      "date": "22.08.2026",
+      "occurredAt": "2026-08-22T07:52:44+10:00",
+      "type": "CYCLE_OPENED",
+      "title": "Создана четвёртая итерация недельного обзора со сроком 2026-08-29 и задачей оценить точечное продвижение четырёх SKU",
+      "detail": "Создана четвёртая итерация недельного обзора со сроком 2026-08-29 и задачей оценить точечное продвижение четырёх SKU",
+      "cycle": "EP-S-20260822-001",
+      "evidence": "PROTOCOL_DERIVED_NEXT_OCCURRENCE:EP-S-20260814-001",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260814-001",
+      "date": "14.08.2026",
+      "occurredAt": "2026-08-14T21:27:05+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Недельная статистика преобразована в CSV; все строки идентифицированы по SKU; решение ожидается",
+      "detail": "Недельная статистика преобразована в CSV; все строки идентифицированы по SKU; решение ожидается",
+      "cycle": "EP-S-20260809-001",
+      "evidence": "OZON_WEEKLY_SALES_REVIEW_OCCURRENCE_2",
+      "facts": {
+        "source_period": "WEEK_ENDING_2026-08-14",
+        "source_location": "OZON_SELLER/Цены и акции/Цены/Аналитика по продажам",
+        "source_document_storage": "NOT_COPIED_TO_REPOSITORY",
+        "csv_filename_ref": "ozon_sales_week_2026-08-14.csv",
+        "csv_schema": [
+          "sku",
+          "заказано на сумму",
+          "заказано товаров",
+          "показы всего",
+          "конверсия"
+        ],
+        "row_count": 32,
+        "rows_with_blank_sku": 0,
+        "aggregate": {
+          "ordered_amount_rub": 8700,
+          "ordered_items": 3,
+          "total_impressions": 6108,
+          "rows_with_orders": 3,
+          "aggregate_conversion": 0.0004911591
+        },
+        "prior_week_comparison": {
+          "prior_week_ending": "2026-08-07",
+          "ordered_items_change": 1,
+          "ordered_items_change_percent": 50,
+          "ordered_amount_change_rub": 2900,
+          "total_impressions_change": -4141,
+          "total_impressions_change_percent": -40.4
+        },
+        "ordered_skus": [
+          "chi-ancientpottery-navy",
+          "chi-vintagerosemandala-pine",
+          "chi-teardropmandala-purple"
+        ],
+        "stock_fact": {
+          "sku": "chi-vintagerosemandala-navy",
+          "current_report_presence": "ABSENT",
+          "absence_explanation": "SOLD_OUT",
+          "buyer_concentration_note": "OWNER_REPORTED_SAME_BUYER_FROM_RUSSIAN_FAR_EAST"
+        },
+        "data_quality": {
+          "status": "COMPLETE",
+          "limitation": "NONE_FOR_REPORTED_ROWS",
+          "row_set_note": "32_ROWS_BECAUSE_CHI_VINTAGEROSEMANDALA_NAVY_IS_SOLD_OUT"
+        },
+        "decision": {
+          "status": "PENDING",
+          "allowed_next_values": [
+            "NEXT_STEP_SELECTED",
+            "NO_ACTION",
+            "HOLD_FOR_DATA_REPAIR"
+          ]
+        }
+      }
+    },
+    {
+      "id": "EP-EVENT-20260814-002",
+      "date": "14.08.2026",
+      "occurredAt": "2026-08-14T21:27:05+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "По итогам недельного обзора принято решение NO_ACTION",
+      "detail": "По итогам недельного обзора принято решение NO_ACTION",
+      "cycle": "EP-S-20260809-001",
+      "evidence": "OWNER_LPR_DECISION:2026-08-14:NO_ACTION",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260814-003",
+      "date": "14.08.2026",
+      "occurredAt": "2026-08-14T21:27:05+10:00",
+      "type": "CYCLE_OPENED",
+      "title": "Создана третья итерация недельного обзора со сроком 2026-08-21",
+      "detail": "Создана третья итерация недельного обзора со сроком 2026-08-21",
+      "cycle": "EP-S-20260814-001",
+      "evidence": "PROTOCOL_DERIVED_NEXT_OCCURRENCE:EP-S-20260809-001",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260809-002",
+      "date": "09.08.2026",
+      "occurredAt": "2026-08-09T11:30:00+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Автоматическая проекция датированных циклов в Google Calendar подтверждена и введена в регулярную эксплуатацию",
+      "detail": "Автоматическая проекция датированных циклов в Google Calendar подтверждена и введена в регулярную эксплуатацию",
+      "cycle": "EP-GP-20260809-001",
+      "evidence": "OWNER_LPR_COMPLETION:2026-08-09:CALENDAR_PROJECTION_AUTOMATION",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260809-001",
+      "date": "09.08.2026",
+      "occurredAt": "2026-08-09T10:07:42+10:00",
+      "type": "CYCLE_OPENED",
+      "title": "Создана вторая итерация недельного обзора со сроком 2026-08-14",
+      "detail": "Создана вторая итерация недельного обзора со сроком 2026-08-14",
+      "cycle": "EP-S-20260809-001",
+      "evidence": "PROTOCOL_DERIVED_NEXT_OCCURRENCE:EP-S-20260807-002",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260809-003",
+      "date": "09.08.2026",
+      "occurredAt": "2026-08-09T03:43:24.305+00:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Проверка функицонала",
+      "detail": "Проверка функицонала",
+      "cycle": "EP-GP-20260809-002",
+      "evidence": "WEBSITE_CLOSE:EP-GP-20260809-002",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260807-009",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T21:52:51+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "По итогам недельного обзора принято решение NO_ACTION",
+      "detail": "По итогам недельного обзора принято решение NO_ACTION",
+      "cycle": "EP-S-20260807-002",
+      "evidence": "OWNER_LPR_DECISION:2026-08-07:NO_ACTION",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260807-008",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T21:37:53+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Недельная статистика преобразована в CSV; решение ожидается",
+      "detail": "Недельная статистика преобразована в CSV; решение ожидается",
+      "cycle": "EP-S-20260807-002",
+      "evidence": "OZON_WEEKLY_SALES_REVIEW_OCCURRENCE_1",
+      "facts": {
+        "source_period": "WEEK_ENDING_2026-08-07",
+        "source_location": "OZON_SELLER/Цены и акции/Цены/Аналитика по продажам",
+        "source_document_storage": "NOT_COPIED_TO_REPOSITORY",
+        "csv_filename_ref": "ozon_sales_week_2026-08-07.csv",
+        "csv_schema": [
+          "sku",
+          "заказано на сумму",
+          "заказано товаров",
+          "показы всего",
+          "конверсия"
+        ],
+        "row_count": 33,
+        "rows_with_blank_sku": 33,
+        "aggregate": {
+          "ordered_amount_rub": 5800,
+          "ordered_items": 2,
+          "total_impressions": 10249,
+          "rows_with_orders": 2
+        },
+        "data_quality": {
+          "status": "PARTIAL",
+          "limitation": "ITEM_LEVEL_IDENTIFICATION_UNAVAILABLE_BECAUSE_ALL_SKU_VALUES_ARE_BLANK",
+          "forbidden_inference": "DO_NOT_ASSIGN_THE_TWO_ORDERS_TO_SPECIFIC_SKUS"
+        },
+        "decision": {
+          "status": "PENDING",
+          "allowed_next_values": [
+            "NEXT_STEP_SELECTED",
+            "NO_ACTION",
+            "HOLD_FOR_DATA_REPAIR"
+          ]
+        }
+      }
+    },
+    {
+      "id": "EP-EVENT-20260807-005",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T20:30:50+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Вторая партия в объёме 75 единиц доставлена в Россию и стала доступна для передачи на Ozon",
+      "detail": "Вторая партия в объёме 75 единиц доставлена в Россию и стала доступна для передачи на Ozon",
+      "cycle": "EP-LI-20260807-002",
+      "evidence": "OWNER_LPR_CLOSURE_DECISION:2026-08-07:INTERNATIONAL_DELIVERY_2",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260807-006",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T20:30:50+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Для второй передачи на Ozon зафиксирован родительский цикл логистики партии",
+      "detail": "Для второй передачи на Ozon зафиксирован родительский цикл логистики партии",
+      "cycle": "EP-LR-20260807-001",
+      "evidence": "PARENT_RELATION_RECORDED:SECOND_OZON_TRANSFER",
+      "facts": {
+        "child_cycle_instance_id": "EP-LR-20260807-001",
+        "parent_cycle_instance_id": "EP-LI-20260807-001",
+        "relationship": "CHILD_OF",
+        "cycle_state_changed": false
+      }
+    },
+    {
+      "id": "EP-EVENT-20260807-007",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T20:30:50+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Логистика второй партии завершена",
+      "detail": "Логистика второй партии завершена",
+      "cycle": "EP-LI-20260807-001",
+      "evidence": "OWNER_LPR_CLOSURE_DECISION:2026-08-07:LOGISTICS_BATCH_2",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260807-002",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T20:15:21+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Полная приёмка второй партии подтверждена",
+      "detail": "Полная приёмка второй партии подтверждена",
+      "cycle": "EP-LR-20260807-003",
+      "evidence": "OWNER_LPR_CLOSURE_DECISION:2026-08-07:OZON_ACCEPTANCE_2",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260807-003",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T20:15:21+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Отгрузка 75 единиц подтверждена последующей полной приёмкой",
+      "detail": "Отгрузка 75 единиц подтверждена последующей полной приёмкой",
+      "cycle": "EP-LR-20260807-002",
+      "evidence": "OWNER_LPR_CLOSURE_DECISION:2026-08-07:OZON_SHIPMENT_2",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260807-004",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T20:15:21+10:00",
+      "type": "CYCLE_CLOSED",
+      "title": "Вторая передача партии на Ozon завершена",
+      "detail": "Вторая передача партии на Ozon завершена",
+      "cycle": "EP-LR-20260807-001",
+      "evidence": "OWNER_LPR_CLOSURE_DECISION:2026-08-07:OZON_TRANSFER_2",
+      "facts": null
+    },
+    {
+      "id": "EP-EVENT-20260807-001",
+      "date": "07.08.2026",
+      "occurredAt": "2026-08-07T19:44:00+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "Evidence confirms complete shipment and acceptance of the second Ozon transfer",
+      "detail": "Evidence confirms complete shipment and acceptance of the second Ozon transfer",
+      "cycle": "EP-LR-20260807-003",
+      "evidence": "SECOND_OZON_TRANSFER_RECONCILIATION",
+      "facts": {
+        "source_document_storage": "NOT_COPIED_TO_REPOSITORY",
+        "shipment": {
+          "total_units": 75,
+          "moscow_units": 43,
+          "saint_petersburg_units": 32,
+          "fact_authority": "OWNER_LPR"
+        },
+        "moscow_acceptance": {
+          "declared_units": 43,
+          "accepted_units": 43,
+          "difference_units": 0,
+          "source_system_or_location": "OZON_ACCEPTANCE_REPORT",
+          "evidence_ref": "OZON_ACCEPTANCE_REPORT:SUPPLY-2000059753725"
+        },
+        "stock_snapshot": {
+          "snapshot_at": "2026-08-07T19:44:00+10:00",
+          "source_system_or_location": "OZON_FBO_STOCK_EXPORT",
+          "evidence_ref": "OZON_STOCK_SNAPSHOT:2026-08-07T19:44:00+10:00",
+          "available_units_total": 74,
+          "available_units_by_cluster": {
+            "moscow": 41,
+            "saint_petersburg": 32,
+            "krasnodar": 1
+          },
+          "unavailable_units": 0,
+          "units_in_transit": 0
+        },
+        "reconciliation": {
+          "sold_from_new_batch_units": 2,
+          "prior_batch_units_in_stock": 1,
+          "remaining_new_batch_units": 73,
+          "formula": "74 - 1 + 2 = 75",
+          "reconciled_new_batch_units": 75,
+          "unresolved_difference_units": 0,
+          "fact_authority": "OWNER_LPR_ACCEPTED_RECONCILIATION"
+        }
+      }
+    }
+  ],
+  "currentStep": [
+    {
+      "id": "task-01",
+      "title": "Запустить продажи на Ozon",
+      "status": "Завершено",
+      "org": null,
+      "related": [
+        "catalog"
+      ],
+      "evidence": "Магазин работает; продажи первой партии зафиксированы. Единственный орган-владелец по имеющимся данным не установлен.",
+      "sourceIds": [
+        "ozon-first-cycle"
+      ]
+    },
+    {
+      "id": "task-02",
+      "title": "Рассчитать фактическую экономику первой партии",
+      "status": "Завершено",
+      "org": "economics",
+      "related": [],
+      "evidence": "При расходах 26 525,06 ₽ и чистом поступлении Ozon 14 757 ₽ текущий денежный результат составил −11 768,06 ₽. Без разовых 11 220 ₽ на первичную маркировку повторяемая себестоимость — 510,17 ₽, расчётная операционная прибыль — 104,71 ₽ на проданную единицу.",
+      "sourceIds": [
+        "economics-batch-30"
+      ]
+    },
+    {
+      "id": "task-03",
+      "title": "Сформировать ассортимент следующего заказа",
+      "status": "Завершено",
+      "org": "catalog",
+      "related": [],
+      "evidence": "Сформирован список из 75 SKU, включающий 32 предпочитаемых принта. Это состав заказа, а не подтверждённое количество принятого складом товара.",
+      "sourceIds": [
+        "catalog-next-order"
+      ]
+    },
+    {
+      "id": "task-04",
+      "title": "Подготовить и ввести коды маркировки",
+      "status": "Завершено",
+      "org": "packing",
+      "related": [
+        "legal"
+      ],
+      "evidence": "Документ успешно принят системой «Честный знак».",
+      "sourceIds": [
+        "marking-acceptance"
+      ]
+    },
+    {
+      "id": "task-05",
+      "title": "Исправить процесс печати и наклеивания этикеток",
+      "status": "Завершено",
+      "org": "packing",
+      "related": [
+        "catalog"
+      ],
+      "evidence": "Зафиксированы ошибки и новая инструкция: согласованный порядок, SKU и соседние этикетки.",
+      "sourceIds": [
+        "labeling-instruction"
+      ]
+    },
+    {
+      "id": "task-06",
+      "title": "Провести две X-Dock поставки",
+      "status": "В работе",
+      "org": "logistic",
+      "related": [],
+      "evidence": "Сформированы отдельные грузоместа для кластеров «Санкт-Петербург и СЗО» и «Москва, МО и дальние регионы» с точкой сдачи ВЛАДИВОСТОК_491. Передача и приёмка складом документами не подтверждены.",
+      "sourceIds": [
+        "logistic-xdock-labels"
+      ]
+    },
+    {
+      "id": "task-07",
+      "title": "Получить декларацию на серийно выпускаемую одежду",
+      "status": "В работе",
+      "org": "legal",
+      "related": [
+        "legal/docs"
+      ],
+      "evidence": "В памятке от 15 июля зафиксирована схема 3д по ТР ТС 017/2011 и необходимость договора с фактическим изготовителем. Наличие подписанного договора, испытаний и зарегистрированной декларации не подтверждено.",
+      "sourceIds": [
+        "legal-memo-3d"
+      ]
+    },
+    {
+      "id": "task-08",
+      "title": "Проверить конверсию новой главной карточки Ozon",
+      "status": "В работе",
+      "org": "economics",
+      "related": [
+        "catalog"
+      ],
+      "evidence": "Предыдущий тест эластичного бустинга 15% завершён: тестовая группа сохранила 898 показов против примерно 894 неделей ранее на фоне общего падения трафика, но не получила заказов. Текущий тест: новая главная карточка chi-vintagerosemandala-pine уже размещена на Ozon; контроль — chi-ethniclanna-mint без изменений. До недельной проверки сохраняем бустинг 15%, цену и остальные существенные элементы без изменений.",
+      "sourceIds": [
+        "ozon-sales-week-2026-08-30",
+        "ozon-card-test-2026-08-30"
+      ]
+    }
+  ],
+  "news": [
+    {
+      "id": "news-01",
+      "date": "7 июня 2026",
+      "title": "Зафиксирован долгосрочный горизонт проекта",
+      "summary": "Long-Term Vision Register сформулировал ориентиры на 5–7 лет. Это план, не достигнутый результат.",
+      "type": "action",
+      "org": null,
+      "sourceIds": [
+        "long-term-vision"
+      ]
+    },
+    {
+      "id": "news-02",
+      "date": "1 июля 2026",
+      "title": "Документ принят «Честным знаком»",
+      "summary": "Формат документа для ввода полученных от физических лиц товаров успешно прошёл загрузку.",
+      "type": "oper",
+      "org": "packing",
+      "task": "task-04",
+      "sourceIds": [
+        "marking-acceptance"
+      ]
+    },
+    {
+      "id": "news-03",
+      "date": "15 июля 2026",
+      "title": "Обновлена инструкция по этикетированию",
+      "summary": "После ошибок первого цикла зафиксирован новый порядок печати: связанный порядок SKU, Ozon и кодов маркировки.",
+      "type": "cycle_closed",
+      "org": "packing",
+      "task": "task-05",
+      "sourceIds": [
+        "labeling-instruction"
+      ]
+    },
+    {
+      "id": "news-06",
+      "date": "15 июля 2026",
+      "title": "Созданы грузоместа для двух направлений",
+      "summary": "Сформированы этикетки X-Dock поставок в Санкт-Петербург и СЗО, а также в Москву, МО и дальние регионы. Приёмка складом пока не подтверждена.",
+      "type": "action",
+      "org": "logistic",
+      "task": "task-06",
+      "sourceIds": [
+        "logistic-xdock-labels"
+      ]
+    },
+    {
+      "id": "news-04",
+      "date": "16 июля 2026",
+      "title": "Рассчитана фактическая экономика первой партии",
+      "summary": "Текущий денежный результат составил −11 768,06 ₽. Без разовой первичной маркировки расчётная повторяемая прибыль — 104,71 ₽ на продажу; для цели 500 ₽ рассчитана минимальная фактическая цена 2 900 ₽.",
+      "type": "cycle_closed",
+      "org": "economics",
+      "task": "task-02",
+      "sourceIds": [
+        "economics-batch-30"
+      ]
+    },
+    {
+      "id": "news-05",
+      "date": "16 июля 2026",
+      "title": "Сформирован следующий ассортимент",
+      "summary": "После добавления пропущенной группы ethniclanna список достиг 75 SKU из 32 предпочитаемых принтов. Это состав заказа, а не подтверждение складской приёмки 75 единиц.",
+      "type": "action",
+      "org": "catalog",
+      "task": "task-03",
+      "sourceIds": [
+        "catalog-next-order"
+      ]
+    },
+    {
+      "id": "news-07",
+      "date": "30 августа 2026",
+      "title": "Завершён тест эластичного бустинга",
+      "summary": "За неделю получен 1 заказ на 2 900 ₽ при 4 076 показах. Четыре продвигаемых SKU сохранили суммарные показы примерно на уровне прошлой недели — 898 против ≈894 — на фоне падения общего трафика примерно на 10%, но заказов в тестовой группе не было.",
+      "type": "cycle_closed",
+      "org": "economics",
+      "task": "task-08",
+      "sourceIds": [
+        "ozon-sales-week-2026-08-30"
+      ]
+    },
+    {
+      "id": "news-08",
+      "date": "30 августа 2026",
+      "title": "Новая главная карточка размещена на Ozon",
+      "summary": "Экспериментальный SKU chi-vintagerosemandala-pine переведён в недельное наблюдение; контроль — chi-ethniclanna-mint. Эластичный бустинг 15%, цена и остальные существенные факторы сохраняются неизменными.",
+      "type": "oper",
+      "org": "economics",
+      "task": "task-08",
+      "sourceIds": [
+        "ozon-card-test-2026-08-30"
+      ]
+    }
+  ],
+  "sourceRegistry": {
+    "sources": [
+      {
+        "id": "long-term-vision",
+        "kind": "document",
+        "title": "Long-Term Vision Register",
+        "status": "confirmed",
+        "scope": "Долгосрочные горизонты и целевые ориентиры проекта"
+      },
+      {
+        "id": "ozon-first-cycle",
+        "kind": "document",
+        "title": "Результаты первого цикла Ozon",
+        "status": "confirmed",
+        "scope": "Количество товаров, продажи, кражи и остаток"
+      },
+      {
+        "id": "economics-batch-30",
+        "kind": "document",
+        "title": "Экономика партии из 30 единиц",
+        "status": "confirmed",
+        "scope": "Расходы, поступления, себестоимость и ценовой расчёт"
+      },
+      {
+        "id": "catalog-next-order",
+        "kind": "conversation",
+        "title": "Состав следующего заказа",
+        "status": "confirmed",
+        "scope": "75 SKU из 32 предпочитаемых принтов"
+      },
+      {
+        "id": "marking-acceptance",
+        "kind": "conversation",
+        "title": "Результат загрузки в «Честный знак»",
+        "status": "confirmed",
+        "scope": "Принятие документа системой маркировки"
+      },
+      {
+        "id": "labeling-instruction",
+        "kind": "conversation",
+        "title": "Уточнённая инструкция этикетирования",
+        "status": "confirmed",
+        "scope": "Порядок SKU, этикеток Ozon и кодов маркировки"
+      },
+      {
+        "id": "logistic-xdock-labels",
+        "kind": "document",
+        "title": "Этикетки двух X-Dock грузомест",
+        "status": "partial",
+        "scope": "Создание грузомест без подтверждения складской приёмки"
+      },
+      {
+        "id": "legal-memo-3d",
+        "kind": "document",
+        "title": "Юридическая памятка по декларации 3д",
+        "status": "partial",
+        "scope": "Схема декларирования; договор, испытания и регистрация ещё не подтверждены"
+      },
+      {
+        "id": "operator-instruction",
+        "kind": "conversation",
+        "title": "Прямые указания оператора",
+        "status": "confirmed",
+        "scope": "Изменения интерфейса, структуры сайта и классификации"
+      },
+      {
+        "id": "sites-source-v13",
+        "kind": "repository",
+        "title": "Исходники Sites, версия 13",
+        "status": "confirmed",
+        "scope": "Текущее опубликованное представление сайта"
+      },
+      {
+        "id": "gap-two-year-stage",
+        "kind": "gap",
+        "title": "Невосстановленная декомпозиция этапа около 2 лет",
+        "status": "missing",
+        "scope": "Требуется исходный артефакт с точными этапами и условиями"
+      },
+      {
+        "id": "calendar-projection-automation",
+        "kind": "repository",
+        "title": "Автоматическая проекция циклов в Google Calendar",
+        "status": "confirmed",
+        "scope": "Доменный протокол, реализация синхронизации, production-событие без дубля и пользовательское уведомление за сутки"
+      },
+      {
+        "id": "ozon-sales-week-2026-08-30",
+        "kind": "screenshot",
+        "title": "Недельная аналитика продаж Ozon на 30 августа",
+        "status": "confirmed",
+        "scope": "1 заказ на 2 900 ₽, 4 076 показов; сравнение тестовой группы эластичного бустинга с предыдущей неделей и остальным ассортиментом"
+      },
+      {
+        "id": "ozon-card-test-2026-08-30",
+        "kind": "conversation",
+        "title": "Эксперимент новой главной карточки chi-vintagerosemandala-pine",
+        "status": "confirmed",
+        "scope": "Выбор экспериментального и контрольного SKU, размещение карточки 3:4 на Ozon, сохранение бустинга 15% и критерии недельного сравнения"
+      }
+    ],
+    "summaryGroups": [
+      {
+        "title": "Подтверждено документами",
+        "text": "Экономика партии на 30 единиц; 24 продажи, 4 кражи и остаток 2; расходы 26 525,06 ₽; сальдо Ozon 14 757 ₽; две этикетки X-Dock; памятка по декларации 3д."
+      },
+      {
+        "title": "Подтверждено беседой и наблюдением",
+        "text": "Список следующего заказа из 75 SKU и 32 предпочитаемых принтов, успешная загрузка документа «Честным знаком», обновлённая инструкция этикетирования, недельная аналитика Ozon на 30 августа и выбранный тест новой главной карточки."
+      },
+      {
+        "title": "Требует подтверждения",
+        "text": "Загрузка новой экспериментальной карточки на Ozon, договор с фактическим изготовителем, испытания и декларация 3д, устойчивый спрос, маржа и возвраты."
+      },
+      {
+        "title": "Историческое правило",
+        "text": "При обновлении сохраняется предыдущий снимок; новая запись относится либо к бизнесу, либо к сайту, но не к обоим сразу."
+      }
+    ]
+  }
+}

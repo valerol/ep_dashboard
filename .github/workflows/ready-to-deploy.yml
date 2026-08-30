@@ -1,0 +1,60 @@
+name: READY_TO_DEPLOY
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-build-and-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.13.0"
+          cache: npm
+      - run: npm ci
+      - name: Protect append-only observation events
+        if: github.event_name == 'push' && github.event.before != '0000000000000000000000000000000000000000'
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          COMMIT_SHA: ${{ github.sha }}
+        run: |
+          if git diff --name-status "$BEFORE_SHA" "$COMMIT_SHA" -- data/ep-domain/observation/events | grep -E '^[DM]'; then
+            echo "Observation events are append-only: deletion or modification detected."
+            exit 1
+          fi
+      - name: Validate JSON and YAML
+        run: npm run check:data-formats
+      - name: Check domain topology and inventory
+        run: npm run check:domain-drift
+      - name: Check derived indexes and projections
+        run: npm run check:projections
+      - name: Run tests and production build
+        run: npm test
+      - name: Validate calendar projection
+        run: npm run test:calendar-sync && npm run sync:calendar:dry-run
+      - name: Synchronize Elephant Pants calendar
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          EP_GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
+          GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$EP_GOOGLE_CALENDAR_ID" ] || [ -z "$GOOGLE_CALENDAR_SERVICE_ACCOUNT_JSON" ]; then
+            echo "Required calendar secrets are not configured."
+            exit 1
+          fi
+          npm run sync:calendar
+      - name: Mark commit ready for Sites
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "READY_TO_DEPLOY: $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+          echo "Run prompts/DEPLOY_SITE.md in ChatGPT desktop to publish this exact commit to the existing Site." >> "$GITHUB_STEP_SUMMARY"

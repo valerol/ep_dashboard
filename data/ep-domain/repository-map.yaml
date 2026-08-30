@@ -94,6 +94,8 @@ repeatable_patterns:
     rule: APPEND_ONLY_ONE_EVENT_PER_FILE
 current_inventory:
   cycle_records:
+    - EP-GP-20260809-001
+    - EP-GP-20260809-002
     - EP-LI-20260807-001
     - EP-LI-20260807-002
     - EP-LR-20260807-001
@@ -105,8 +107,6 @@ current_inventory:
     - EP-S-20260814-001
     - EP-S-20260822-001
     - EP-S-20260830-001
-    - EP-GP-20260809-001
-    - EP-GP-20260809-002
   observation_events:
     - EP-EVENT-20260807-001
     - EP-EVENT-20260807-002
