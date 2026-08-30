@@ -1,0 +1,91 @@
+record_id: EP-S-20260830-001
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: "2026-08-30T18:00:00+10:00"
+updated_at: "2026-08-30T18:00:00+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260830-001
+  - EP-EVENT-20260830-002
+  - OWNER_LPR_DECISION:2026-08-30:TEST_PRODUCT_CARD_IMAGE
+  - OWNER_LPR_APPROVED_ASSET:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_MAIN_IMAGE
+
+cycle_instance_id: EP-S-20260830-001
+cycle_type_id: OZON_WEEKLY_SALES_REVIEW
+cycle_class: SALES
+series_id: EP-SERIES-OZON-WEEKLY-SALES-REVIEW
+occurrence: 5
+scope:
+  class_boundary_ref: EP-DP_v0.2_S1-S2
+  instance_subject_ref: EP-BATCH-2026-002
+
+parent_cycle_instance_id: EP-S-20260807-001
+predecessor_cycle_instance_id: EP-S-20260822-001
+continuation_reason: NEXT_CONVERSION_EXPERIMENT_SELECTED_AFTER_PROMOTION_TEST
+trigger_evidence_ref: EP-EVENT-20260830-002
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: ECONOMICS.SYSTEM
+
+goal: Проверить, повышает ли новая главная карточка конверсию chi-vintagerosemandala-pine при сохранении текущего эластичного бустинга
+cycle_record_state: OPEN
+transition_decision: READY
+remediation_state: NONE
+current_step: UPLOAD_EXPERIMENTAL_MAIN_IMAGE_AND_MONITOR_7_DAYS
+plan:
+  - Использовать chi-vintagerosemandala-pine как экспериментальный SKU
+  - Использовать chi-ethniclanna-mint как контрольный SKU без изменений карточки
+  - Сохранить текущий эластичный бустинг 15% на продвигаемых SKU без изменения рекламного фактора
+  - Заменить главное изображение chi-vintagerosemandala-pine на подготовленную вертикальную карточку 3:4
+  - Не менять цену, описание и остальные существенные элементы экспериментальной карточки в течение теста
+  - Через 7 дней снять аналитику Ozon и сравнить показы, заказы и конверсию экспериментального SKU с его предыдущей неделей и контрольным SKU
+expected_result: При сопоставимом рекламном воздействии изменение главного изображения даст измеримый рост конверсии chi-vintagerosemandala-pine либо покажет отсутствие такого эффекта
+actual_result: null
+evidence_refs:
+  - EP-EVENT-20260830-002
+
+experiment:
+  variable: MAIN_PRODUCT_IMAGE
+  experimental_sku: chi-vintagerosemandala-pine
+  control_sku: chi-ethniclanna-mint
+  baseline:
+    experimental_impressions_last_week: 350
+    experimental_orders_last_week: 0
+    control_impressions_last_week: 290
+    control_orders_last_week: 0
+  asset:
+    status: PREPARED_NOT_YET_CONFIRMED_UPLOADED_TO_OZON
+    format: "3:4"
+    visible_pockets: 1
+    size_claim: "42–46"
+    claims:
+      - 100% вискоза
+      - Лёгкая ткань
+      - Глубокий карман
+      - Для дома, йоги и пляжа
+
+schedule:
+  kind: CHECK
+  date: "2026-09-06"
+  timezone: Asia/Vladivostok
+  duration_minutes: 30
+  reminder_before: P1D
+  calendar_publish: true
+  transparency: transparent
+  title: Elephant Pants · Проверить тест карточки Ozon
+  projection_protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+
+opened_at: "2026-08-30T18:00:00+10:00"
+current_closed_at: null
+current_closure_outcome: NONE
+current_closure_event_ref: null
+closure_event_refs: []
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2.1
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
+protocol_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
