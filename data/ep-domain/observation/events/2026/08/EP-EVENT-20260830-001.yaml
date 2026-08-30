@@ -1,0 +1,71 @@
+record_id: EP-EVENT-20260830-001
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-30T17:46:00+10:00"
+updated_at: "2026-08-30T17:46:00+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_OBSERVATION:2026-08-30:OZON_WEEKLY_ANALYTICS
+
+observation_event_id: EP-EVENT-20260830-001
+event_type: CYCLE_CLOSED
+action_or_event_ref: OWNER_LPR_OBSERVATION:2026-08-30:OZON_WEEKLY_ANALYTICS
+occurred_at: "2026-08-30T17:46:00+10:00"
+observed_or_received_at: "2026-08-30T17:46:00+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260822-001
+    classification_basis_ref: WEEKLY_OZON_ANALYTICS_PROVIDED_BY_OWNER
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-30T17:46:00+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: CLOSED
+  current_step_after: START_PRODUCT_CARD_CONVERSION_TEST
+  result: Эластичный бустинг сохранил видимость четырёх продвигаемых SKU на фоне падения общего трафика, но не дал заказов в тестовой группе
+
+facts:
+  period: LAST_7_DAYS_AS_OF_2026-08-30
+  store_total:
+    ordered_items: 1
+    ordered_amount_rub: 2900
+    impressions: 4076
+  promoted_group:
+    skus:
+      - chi-himatun-sky
+      - chi-ethniclanna-mint
+      - chi-vintagerosemandala-pine
+      - chi-teardropmandala-purple
+    current_impressions: 898
+    previous_impressions_approx: 894
+    impression_change_approx_percent: 0.4
+    ordered_items: 0
+  non_promoted_group:
+    current_impressions: 3178
+    previous_impressions_approx: 3649
+    impression_change_approx_percent: -13
+  store_impression_change_approx_percent: -10
+  only_selling_sku: chi-ancientpottery-black
+  interpretation: PROMOTION_VISIBILITY_EFFECT_OBSERVED_WITHOUT_SALES_CONVERSION
+
+closure:
+  outcome: ACHIEVED
+  expected_result_ref: EP-S-20260822-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: ACTUAL_RESULT_RECORDED
+  actual_vs_expected_comparison: RESULT_MEASURED_AND_NEXT_TEST_SELECTED
+  closure_basis: WEEKLY_ANALYTICS_REVIEW_COMPLETED
+  closure_evidence_refs:
+    - OWNER_LPR_OBSERVATION:2026-08-30:OZON_WEEKLY_ANALYTICS
+  residue_disposition: CONTINUE_PARENT_SALES_BATCH_AND_TEST_CARD_CONVERSION
+  decided_by: OWNER_LPR
+  authority_ref: EP-DP-DR-007
+  decided_at: "2026-08-30T17:46:00+10:00"
+  closed_at: "2026-08-30T17:46:00+10:00"
