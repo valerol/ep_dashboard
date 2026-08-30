@@ -1,0 +1,54 @@
+record_id: EP-EVENT-20260830-003
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-30T18:18:00+10:00"
+updated_at: "2026-08-30T18:18:00+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_ACTION:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_IMAGE_UPLOADED_TO_OZON
+
+observation_event_id: EP-EVENT-20260830-003
+event_type: STATE_OBSERVED
+action_or_event_ref: OWNER_LPR_ACTION:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_IMAGE_UPLOADED_TO_OZON
+occurred_at: "2026-08-30T18:18:00+10:00"
+observed_or_received_at: "2026-08-30T18:18:00+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260830-001
+    classification_basis_ref: OWNER_CONFIRMED_OZON_UPLOAD
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-30T18:18:00+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: OPEN
+  current_step_after: MONITOR_EXPERIMENTAL_MAIN_IMAGE_FOR_7_DAYS
+  result: Новая главная карточка chi-vintagerosemandala-pine размещена на Ozon; эксперимент перешёл из подготовки в наблюдение
+
+facts:
+  experimental_sku: chi-vintagerosemandala-pine
+  control_sku: chi-ethniclanna-mint
+  experimental_asset_status: UPLOADED_TO_OZON
+  upload_confirmation_source: OWNER_LPR_DIRECT_REPORT
+  elastic_boosting_percent: 15
+  evaluation_date: "2026-09-06"
+
+closure:
+  outcome: null
+  expected_result_ref: EP-S-20260830-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: NO_FINAL_RESULT
+  actual_vs_expected_comparison: TEST_RUNNING
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
