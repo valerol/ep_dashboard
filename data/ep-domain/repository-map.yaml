@@ -1,7 +1,7 @@
 record_id: EP-DOMAIN-REPOSITORY-MAP
 record_type: REPOSITORY_TOPOLOGY_MANIFEST
 schema_version: "1.3"
-snapshot_at: "2026-08-30"
+snapshot_at: "2026-08-31"
 data_owner: OWNER_LPR
 authority_ref: EP-DP-DR-061
 repository:
@@ -130,6 +130,7 @@ current_inventory:
     - EP-EVENT-20260830-001
     - EP-EVENT-20260830-002
     - EP-EVENT-20260830-003
+    - EP-EVENT-20260831-001
   active_protocol_versions:
     - EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
     - EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0
