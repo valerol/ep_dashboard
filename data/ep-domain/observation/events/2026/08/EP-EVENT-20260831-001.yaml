@@ -1,0 +1,68 @@
+record_id: EP-EVENT-20260831-001
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-08-31T15:10:00+10:00"
+updated_at: "2026-08-31T15:10:00+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_ACTION:2026-08-31:CHI_TEARDROPMANDALA_NAVY_CONTENT_RATING_RAISED
+
+observation_event_id: EP-EVENT-20260831-001
+event_type: STATE_OBSERVED
+action_or_event_ref: OWNER_LPR_ACTION:2026-08-31:CHI_TEARDROPMANDALA_NAVY_CONTENT_RATING_RAISED
+occurred_at: "2026-08-31T15:10:00+10:00"
+observed_or_received_at: "2026-08-31T15:10:00+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260830-001
+    classification_basis_ref: OWNER_STARTED_CONTENT_RATING_EXPERIMENT_DURING_OPEN_WEEKLY_SALES_CYCLE
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-08-31T15:10:00+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: OPEN
+  current_step_after: MONITOR_MAIN_IMAGE_AND_CONTENT_RATING_EXPERIMENTS_UNTIL_NEXT_REVIEW
+  result: Контент-рейтинг chi-teardropmandala-navy повышен с 77,5 до не менее 95,5 для проверки влияния качества контента на показы
+
+facts:
+  experiment_type: CONTENT_RATING_VISIBILITY
+  experimental_sku: chi-teardropmandala-navy
+  content_rating_before: 77.5
+  content_rating_after_minimum: 95.5
+  intervention_status: APPLIED_ON_OZON
+  hypothesis: Повышение контент-рейтинга chi-teardropmandala-navy с 77,5 до не менее 95,5 при неизменных прочих факторах улучшит динамику показов относительно собственной предыдущей недели и sibling-SKU семейства teardropmandala
+  controls:
+    comparison_basis:
+      - SAME_SKU_PREVIOUS_WEEK
+      - TEARDROPMANDALA_SIBLING_SKUS_WITH_EXISTING_95_5_RATING
+    keep_unchanged_if_possible:
+      - PRICE
+      - PROMOTION
+      - MAIN_IMAGE
+      - CARD_GROUPING
+  evaluation_metrics:
+    - IMPRESSIONS
+    - IMPRESSION_CHANGE_PERCENT
+    - RELATIVE_IMPRESSION_CHANGE_VS_TEARDROPMANDALA_SIBLINGS
+  evaluation_due_date: "2026-09-06"
+
+closure:
+  outcome: null
+  expected_result_ref: EP-S-20260830-001#secondary_experiments.content_rating_visibility.expected_result
+  actual_result_or_NO_FINAL_RESULT: NO_FINAL_RESULT
+  actual_vs_expected_comparison: TEST_RUNNING
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null
