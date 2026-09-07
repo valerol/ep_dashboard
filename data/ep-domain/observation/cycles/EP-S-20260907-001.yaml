@@ -2,13 +2,15 @@ record_id: EP-S-20260907-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-09-07T15:36:22+10:00"
-updated_at: "2026-09-07T15:47:14+10:00"
+updated_at: "2026-09-07T15:56:09+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260907-001
   - EP-EVENT-20260907-002
+  - EP-EVENT-20260907-003
   - OWNER_LPR_ACTION:2026-09-07:ELASTIC_BOOSTING_REMOVED
   - OWNER_LPR_DECISION:2026-09-07:CONNECT_MOYSKLAD
+  - OWNER_LPR_ACTION:2026-09-07:OZON_PROMOTION_STARTED
 
 cycle_instance_id: EP-S-20260907-001
 cycle_type_id: OZON_WEEKLY_SALES_REVIEW
@@ -21,31 +23,52 @@ scope:
 
 parent_cycle_instance_id: EP-S-20260807-001
 predecessor_cycle_instance_id: EP-S-20260830-001
-continuation_reason: WEEKLY_REVIEW_REQUIRED_AND_MOYSKLAD_SELECTED_AS_NEXT_SALES_ENABLEMENT_STEP
-trigger_evidence_ref: EP-EVENT-20260907-002
+continuation_reason: WEEKLY_REVIEW_REQUIRED_AND_OZON_PROMOTION_EXPERIMENT_STARTED
+trigger_evidence_ref: EP-EVENT-20260907-003
 
 domain_membership:
   local_domain_label: ELEPHANT_PANTS
 contour_membership: ECONOMICS.SYSTEM
 
-goal: Подключить «МойСклад» к Ozon, проверить базовый складской контур и использовать общую настройку для налаживания процесса маркировки
+goal: Проверить, повышает ли участие одного SKU из каждой товарной группы в акции Ozon показы и продажи
 cycle_record_state: OPEN
 transition_decision: READY
 remediation_state: NONE
-current_step: CREATE_MOYSKLAD_ACCOUNT_AND_CONNECT_OZON_CHANNEL
-current_step_summary: Создать аккаунт «МоегоСклада» на бесплатном тарифе и подключить канал Ozon за 600–650 ₽ в месяц. Эластичный бустинг со всех оставшихся позиций снимается.
+current_step: MONITOR_OZON_PROMOTION_FOR_7_DAYS
+current_step_summary: Восемь SKU — по одному из каждой товарной группы — добавлены в акцию Ozon. Сохранить условия теста до 14 сентября и затем снять недельную статистику.
 plan:
-  - Снять эластичный бустинг 15% со всех оставшихся позиций как неэффективный инструмент продвижения
-  - Подключить бесплатный тариф «МоегоСклада» за 0 ₽ для одного пользователя и объёма до 100 товаров и документов
-  - Подключить канал Ozon стоимостью 600–650 ₽ в месяц
-  - Настроить сопоставление SKU, остатков и складских документов между «МоимСкладом» и Ozon
-  - Совместно с проектом маркировки загрузить товарные единицы, получить или связать коды, сформировать и распечатать этикетки, сопоставить код с правильным SKU и довести единицы до статуса «в обороте» в «Честном знаке»
-  - Повторить полный marking workflow без аварийных ручных исправлений
-  - Снять следующую недельную статистику Ozon уже без бустинга
-expected_result: «МойСклад» работает на бесплатном базовом тарифе, канал Ozon подключён, складские данные сопоставлены; полный процесс маркировки проверен по критериям EP-DP-DR-041; получена недельная статистика продаж без бустинга
+  - Сохранить участие выбранных восьми SKU в акции Ozon до окончания недельного окна
+  - По возможности не менять у выбранных SKU карточки, остатки и другие условия продвижения во время теста
+  - 14 сентября снять показы, заказы, сумму заказов, цену и остаток по всем SKU
+  - Для каждого выбранного SKU сравнить результат с его собственной базовой неделей и с остальными цветами той же товарной группы
+  - Рассчитать заказы на 1 000 показов для экспериментальной и контрольной совокупностей
+  - Не считать рост одних показов достаточным бизнес-результатом без заказов
+expected_result: Получена недельная статистика по восьми акционным SKU и их групповым контролям; определено, дала ли акция Ozon прирост заказов на 1 000 показов, а не только изменение видимости
 actual_result: null
 evidence_refs:
   - EP-EVENT-20260907-002
+  - EP-EVENT-20260907-003
+
+experiment:
+  kind: OZON_PROMOTION_ONE_SKU_PER_PRODUCT_GROUP
+  duration_days: 7
+  experimental_sku: 8 SKU — по одному на товарную группу
+  control_sku: остальные цвета соответствующих групп
+  experimental_skus:
+    - chi-rainbow-stripe
+    - chi-maewgingmai-mint
+    - chi-teardropmandala-purple
+    - chi-vintagerosemandala-ruby
+    - chi-yayacat-orange
+    - chi-ethniclanna-olive
+    - chi-ancientpottery-navy
+    - chi-himatun-sky
+  baseline:
+    period: LAST_7_DAYS_AS_OF_2026-09-07
+    ordered_items: 0
+    impressions: 840
+  primary_metric: ORDERS_PER_1000_IMPRESSIONS
+  interpretation_rule: IMPRESSIONS_WITHOUT_ORDERS_ARE_NOT_SUFFICIENT_FOR_BUSINESS_SUCCESS
 
 cross_organ_dependencies:
   - related_project_ref: PROJECT_CARD_MARKING
@@ -71,7 +94,7 @@ schedule:
   reminder_before: P1D
   calendar_publish: true
   transparency: transparent
-  title: Elephant Pants · Проверить подключение «МоегоСклада» и продажи Ozon
+  title: Elephant Pants · Подвести итоги недельной акции Ozon
   projection_protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
 
 opened_at: "2026-09-07T15:36:22+10:00"

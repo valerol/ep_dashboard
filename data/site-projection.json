@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T15:47:14+10:00",
+  "generatedAt": "2026-09-07T15:56:09+10:00",
   "dataDate": "2026-09-07",
   "counts": {
     "total": 14,
@@ -10,28 +10,28 @@
     "id": "EP-S-20260907-001",
     "type": "OZON_WEEKLY_SALES_REVIEW",
     "title": "Еженедельная проверка аналитики продаж Ozon",
-    "goal": "Подключить «МойСклад» к Ozon, проверить базовый складской контур и использовать общую настройку для налаживания процесса маркировки",
+    "goal": "Проверить, повышает ли участие одного SKU из каждой товарной группы в акции Ozon показы и продажи",
     "cls": "SALES",
     "occurrence": 6,
     "state": "OPEN",
     "decision": "READY",
     "outcome": "NONE",
     "parent": "EP-S-20260807-001",
-    "result": "Бустинг снимается со всех оставшихся позиций как неэффективный инструмент продвижения; следующим шагом выбрано подключение «МоегоСклада» к Ozon",
-    "step": "CREATE_MOYSKLAD_ACCOUNT_AND_CONNECT_OZON_CHANNEL",
-    "stepSummary": "Создать аккаунт «МоегоСклада» на бесплатном тарифе и подключить канал Ozon за 600–650 ₽ в месяц. Эластичный бустинг со всех оставшихся позиций снимается.",
+    "result": "В акцию Ozon добавлены восемь SKU — по одному из каждой товарной группы; открыт недельный эксперимент до 14 сентября",
+    "step": "MONITOR_OZON_PROMOTION_FOR_7_DAYS",
+    "stepSummary": "Восемь SKU — по одному из каждой товарной группы — добавлены в акцию Ozon. Сохранить условия теста до 14 сентября и затем снять недельную статистику.",
     "plan": [
-      "Снять эластичный бустинг 15% со всех оставшихся позиций как неэффективный инструмент продвижения",
-      "Подключить бесплатный тариф «МоегоСклада» за 0 ₽ для одного пользователя и объёма до 100 товаров и документов",
-      "Подключить канал Ozon стоимостью 600–650 ₽ в месяц",
-      "Настроить сопоставление SKU, остатков и складских документов между «МоимСкладом» и Ozon",
-      "Совместно с проектом маркировки загрузить товарные единицы, получить или связать коды, сформировать и распечатать этикетки, сопоставить код с правильным SKU и довести единицы до статуса «в обороте» в «Честном знаке»",
-      "Повторить полный marking workflow без аварийных ручных исправлений",
-      "Снять следующую недельную статистику Ozon уже без бустинга"
+      "Сохранить участие выбранных восьми SKU в акции Ozon до окончания недельного окна",
+      "По возможности не менять у выбранных SKU карточки, остатки и другие условия продвижения во время теста",
+      "14 сентября снять показы, заказы, сумму заказов, цену и остаток по всем SKU",
+      "Для каждого выбранного SKU сравнить результат с его собственной базовой неделей и с остальными цветами той же товарной группы",
+      "Рассчитать заказы на 1 000 показов для экспериментальной и контрольной совокупностей",
+      "Не считать рост одних показов достаточным бизнес-результатом без заказов"
     ],
     "evidencePolicy": "REQUIRED",
     "evidence": [
-      "EP-EVENT-20260907-002"
+      "EP-EVENT-20260907-002",
+      "EP-EVENT-20260907-003"
     ],
     "schedule": {
       "kind": "CHECK",
@@ -41,39 +41,61 @@
       "reminder_before": "P1D",
       "calendar_publish": true,
       "transparency": "transparent",
-      "title": "Elephant Pants · Проверить подключение «МоегоСклада» и продажи Ozon",
+      "title": "Elephant Pants · Подвести итоги недельной акции Ozon",
       "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
     },
-    "experiment": null,
-    "updatedAt": "2026-09-07T15:47:14+10:00"
+    "experiment": {
+      "kind": "OZON_PROMOTION_ONE_SKU_PER_PRODUCT_GROUP",
+      "duration_days": 7,
+      "experimental_sku": "8 SKU — по одному на товарную группу",
+      "control_sku": "остальные цвета соответствующих групп",
+      "experimental_skus": [
+        "chi-rainbow-stripe",
+        "chi-maewgingmai-mint",
+        "chi-teardropmandala-purple",
+        "chi-vintagerosemandala-ruby",
+        "chi-yayacat-orange",
+        "chi-ethniclanna-olive",
+        "chi-ancientpottery-navy",
+        "chi-himatun-sky"
+      ],
+      "baseline": {
+        "period": "LAST_7_DAYS_AS_OF_2026-09-07",
+        "ordered_items": 0,
+        "impressions": 840
+      },
+      "primary_metric": "ORDERS_PER_1000_IMPRESSIONS",
+      "interpretation_rule": "IMPRESSIONS_WITHOUT_ORDERS_ARE_NOT_SUFFICIENT_FOR_BUSINESS_SUCCESS"
+    },
+    "updatedAt": "2026-09-07T15:56:09+10:00"
   },
   "cycles": [
     {
       "id": "EP-S-20260907-001",
       "type": "OZON_WEEKLY_SALES_REVIEW",
       "title": "Еженедельная проверка аналитики продаж Ozon",
-      "goal": "Подключить «МойСклад» к Ozon, проверить базовый складской контур и использовать общую настройку для налаживания процесса маркировки",
+      "goal": "Проверить, повышает ли участие одного SKU из каждой товарной группы в акции Ozon показы и продажи",
       "cls": "SALES",
       "occurrence": 6,
       "state": "OPEN",
       "decision": "READY",
       "outcome": "NONE",
       "parent": "EP-S-20260807-001",
-      "result": "Бустинг снимается со всех оставшихся позиций как неэффективный инструмент продвижения; следующим шагом выбрано подключение «МоегоСклада» к Ozon",
-      "step": "CREATE_MOYSKLAD_ACCOUNT_AND_CONNECT_OZON_CHANNEL",
-      "stepSummary": "Создать аккаунт «МоегоСклада» на бесплатном тарифе и подключить канал Ozon за 600–650 ₽ в месяц. Эластичный бустинг со всех оставшихся позиций снимается.",
+      "result": "В акцию Ozon добавлены восемь SKU — по одному из каждой товарной группы; открыт недельный эксперимент до 14 сентября",
+      "step": "MONITOR_OZON_PROMOTION_FOR_7_DAYS",
+      "stepSummary": "Восемь SKU — по одному из каждой товарной группы — добавлены в акцию Ozon. Сохранить условия теста до 14 сентября и затем снять недельную статистику.",
       "plan": [
-        "Снять эластичный бустинг 15% со всех оставшихся позиций как неэффективный инструмент продвижения",
-        "Подключить бесплатный тариф «МоегоСклада» за 0 ₽ для одного пользователя и объёма до 100 товаров и документов",
-        "Подключить канал Ozon стоимостью 600–650 ₽ в месяц",
-        "Настроить сопоставление SKU, остатков и складских документов между «МоимСкладом» и Ozon",
-        "Совместно с проектом маркировки загрузить товарные единицы, получить или связать коды, сформировать и распечатать этикетки, сопоставить код с правильным SKU и довести единицы до статуса «в обороте» в «Честном знаке»",
-        "Повторить полный marking workflow без аварийных ручных исправлений",
-        "Снять следующую недельную статистику Ozon уже без бустинга"
+        "Сохранить участие выбранных восьми SKU в акции Ozon до окончания недельного окна",
+        "По возможности не менять у выбранных SKU карточки, остатки и другие условия продвижения во время теста",
+        "14 сентября снять показы, заказы, сумму заказов, цену и остаток по всем SKU",
+        "Для каждого выбранного SKU сравнить результат с его собственной базовой неделей и с остальными цветами той же товарной группы",
+        "Рассчитать заказы на 1 000 показов для экспериментальной и контрольной совокупностей",
+        "Не считать рост одних показов достаточным бизнес-результатом без заказов"
       ],
       "evidencePolicy": "REQUIRED",
       "evidence": [
-        "EP-EVENT-20260907-002"
+        "EP-EVENT-20260907-002",
+        "EP-EVENT-20260907-003"
       ],
       "schedule": {
         "kind": "CHECK",
@@ -83,11 +105,33 @@
         "reminder_before": "P1D",
         "calendar_publish": true,
         "transparency": "transparent",
-        "title": "Elephant Pants · Проверить подключение «МоегоСклада» и продажи Ozon",
+        "title": "Elephant Pants · Подвести итоги недельной акции Ozon",
         "projection_protocol_ref": "EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0"
       },
-      "experiment": null,
-      "updatedAt": "2026-09-07T15:47:14+10:00"
+      "experiment": {
+        "kind": "OZON_PROMOTION_ONE_SKU_PER_PRODUCT_GROUP",
+        "duration_days": 7,
+        "experimental_sku": "8 SKU — по одному на товарную группу",
+        "control_sku": "остальные цвета соответствующих групп",
+        "experimental_skus": [
+          "chi-rainbow-stripe",
+          "chi-maewgingmai-mint",
+          "chi-teardropmandala-purple",
+          "chi-vintagerosemandala-ruby",
+          "chi-yayacat-orange",
+          "chi-ethniclanna-olive",
+          "chi-ancientpottery-navy",
+          "chi-himatun-sky"
+        ],
+        "baseline": {
+          "period": "LAST_7_DAYS_AS_OF_2026-09-07",
+          "ordered_items": 0,
+          "impressions": 840
+        },
+        "primary_metric": "ORDERS_PER_1000_IMPRESSIONS",
+        "interpretation_rule": "IMPRESSIONS_WITHOUT_ORDERS_ARE_NOT_SUFFICIENT_FOR_BUSINESS_SUCCESS"
+      },
+      "updatedAt": "2026-09-07T15:56:09+10:00"
     },
     {
       "id": "EP-S-20260830-001",
@@ -584,6 +628,99 @@
     }
   ],
   "events": [
+    {
+      "id": "EP-EVENT-20260907-003",
+      "date": "07.09.2026",
+      "occurredAt": "2026-09-07T15:56:09+10:00",
+      "type": "STATE_OBSERVED",
+      "title": "В акцию Ozon добавлены восемь SKU — по одному из каждой товарной группы; открыт недельный эксперимент до 14 сентября",
+      "detail": "В акцию Ozon добавлены восемь SKU — по одному из каждой товарной группы; открыт недельный эксперимент до 14 сентября",
+      "cycle": "EP-S-20260907-001",
+      "evidence": "OWNER_LPR_ACTION:2026-09-07:OZON_PROMOTION_STARTED",
+      "facts": {
+        "experiment_kind": "OZON_PROMOTION_ONE_SKU_PER_PRODUCT_GROUP",
+        "duration_days": 7,
+        "ends_on": "2026-09-14",
+        "baseline_period": "LAST_7_DAYS_AS_OF_2026-09-07",
+        "baseline_selected_skus_total": {
+          "ordered_items": 0,
+          "impressions": 840
+        },
+        "selected_skus": [
+          {
+            "sku": "chi-rainbow-stripe",
+            "ozon_sku": 4069554623,
+            "action_price_rub": 1676,
+            "discount_percent": 42.21,
+            "baseline_impressions": 136,
+            "baseline_orders": 0
+          },
+          {
+            "sku": "chi-maewgingmai-mint",
+            "ozon_sku": 4071910156,
+            "action_price_rub": 1117,
+            "discount_percent": 61.48,
+            "baseline_impressions": 58,
+            "baseline_orders": 0
+          },
+          {
+            "sku": "chi-teardropmandala-purple",
+            "ozon_sku": 4071911471,
+            "action_price_rub": 1117,
+            "discount_percent": 57.93,
+            "baseline_impressions": 111,
+            "baseline_orders": 0
+          },
+          {
+            "sku": "chi-vintagerosemandala-ruby",
+            "ozon_sku": 4071911527,
+            "action_price_rub": 1676,
+            "discount_percent": 42.21,
+            "baseline_impressions": 148,
+            "baseline_orders": 0
+          },
+          {
+            "sku": "chi-yayacat-orange",
+            "ozon_sku": 4071910499,
+            "action_price_rub": 2513,
+            "discount_percent": 13.34,
+            "baseline_impressions": 112,
+            "baseline_orders": 0
+          },
+          {
+            "sku": "chi-ethniclanna-olive",
+            "ozon_sku": 4071913090,
+            "action_price_rub": 1676,
+            "discount_percent": 42.21,
+            "baseline_impressions": 74,
+            "baseline_orders": 0
+          },
+          {
+            "sku": "chi-ancientpottery-navy",
+            "ozon_sku": 4071910323,
+            "action_price_rub": 1676,
+            "discount_percent": 42.21,
+            "baseline_impressions": 106,
+            "baseline_orders": 0
+          },
+          {
+            "sku": "chi-himatun-sky",
+            "ozon_sku": 4071911883,
+            "action_price_rub": 1676,
+            "discount_percent": 35.11,
+            "baseline_impressions": 95,
+            "baseline_orders": 0
+          }
+        ],
+        "evaluation": {
+          "experimental_unit": "SELECTED_SKU_WITHIN_EACH_PRODUCT_GROUP",
+          "control": "NON_PROMOTED_COLORS_IN_THE_SAME_PRODUCT_GROUP",
+          "primary_metric": "ORDERS_PER_1000_IMPRESSIONS",
+          "secondary_metric": "IMPRESSIONS",
+          "interpretation_rule": "IMPRESSIONS_WITHOUT_ORDERS_ARE_NOT_SUFFICIENT_FOR_BUSINESS_SUCCESS"
+        }
+      }
+    },
     {
       "id": "EP-EVENT-20260907-001",
       "date": "07.09.2026",
@@ -1357,11 +1494,24 @@
         "packing",
         "catalog"
       ],
-      "evidence": "Выбран бесплатный тариф 0 ₽: 1 пользователь, до 100 товаров и документов, базовый складской учёт. Канал Ozon стоит 600–650 ₽ в месяц. Настройка должна одновременно поддержать продажи и пройти полный тест маркировки до статуса «в обороте» с повтором без аварийных ручных исправлений. Бустинг снимается со всех оставшихся SKU как неэффективный инструмент продвижения.",
+      "evidence": "Параллельная задача на пересечении sales и проекта маркировки. Выбран бесплатный тариф 0 ₽: 1 пользователь, до 100 товаров и документов, базовый складской учёт. Канал Ozon стоит 600–650 ₽ в месяц. Настройка должна пройти полный тест маркировки до статуса «в обороте» с повтором без аварийных ручных исправлений.",
       "sourceIds": [
         "moysklad-ozon-decision-2026-09-07",
         "marking-project-card",
         "ozon-boosting-stop-2026-09-07"
+      ]
+    },
+    {
+      "id": "task-10",
+      "title": "Проверить результат участия товаров в акции Ozon",
+      "status": "В работе",
+      "org": "economics",
+      "related": [
+        "catalog"
+      ],
+      "evidence": "7 сентября в акцию Ozon добавлены 8 SKU — по одному из каждой товарной группы. Базовая неделя: 840 показов и 0 заказов по выбранным SKU. Итоги снимаются 14 сентября по заказам на 1 000 показов с внутригрупповым контролем.",
+      "sourceIds": [
+        "ozon-promotion-test-2026-09-07"
       ]
     }
   ],
@@ -1476,14 +1626,26 @@
     {
       "id": "news-10",
       "date": "7 сентября 2026",
-      "title": "Следующий шаг — подключение «МоегоСклада»",
-      "summary": "Выбран бесплатный тариф 0 ₽ для одного пользователя и объёма до 100 товаров и документов; канал Ozon — 600–650 ₽ в месяц. Задача связана с активным проектом маркировки. Бустинг снимается со всех оставшихся позиций как неэффективный инструмент продвижения.",
+      "title": "Подключение «МоегоСклада» вынесено в параллельный контур",
+      "summary": "Выбран бесплатный тариф 0 ₽ для одного пользователя и объёма до 100 товаров и документов; канал Ozon — 600–650 ₽ в месяц. Задача остаётся активной на пересечении sales и проекта маркировки, но больше не является текущим недельным sales-экспериментом.",
       "type": "action",
       "org": "economics",
       "task": "task-09",
       "sourceIds": [
         "moysklad-ozon-decision-2026-09-07",
         "ozon-boosting-stop-2026-09-07"
+      ]
+    },
+    {
+      "id": "news-11",
+      "date": "7 сентября 2026",
+      "title": "Стартовал недельный эксперимент с акцией Ozon",
+      "summary": "В акцию добавлены 8 SKU — по одному из каждой товарной группы. На базовой неделе они получили 840 показов и 0 заказов. Проверка 14 сентября сопоставит их с собственной базой и остальными цветами тех же групп.",
+      "type": "oper",
+      "org": "economics",
+      "task": "task-10",
+      "sourceIds": [
+        "ozon-promotion-test-2026-09-07"
       ]
     }
   ],
@@ -1586,6 +1748,48 @@
         "title": "Эксперимент новой главной карточки chi-vintagerosemandala-pine",
         "status": "confirmed",
         "scope": "Выбор экспериментального и контрольного SKU, размещение карточки 3:4 на Ozon, сохранение бустинга 15% и критерии недельного сравнения"
+      },
+      {
+        "id": "ozon-sales-week-2026-09-07",
+        "kind": "screenshot",
+        "title": "Недельная аналитика продаж Ozon на 7 сентября",
+        "status": "confirmed",
+        "scope": "1 заказ на 2 455 ₽, 3 571 показ; закрытие тестов главного изображения и контент-рейтинга"
+      },
+      {
+        "id": "ozon-content-rating-test-2026-08-31",
+        "kind": "conversation",
+        "title": "Эксперимент контент-рейтинга chi-teardropmandala-navy",
+        "status": "confirmed",
+        "scope": "Повышение контент-рейтинга с 77,5 до не менее 95,5 и недельное сравнение показов"
+      },
+      {
+        "id": "moysklad-ozon-decision-2026-09-07",
+        "kind": "conversation",
+        "title": "Решение подключить «МойСклад» к Ozon",
+        "status": "confirmed",
+        "scope": "Бесплатный базовый тариф и платный канал Ozon как общий контур sales и маркировки"
+      },
+      {
+        "id": "marking-project-card",
+        "kind": "repository",
+        "title": "Карточка проекта «Маркировка»",
+        "status": "confirmed",
+        "scope": "Полный marking workflow до статуса «в обороте» и повтор без аварийных ручных исправлений"
+      },
+      {
+        "id": "ozon-boosting-stop-2026-09-07",
+        "kind": "conversation",
+        "title": "Решение снять эластичный бустинг",
+        "status": "confirmed",
+        "scope": "Бустинг признан неэффективным инструментом продвижения и снят с оставшихся SKU"
+      },
+      {
+        "id": "ozon-promotion-test-2026-09-07",
+        "kind": "screenshot",
+        "title": "Старт недельного эксперимента с акцией Ozon",
+        "status": "confirmed",
+        "scope": "8 SKU — по одному из каждой товарной группы; базово 840 показов и 0 заказов; цены акции и остатки зафиксированы на 7 сентября"
       }
     ],
     "summaryGroups": [

@@ -1,0 +1,111 @@
+record_id: EP-EVENT-20260907-003
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-09-07T15:56:09+10:00"
+updated_at: "2026-09-07T15:56:09+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_ACTION:2026-09-07:OZON_PROMOTION_STARTED
+  - OWNER_LPR_SCREENSHOT:2026-09-07:OZON_PROMOTION_SELECTION
+
+observation_event_id: EP-EVENT-20260907-003
+event_type: STATE_OBSERVED
+action_or_event_ref: OWNER_LPR_ACTION:2026-09-07:OZON_PROMOTION_STARTED
+occurred_at: "2026-09-07T15:56:09+10:00"
+observed_or_received_at: "2026-09-07T15:56:09+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260907-001
+    classification_basis_ref: OWNER_STARTED_ONE_WEEK_OZON_PROMOTION_EXPERIMENT
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-09-07T15:56:09+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: OPEN
+  new_cycle_record_state: OPEN
+  current_step_after: MONITOR_OZON_PROMOTION_FOR_7_DAYS
+  result: В акцию Ozon добавлены восемь SKU — по одному из каждой товарной группы; открыт недельный эксперимент до 14 сентября
+
+facts:
+  experiment_kind: OZON_PROMOTION_ONE_SKU_PER_PRODUCT_GROUP
+  duration_days: 7
+  ends_on: "2026-09-14"
+  baseline_period: LAST_7_DAYS_AS_OF_2026-09-07
+  baseline_selected_skus_total:
+    ordered_items: 0
+    impressions: 840
+  selected_skus:
+    - sku: chi-rainbow-stripe
+      ozon_sku: 4069554623
+      action_price_rub: 1676
+      discount_percent: 42.21
+      baseline_impressions: 136
+      baseline_orders: 0
+    - sku: chi-maewgingmai-mint
+      ozon_sku: 4071910156
+      action_price_rub: 1117
+      discount_percent: 61.48
+      baseline_impressions: 58
+      baseline_orders: 0
+    - sku: chi-teardropmandala-purple
+      ozon_sku: 4071911471
+      action_price_rub: 1117
+      discount_percent: 57.93
+      baseline_impressions: 111
+      baseline_orders: 0
+    - sku: chi-vintagerosemandala-ruby
+      ozon_sku: 4071911527
+      action_price_rub: 1676
+      discount_percent: 42.21
+      baseline_impressions: 148
+      baseline_orders: 0
+    - sku: chi-yayacat-orange
+      ozon_sku: 4071910499
+      action_price_rub: 2513
+      discount_percent: 13.34
+      baseline_impressions: 112
+      baseline_orders: 0
+    - sku: chi-ethniclanna-olive
+      ozon_sku: 4071913090
+      action_price_rub: 1676
+      discount_percent: 42.21
+      baseline_impressions: 74
+      baseline_orders: 0
+    - sku: chi-ancientpottery-navy
+      ozon_sku: 4071910323
+      action_price_rub: 1676
+      discount_percent: 42.21
+      baseline_impressions: 106
+      baseline_orders: 0
+    - sku: chi-himatun-sky
+      ozon_sku: 4071911883
+      action_price_rub: 1676
+      discount_percent: 35.11
+      baseline_impressions: 95
+      baseline_orders: 0
+  evaluation:
+    experimental_unit: SELECTED_SKU_WITHIN_EACH_PRODUCT_GROUP
+    control: NON_PROMOTED_COLORS_IN_THE_SAME_PRODUCT_GROUP
+    primary_metric: ORDERS_PER_1000_IMPRESSIONS
+    secondary_metric: IMPRESSIONS
+    interpretation_rule: IMPRESSIONS_WITHOUT_ORDERS_ARE_NOT_SUFFICIENT_FOR_BUSINESS_SUCCESS
+
+closure:
+  outcome: null
+  expected_result_ref: EP-S-20260907-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: NO_FINAL_RESULT
+  actual_vs_expected_comparison: OBSERVATION_WINDOW_OPEN
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null

@@ -2,13 +2,13 @@ record_id: EP-CYCLE-INDEX
 record_type: DERIVED_CYCLE_INDEX
 schema_version: '1.0'
 created_at: '2026-08-07T20:00:27+10:00'
-updated_at: '2026-09-07T15:47:14+10:00'
+updated_at: '2026-09-07T15:56:09+10:00'
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-009
 authority: DERIVED_NON_CANONICAL_PROJECTION
 generated_from: data/ep-domain/observation/cycles/*.yaml
-generated_at: '2026-09-07T15:47:14+10:00'
+generated_at: '2026-09-07T15:56:09+10:00'
 counts:
   total: 14
   open: 2
