@@ -65,6 +65,7 @@ function publicCycle(record, typeTitles, cycleEvents) {
     parent: record.parent_cycle_instance_id,
     result: record.actual_result || latestEvent?.state_change?.result || record.goal,
     step: record.current_step,
+    stepSummary: record.current_step_summary || null,
     plan: record.plan || [],
     evidencePolicy: record.evidence_policy || "REQUIRED",
     evidence: [...new Set([...(record.evidence_refs || []), ...cycleEvents.map((event) => event.observation_event_id)])],

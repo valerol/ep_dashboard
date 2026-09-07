@@ -2,7 +2,7 @@ record_id: EP-S-20260907-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-09-07T15:36:22+10:00"
-updated_at: "2026-09-07T15:36:22+10:00"
+updated_at: "2026-09-07T15:47:14+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260907-001
@@ -33,6 +33,7 @@ cycle_record_state: OPEN
 transition_decision: READY
 remediation_state: NONE
 current_step: CREATE_MOYSKLAD_ACCOUNT_AND_CONNECT_OZON_CHANNEL
+current_step_summary: Создать аккаунт «МоегоСклада» на бесплатном тарифе и подключить канал Ozon за 600–650 ₽ в месяц. Эластичный бустинг со всех оставшихся позиций снимается.
 plan:
   - Снять эластичный бустинг 15% со всех оставшихся позиций как неэффективный инструмент продвижения
   - Подключить бесплатный тариф «МоегоСклада» за 0 ₽ для одного пользователя и объёма до 100 товаров и документов
