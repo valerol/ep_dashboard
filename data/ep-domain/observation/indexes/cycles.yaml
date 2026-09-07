@@ -2,17 +2,17 @@ record_id: EP-CYCLE-INDEX
 record_type: DERIVED_CYCLE_INDEX
 schema_version: '1.0'
 created_at: '2026-08-07T20:00:27+10:00'
-updated_at: '2026-08-30T18:18:00+10:00'
+updated_at: '2026-09-07T15:36:22+10:00'
 data_owner: OWNER_LPR
 source_refs:
   - EP-DP-DR-009
 authority: DERIVED_NON_CANONICAL_PROJECTION
 generated_from: data/ep-domain/observation/cycles/*.yaml
-generated_at: '2026-08-30T18:18:00+10:00'
+generated_at: '2026-09-07T15:36:22+10:00'
 counts:
-  total: 13
+  total: 14
   open: 2
-  closed: 11
+  closed: 12
 cycles:
   - cycle_instance_id: EP-GP-20260809-001
     cycle_type_id: CALENDAR_PROJECTION_AUTOMATION
@@ -114,6 +114,14 @@ cycles:
     cycle_type_id: OZON_WEEKLY_SALES_REVIEW
     cycle_class: SALES
     occurrence: 5
+    parent_cycle_instance_id: EP-S-20260807-001
+    cycle_record_state: CLOSED
+    current_closure_outcome: ACHIEVED
+    subject_ref: EP-BATCH-2026-002
+  - cycle_instance_id: EP-S-20260907-001
+    cycle_type_id: OZON_WEEKLY_SALES_REVIEW
+    cycle_class: SALES
+    occurrence: 6
     parent_cycle_instance_id: EP-S-20260807-001
     cycle_record_state: OPEN
     current_closure_outcome: NONE

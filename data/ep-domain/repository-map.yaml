@@ -107,6 +107,7 @@ current_inventory:
     - EP-S-20260814-001
     - EP-S-20260822-001
     - EP-S-20260830-001
+    - EP-S-20260907-001
   observation_events:
     - EP-EVENT-20260807-001
     - EP-EVENT-20260807-002
@@ -131,6 +132,8 @@ current_inventory:
     - EP-EVENT-20260830-002
     - EP-EVENT-20260830-003
     - EP-EVENT-20260831-001
+    - EP-EVENT-20260907-001
+    - EP-EVENT-20260907-002
   active_protocol_versions:
     - EP-DP-LOGISTICS-CYCLE-PROTOCOL-1.0
     - EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0

@@ -1,0 +1,88 @@
+record_id: EP-S-20260907-001
+record_type: CYCLE_RECORD
+schema_version: "1.0"
+created_at: "2026-09-07T15:36:22+10:00"
+updated_at: "2026-09-07T15:36:22+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - EP-EVENT-20260907-001
+  - EP-EVENT-20260907-002
+  - OWNER_LPR_ACTION:2026-09-07:ELASTIC_BOOSTING_REMOVED
+  - OWNER_LPR_DECISION:2026-09-07:CONNECT_MOYSKLAD
+
+cycle_instance_id: EP-S-20260907-001
+cycle_type_id: OZON_WEEKLY_SALES_REVIEW
+cycle_class: SALES
+series_id: EP-SERIES-OZON-WEEKLY-SALES-REVIEW
+occurrence: 6
+scope:
+  class_boundary_ref: EP-DP_v0.2_S1-S2
+  instance_subject_ref: EP-BATCH-2026-002
+
+parent_cycle_instance_id: EP-S-20260807-001
+predecessor_cycle_instance_id: EP-S-20260830-001
+continuation_reason: WEEKLY_REVIEW_REQUIRED_AND_MOYSKLAD_SELECTED_AS_NEXT_SALES_ENABLEMENT_STEP
+trigger_evidence_ref: EP-EVENT-20260907-002
+
+domain_membership:
+  local_domain_label: ELEPHANT_PANTS
+contour_membership: ECONOMICS.SYSTEM
+
+goal: Подключить «МойСклад» к Ozon, проверить базовый складской контур и использовать общую настройку для налаживания процесса маркировки
+cycle_record_state: OPEN
+transition_decision: READY
+remediation_state: NONE
+current_step: CREATE_MOYSKLAD_ACCOUNT_AND_CONNECT_OZON_CHANNEL
+plan:
+  - Снять эластичный бустинг 15% со всех оставшихся позиций как неэффективный инструмент продвижения
+  - Подключить бесплатный тариф «МоегоСклада» за 0 ₽ для одного пользователя и объёма до 100 товаров и документов
+  - Подключить канал Ozon стоимостью 600–650 ₽ в месяц
+  - Настроить сопоставление SKU, остатков и складских документов между «МоимСкладом» и Ozon
+  - Совместно с проектом маркировки загрузить товарные единицы, получить или связать коды, сформировать и распечатать этикетки, сопоставить код с правильным SKU и довести единицы до статуса «в обороте» в «Честном знаке»
+  - Повторить полный marking workflow без аварийных ручных исправлений
+  - Снять следующую недельную статистику Ozon уже без бустинга
+expected_result: «МойСклад» работает на бесплатном базовом тарифе, канал Ozon подключён, складские данные сопоставлены; полный процесс маркировки проверен по критериям EP-DP-DR-041; получена недельная статистика продаж без бустинга
+actual_result: null
+evidence_refs:
+  - EP-EVENT-20260907-002
+
+cross_organ_dependencies:
+  - related_project_ref: PROJECT_CARD_MARKING
+    related_cycle_class: LOGISTIC_RUSSIA
+    relationship: SHARED_MOYSKLAD_CONFIGURATION_AND_MARKING_WORKFLOW_VALIDATION
+    acceptance_ref: EP-DP-DR-041
+
+commercial_terms_as_reported_by_owner:
+  base_tariff_monthly_fee_rub: 0
+  base_tariff_duration: ALWAYS_FREE
+  users: 1
+  goods_and_documents_limit: 100
+  marketplace_channel_monthly_fee_rub_range:
+    min: 600
+    max: 650
+  marketplace_channel_billing_basis: PER_CHANNEL
+
+schedule:
+  kind: CHECK
+  date: "2026-09-14"
+  timezone: Asia/Vladivostok
+  duration_minutes: 30
+  reminder_before: P1D
+  calendar_publish: true
+  transparency: transparent
+  title: Elephant Pants · Проверить подключение «МоегоСклада» и продажи Ozon
+  projection_protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
+
+opened_at: "2026-09-07T15:36:22+10:00"
+current_closed_at: null
+current_closure_outcome: NONE
+current_closure_event_ref: null
+closure_event_refs: []
+reopen_event_refs: []
+post_close_evidence_refs: []
+
+instruction_version: EP-DP-v0.2.1
+observer: OWNER_LPR
+identity_rule_ref: EP-DP-DR-006
+closure_rule_ref: EP-DP-DR-007
+protocol_ref: EP-DP-OZON-WEEKLY-SALES-REVIEW-PROTOCOL-1.0

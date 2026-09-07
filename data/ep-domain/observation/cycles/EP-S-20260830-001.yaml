@@ -2,16 +2,19 @@ record_id: EP-S-20260830-001
 record_type: CYCLE_RECORD
 schema_version: "1.0"
 created_at: "2026-08-30T18:00:00+10:00"
-updated_at: "2026-08-31T15:10:00+10:00"
+updated_at: "2026-09-07T15:36:22+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - EP-EVENT-20260830-001
   - EP-EVENT-20260830-002
   - EP-EVENT-20260831-001
+  - EP-EVENT-20260907-001
   - OWNER_LPR_DECISION:2026-08-30:TEST_PRODUCT_CARD_IMAGE
   - OWNER_LPR_APPROVED_ASSET:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_MAIN_IMAGE
   - OWNER_LPR_ACTION:2026-08-30:CHI_VINTAGEROSEMANDALA_PINE_IMAGE_UPLOADED_TO_OZON
   - OWNER_LPR_ACTION:2026-08-31:CHI_TEARDROPMANDALA_NAVY_CONTENT_RATING_RAISED
+  - OWNER_LPR_OBSERVATION:2026-09-07:OZON_WEEKLY_ANALYTICS
+  - OWNER_LPR_DECISION:2026-09-07:CLOSE_CARD_EXPERIMENTS
 
 cycle_instance_id: EP-S-20260830-001
 cycle_type_id: OZON_WEEKLY_SALES_REVIEW
@@ -32,24 +35,25 @@ domain_membership:
 contour_membership: ECONOMICS.SYSTEM
 
 goal: Проверить влияние изменений карточек на конверсию и видимость отдельных SKU при сохранении контролируемых факторов
-cycle_record_state: OPEN
-transition_decision: READY
+cycle_record_state: CLOSED
+transition_decision: NEXT_STEP_SELECTED
 remediation_state: NONE
-current_step: MONITOR_MAIN_IMAGE_AND_CONTENT_RATING_EXPERIMENTS_UNTIL_NEXT_REVIEW
+current_step: CONNECT_MOYSKLAD_TO_OZON_AND_MARKING_WORKFLOW
 plan:
   - Использовать chi-vintagerosemandala-pine как экспериментальный SKU для теста главного изображения
   - Использовать chi-ethniclanna-mint как контрольный SKU без изменений карточки для теста изображения
-  - Сохранить текущий эластичный бустинг 15% на продвигаемых SKU без изменения рекламного фактора
+  - Сохранить текущий эластичный бустинг 15% на продвигаемых SKU без изменения рекламного фактора до завершения теста
   - Использовать новое главное изображение chi-vintagerosemandala-pine в формате 3:4
   - Не менять цену, описание и остальные существенные элементы chi-vintagerosemandala-pine в течение теста
   - Использовать chi-teardropmandala-navy как экспериментальный SKU для теста контент-рейтинга
   - Сохранить по возможности цену, продвижение, главное изображение и структуру карточки chi-teardropmandala-navy неизменными после повышения контент-рейтинга
   - Через 7 дней снять аналитику Ozon и оценить оба эксперимента раздельно
 expected_result: Получены измеримые данные о влиянии главного изображения на конверсию chi-vintagerosemandala-pine и о влиянии повышения контент-рейтинга на показы chi-teardropmandala-navy
-actual_result: null
+actual_result: За неделю магазин получил 3 571 показ, 1 заказ на 2 455 ₽; заказ пришёлся на контрольный chi-ethniclanna-mint. После замены главного изображения chi-vintagerosemandala-pine вырос с 350 до 383 показов (+9,4%), тогда как контрольный chi-ethniclanna-mint снизился с 290 до 248 (−14,5%), но экспериментальный SKU не получил заказов, поэтому влияние изображения на конверсию не подтверждено. После повышения контент-рейтинга chi-teardropmandala-navy сохранил показы почти на прежнем уровне — 50 против 49 (−2,0%) — на фоне снижения сопоставимых sibling-SKU семейства с 474 до 361 (−23,8%); относительный сигнал видимости есть, но продаж нет и причинная связь не доказана. Оба эксперимента закрыты; следующим шагом выбрано подключение «МоегоСклада» к Ozon с пересечением с проектом маркировки.
 evidence_refs:
   - EP-EVENT-20260830-002
   - EP-EVENT-20260831-001
+  - EP-EVENT-20260907-001
 
 experiment:
   variable: MAIN_PRODUCT_IMAGE
@@ -72,10 +76,21 @@ experiment:
       - Лёгкая ткань
       - Глубокий карман
       - Для дома, йоги и пляжа
+  result:
+    status: CLOSED
+    experimental_impressions_previous: 350
+    experimental_impressions_current: 383
+    experimental_impression_change_percent: 9.4
+    experimental_orders_current: 0
+    control_impressions_previous: 290
+    control_impressions_current: 248
+    control_impression_change_percent: -14.5
+    control_orders_current: 1
+    outcome: VISIBILITY_SIGNAL_WITHOUT_CONVERSION_CONFIRMATION
 
 secondary_experiments:
   content_rating_visibility:
-    status: RUNNING
+    status: CLOSED
     variable: OZON_CONTENT_RATING
     experimental_sku: chi-teardropmandala-navy
     intervention_applied_at: "2026-08-31T15:10:00+10:00"
@@ -96,6 +111,15 @@ secondary_experiments:
       - IMPRESSION_CHANGE_PERCENT
       - RELATIVE_IMPRESSION_CHANGE_VS_TEARDROPMANDALA_SIBLINGS
     expected_result: Определено, улучшилась ли относительная динамика показов chi-teardropmandala-navy после повышения контент-рейтинга
+    result:
+      experimental_impressions_previous: 50
+      experimental_impressions_current: 49
+      experimental_impression_change_percent: -2.0
+      comparable_sibling_impressions_previous: 474
+      comparable_sibling_impressions_current: 361
+      comparable_sibling_impression_change_percent: -23.8
+      ordered_items: 0
+      outcome: RELATIVE_VISIBILITY_SIGNAL_WITHOUT_SALES_OR_CAUSAL_CONFIRMATION
 
 schedule:
   kind: CHECK
@@ -109,10 +133,11 @@ schedule:
   projection_protocol_ref: EP-DP-CALENDAR-PROJECTION-PROTOCOL-1.0
 
 opened_at: "2026-08-30T18:00:00+10:00"
-current_closed_at: null
-current_closure_outcome: NONE
-current_closure_event_ref: null
-closure_event_refs: []
+current_closed_at: "2026-09-07T15:36:22+10:00"
+current_closure_outcome: ACHIEVED
+current_closure_event_ref: EP-EVENT-20260907-001
+closure_event_refs:
+  - EP-EVENT-20260907-001
 reopen_event_refs: []
 post_close_evidence_refs: []
 

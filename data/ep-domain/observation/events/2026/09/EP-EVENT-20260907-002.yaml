@@ -1,0 +1,70 @@
+record_id: EP-EVENT-20260907-002
+record_type: OBSERVATION_EVENT
+schema_version: "1.0"
+created_at: "2026-09-07T15:36:22+10:00"
+updated_at: "2026-09-07T15:36:22+10:00"
+data_owner: OWNER_LPR
+source_refs:
+  - OWNER_LPR_ACTION:2026-09-07:ELASTIC_BOOSTING_REMOVED
+  - OWNER_LPR_DECISION:2026-09-07:CONNECT_MOYSKLAD
+
+observation_event_id: EP-EVENT-20260907-002
+event_type: STATE_OBSERVED
+action_or_event_ref: OWNER_LPR_DECISION:2026-09-07:CONNECT_MOYSKLAD
+occurred_at: "2026-09-07T15:36:22+10:00"
+observed_or_received_at: "2026-09-07T15:36:22+10:00"
+
+membership:
+  primary:
+    cycle_class: SALES
+    cycle_instance_id: EP-S-20260907-001
+    classification_basis_ref: OWNER_SELECTED_NEXT_SALES_STEP
+  related:
+    - cycle_class: SALES
+      cycle_instance_id: EP-S-20260807-001
+      relation_basis_ref: CHILD_OF_OPEN_SALES_BATCH
+  classified_by: OWNER_LPR
+  classified_at: "2026-09-07T15:36:22+10:00"
+  decision_ref: EP-DP-DR-006
+
+state_change:
+  previous_cycle_record_state: NOT_CREATED
+  new_cycle_record_state: OPEN
+  current_step_after: CREATE_MOYSKLAD_ACCOUNT_AND_CONNECT_OZON_CHANNEL
+  result: Бустинг снимается со всех оставшихся позиций как неэффективный инструмент продвижения; следующим шагом выбрано подключение «МоегоСклада» к Ozon
+
+facts:
+  elastic_boosting:
+    previous_percent: 15
+    action: REMOVE_FROM_ALL_REMAINING_SKUS
+    reason: INEFFECTIVE_AS_PROMOTION_TOOL
+  moysklad:
+    selected_starting_tariff:
+      monthly_fee_rub: 0
+      duration: ALWAYS_FREE
+      users: 1
+      goods_and_documents_limit: 100
+      capabilities:
+        - BASIC_WAREHOUSE_ACCOUNTING
+    ozon_marketplace_channel:
+      monthly_fee_rub_range:
+        min: 600
+        max: 650
+      billing_basis: PER_CHANNEL
+  cross_organ_link:
+    related_project_ref: PROJECT_CARD_MARKING
+    related_cycle_class: LOGISTIC_RUSSIA
+    relationship: SHARED_MOYSKLAD_CONFIGURATION_AND_MARKING_WORKFLOW_VALIDATION
+
+closure:
+  outcome: null
+  expected_result_ref: EP-S-20260907-001#expected_result
+  actual_result_or_NO_FINAL_RESULT: NO_FINAL_RESULT
+  actual_vs_expected_comparison: NEXT_STEP_SELECTED
+  closure_basis: null
+  closure_evidence_refs: []
+  residue_disposition: null
+  decided_by: null
+  authority_ref: null
+  decided_at: null
+  closed_at: null

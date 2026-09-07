@@ -2,7 +2,7 @@ record_id: EP-EVENT-20260830-001
 record_type: OBSERVATION_EVENT
 schema_version: "1.0"
 created_at: "2026-08-30T17:46:00+10:00"
-updated_at: "2026-08-30T17:46:00+10:00"
+updated_at: "2026-09-07T15:18:58+10:00"
 data_owner: OWNER_LPR
 source_refs:
   - OWNER_LPR_OBSERVATION:2026-08-30:OZON_WEEKLY_ANALYTICS
@@ -30,7 +30,7 @@ state_change:
   previous_cycle_record_state: OPEN
   new_cycle_record_state: CLOSED
   current_step_after: START_PRODUCT_CARD_CONVERSION_TEST
-  result: Эластичный бустинг сохранил видимость четырёх продвигаемых SKU на фоне падения общего трафика, но не дал заказов в тестовой группе
+  result: Эластичный бустинг удержал видимость целевых SKU, но не распространил эффект на другие цвета тех же рисунков и не дал заказов в тестовой группе; эксперимент признан не оправдавшимся
 
 facts:
   period: LAST_7_DAYS_AS_OF_2026-08-30
@@ -48,13 +48,20 @@ facts:
     previous_impressions_approx: 894
     impression_change_approx_percent: 0.4
     ordered_items: 0
+  directly_comparable_same_pattern_non_promoted_variants:
+    previous_impressions: 1879
+    current_impressions: 1484
+    impression_change_percent: -21.0
+    comparison_basis: SAME_SKUS_PRESENT_IN_BOTH_WEEKLY_REPORTS
   non_promoted_group:
     current_impressions: 3178
     previous_impressions_approx: 3649
     impression_change_approx_percent: -13
   store_impression_change_approx_percent: -10
   only_selling_sku: chi-ancientpottery-black
-  interpretation: PROMOTION_VISIBILITY_EFFECT_OBSERVED_WITHOUT_SALES_CONVERSION
+  halo_effect_on_same_pattern_variants: NOT_OBSERVED
+  experiment_outcome: NOT_JUSTIFIED
+  interpretation: TARGET_ONLY_VISIBILITY_RETENTION_WITHOUT_GROUP_HALO_OR_SALES_CONVERSION
 
 closure:
   outcome: ACHIEVED
